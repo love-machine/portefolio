@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Jules ROBERT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body > 
+    <a href="apropos.html" class="back-button"><i class="fa fa-arrow-left"></i> revenir sur la page d'avant</a>
+
+    <!-- Barre de navigation -->
+    <ul class="navbar">
+        <div id="clock"></div>
+        <br>
+        <li><a href="index.html"><i class="fa fa-home"></i> Accueil</a></li>
+        <li><a href="apropos.html"><i class="fa fa-info-circle"></i> À propos</a></li>
+        <li><a href="veille.html"><i class="fa-solid fa-laptop-code"></i>Veille technologique</a></li>
+        <li><a href="environnement.html"><i class="fa fa-cogs"></i>Environnement de travail</a></li>
+        <li><a href="contact.html"><i class="fa fa-phone"></i> Contact</a></li>
+    </ul>
+
+    <!-- Contenu principal -->
+    <div class="main-content">
+
+        <!-- Section Projet -->
+        <div class="project-container">
+            <img src="images/ripv2.jpg" alt="Image illustrant le routage RIP" class="project-image">
+            <div class="project-details">
+                <h2>Informations du TP :</h2>
+                <ul>
+                    <li><strong>Catégorie :</strong> Protocole de routage dynamique</li>
+                    <li><strong>Technologie étudiée :</strong> RIPv2 (Routing Information Protocol version 2)</li>
+                    <li><strong>Outils utilisés :</strong> Cisco Packet Tracer, routeurs Cisco, terminal</li>
+                    <li><strong>Période :</strong> Année scolaire 2024 - 2025</li>
+                    <li><strong>Objectif :</strong> Apprendre à configurer un protocole de routage dynamique<br> et comprendre le fonctionnement du partage de routes dans un réseau</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section Présentation -->
+        <section class="project-overview">
+            <h1>Protocole RIP (RIPv2)</h1>
+            <h2>Contexte du TP :</h2>
+            <p>Dans le cadre de ma formation en réseaux informatiques, ce TP vous propose de découvrir RIPv2 (Routing Information Protocol version 2), un protocole de routage dynamique utilisé pour permettre aux routeurs de partager automatiquement les informations de leurs réseaux.</p>
+        </section>
+
+        <!-- Section Explication RIP -->
+        <section class="project-overview">
+            <h2>Qu'est-ce que le RIP ?</h2>
+            <p>Le RIP (Routing Information Protocol) est un protocole utilisé pour permettre à des routeurs de communiquer entre eux et d'échanger des informations sur les meilleurs chemins pour atteindre d'autres réseaux.</p>
+            <p>C'est un peu comme un GPS qui aide les routeurs à savoir quel chemin emprunter pour envoyer des données d'un point à un autre.</p>
+
+            <h2>Pourquoi on utilise RIP ?</h2>
+            <p>RIP est utile dans les petits réseaux, comme ceux d'une entreprise ou d'une maison, car il permet aux routeurs de partager facilement des informations pour savoir comment acheminer les données.</p>
+            <p>Il est simple et rapide à configurer, ce qui en fait une bonne option dans des environnements plus petits ou pour apprendre les bases du routage.</p>
+
+            <h2>Comment ça marche ?</h2>
+            <p>RIP v2 permet aux routeurs de se dire : "Voici où sont les autres réseaux, et voici le chemin pour y accéder."</p>
+            <ul>
+                <li>Les routeurs comptent les "sauts" (le nombre de routeurs traversés) pour atteindre un réseau.</li>
+                <li>Si un réseau est à plus de 15 sauts, RIP ne pourra pas l’atteindre.</li>
+                <li>Les informations de routage sont échangées toutes les 30 secondes.</li>
+            </ul>
+            <!-- Exemple d'image illustrative -->
+            <img src="images/shema-ri.png" alt="Schéma illustrant le fonctionnement du protocole RIP" class="project-image">
+
+            <h2>Avantages de RIP :</h2>
+            <ul>
+                <li>✅ Facile à comprendre et à configurer</li>
+                <li>✅ Idéal pour les petits réseaux ou pour l’apprentissage</li>
+                <li>✅ Partage d’informations simple entre routeurs</li>
+            </ul>
+
+            <h2>Inconvénients :</h2>
+            <ul>
+                <li>⚠️ Pas adapté aux grands réseaux</li>
+                <li>⚠️ Limité à 15 sauts</li>
+                <li>⚠️ Moins réactif que d’autres protocoles modernes comme OSPF</li>
+            </ul>
+
+            <h2>En résumé :</h2>
+            <p>RIP est comme une petite carte pour un routeur, lui indiquant comment arriver là où il veut aller. Bien qu’il soit moins utilisé aujourd’hui dans les grandes entreprises, il reste un outil pédagogique simple et efficace pour comprendre les bases du routage dynamique.</p>
+        </section>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="horloge.js"></script> 
+    <script src="lien-survolé.js"></script>
+</body>
+</html>

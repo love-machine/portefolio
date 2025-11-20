@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Jules ROBERT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <a href="apropos.html" class="back-button"><i class="fa fa-arrow-left"></i> revenir sur la page d'avant</a>
+
+    <!-- Barre de navigation -->
+    <ul class="navbar">
+        <div id="clock"></div>
+        <br>
+        <li><a href="index.html"><i class="fa fa-home"></i> Accueil</a></li>
+        <li><a href="apropos.html"><i class="fa fa-info-circle"></i> À propos</a></li>
+        <li><a href="veille.html"><i class="fa-solid fa-laptop-code"></i>Veille technologique</a></li>
+        <li><a href="environnement.html"><i class="fa fa-cogs"></i>Environnement de travail</a></li>
+        <li><a href="contact.html"><i class="fa fa-phone"></i> Contact</a></li>
+    </ul>
+
+    <!-- Contenu principal -->
+    <div class="main-content">
+
+        <!-- Section Projet -->
+        <!-- Section Projet OSPF -->
+    <div class="project-container">
+        <img src="images/OSPF.webp" alt="Topologie OSPF" class="project-image">
+        <div class="project-details">
+            <h2>Informations du Projet :</h2>
+            <ul>
+                <li><strong>Catégorie :</strong> TP Réseaux - OSPF avancé</li>
+                <li><strong>Technologies utilisées :</strong> Cisco Packet Tracer, OSPF</li>
+                <li><strong>Outils :</strong> Simulation, Configuration CLI</li>
+                <li><strong>Date du projet :</strong> 2024 - 2025</li>
+                <li><strong>Fichier de travail :</strong> <a href="images/5_8 - TP - Configuration des fonctionnalités avancées de OSPF 1.pka" target="_blank">Télécharger la maquette</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section Présentation OSPF -->
+    <section class="project-overview">
+        <h2>Présentation du protocole OSPF</h2>
+        <p><strong>OSPF</strong> (Open Shortest Path First) est un protocole de routage utilisé pour aider les routeurs à savoir <em>par où faire passer les données</em> dans un réseau. Contrairement à RIP, il est <strong>plus intelligent, plus rapide</strong> et adapté aux <strong>grands réseaux</strong>.</p>
+
+        <h3>🌐 Pourquoi on utilise OSPF ?</h3>
+        <ul>
+            <li>Idéal pour les <strong>réseaux moyens à grands</strong> comme ceux des entreprises ou fournisseurs d'accès.</li>
+            <li>Permet de <strong>calculer le chemin le plus court</strong> en tenant compte de la bande passante.</li>
+            <li>Plus précis que RIP : ne se contente pas de compter les sauts.</li>
+        </ul>
+
+        <h3>⚙️ Comment ça marche ?</h3>
+        <ul>
+            <li>Chaque routeur crée une carte du réseau appelée <strong>base de données de topologie</strong>.</li>
+            <li>Les informations de routage sont échangées via des messages <strong>LSA (Link State Advertisement)</strong>.</li>
+            <li>Les routes sont calculées avec l’algorithme de <strong>Dijkstra</strong> pour trouver le <strong>chemin le plus court</strong>.</li>
+            <li>Mise à jour uniquement en cas de changement → <strong>moins de trafic inutile</strong>.</li>
+        </ul>
+
+        <h3>✅ Avantages de OSPF</h3>
+        <ul>
+            <li><strong>Rapide et réactif</strong> aux changements.</li>
+            <li><strong>Pas de limite de saut</strong>, donc adapté aux grands réseaux.</li>
+            <li><strong>Choix intelligent des routes</strong> basé sur la bande passante.</li>
+            <li>Possibilité de structurer le réseau en <strong>zones</strong> pour faciliter la gestion.</li>
+        </ul>
+
+        <h3>⚠️ Inconvénients</h3>
+        <ul>
+            <li><strong>Plus complexe</strong> à configurer que RIP.</li>
+            <li>Consomme plus de <strong>ressources (CPU et RAM)</strong> sur les routeurs.</li>
+            <li>Nécessite une bonne compréhension des <strong>zones OSPF</strong>.</li>
+        </ul>
+
+    </section>
+    </div>
+    <!-- Scripts -->
+    <script src="horloge.js"></script> 
+    <script src="lien-survolé.js"></script>
+</body>
+</html>

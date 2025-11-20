@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Jules ROBERT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="body">
+
+<!-- Barre de navigation -->
+<ul class="navbar">
+    <div id="clock"></div>
+    <br>
+    <li><a class="active" href="index.html"><i class="fa fa-home"></i> Accueil</a></li>
+    <li><a href="apropos.html"><i class="fa fa-info-circle"></i> À propos</a></li>
+    <li><a href="veille.html"><i class="fa-solid fa-laptop-code"></i>Veille technologique</a></li>
+    <li><a href="environnement.html"><i class="fa fa-cogs"></i>Environnement de travail</a></li>
+    <li><a href="contact.html"><i class="fa fa-phone"></i> Contact</a></li>
+</ul>
+
+<!-- Contenu principal -->
+<div class="main-content">
+  <header id="portfolio">
+    <div style="position: relative; text-align: center; color: black;">
+      <img src="images/bts-sio-fond.webp" alt="Bannière" style="width: 100%; height: 400px; object-fit: cover;">
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 50px; font-weight: bold; color: white;">
+        Jules ROBERT
+      </div>
+    </div>
+  </header>
+
+  <section class="bugatti-bio">
+    <div class="bugatti-bio-container">
+      <div class="bugatti-bio-image">
+        <img src="images/photo_jules.jpg" alt="Jules Robert" class="bugatti-bio-img">
+      </div>
+      <div class="bugatti-bio-text">
+        <h1>À propos de moi</h1>
+        <p>
+          Je m'appelle <strong>Jules Robert</strong>, étudiant en première année de BTS SIO à 
+          <a href="https://www.sb-lycee.fr/" class="contactMoi">Saint-Bénigne.</a> Passionné par les 
+          <strong>réseaux</strong> et la <strong>cybersécurité</strong>, je suis à la recherche d'une entreprise 
+          pour un contrat d'apprentissage. Sérieux, motivé et curieux, je souhaite développer mes compétences 
+          techniques et contribuer à la sécurisation des systèmes informatiques. 
+          N'hésitez pas à <a href="contact.html" class="contactMoi">échanger avec moi via mon portfolio</a> !
+        </p>
+      </div>
+    </div>
+</section>
+    <!-- Conteneur des cartes flip -->
+    <h2><b>Présentation de la filière : BTS SIO</b></h2>
+    <p>Le BTS SIO (Services Informatiques aux Organisations) est une formation professionnalisante en deux ans, axée sur l’informatique. En tant qu’étudiant, j’apprends à concevoir et maintenir des solutions informatiques adaptées aux besoins des entreprises. Ce diplôme forme des techniciens capables de gérer les systèmes d’information et de répondre aux enjeux numériques.</p>
+    <p class="section-title">Les options du BTS SIO :</p>
+
+    
+    <div class="flip-card-container">
+      <div class="flip-card" id="SISR">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="images/option-sisr.jpg" alt="Option SISR" style="width:300px;height:300px;">
+          </div>
+          <div class="flip-card-back">
+            <h3>Objectif :<br> Former des experts en gestion des infrastructures informatiques.</h3>
+            <hr>
+              <p style="font-size: 1.2em;"><strong>compétances :</strong></p>
+              <li><strong>Administration réseau :</strong><br> Installer, configurer et gérer des réseaux.</li>
+              <br>
+              <li><strong>Maintenance et supervision :</strong><br> Garantir la disponibilité des systèmes.</li>
+              <br>
+              <li><strong>Sécurisation :</strong><br> Protéger les données et prévenir les cyberattaques.</li>
+              <br>
+              <li><strong>Virtualisation et Cloud :</strong><br> Gestion de serveurs virtuels et solutions Cloud.</li>
+              <br>
+            <p><strong>Débouchés :</strong><br> Administrateur réseau, technicien en cybersécurité.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flip-card" id="SLAM">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img src="images/option-slam.jpg" alt="Avatar" style="width:300px;height:300px;">
+          </div>
+          <div class="flip-card-back">
+            <h3><strong>Objectif :</strong><br> Former des développeurs d'applications et logiciels.</h3>
+            <br>
+            <hr>
+            <p style="font-size: 1.2em;"><strong>compétances :</strong></p>
+              <li><strong>Analyse des besoins :</strong><br> Comprendre et rédiger des cahiers des charges.</li>
+              <br>
+              <li><strong>Développement :</strong><br> Concevoir des applications web, mobiles ou desktop.</li>
+              <br>
+              <li><strong>Base de données :</strong><br> Gérer et optimiser les bases (SQL, NoSQL).</li>
+              <br>
+              <li><strong>Maintenance :</strong><br> Résolution de bugs et mise à jour logicielle.</li>
+              <br>
+            <p><strong>Débouchés :</strong> Développeur d’applications, analyste programmeur.</p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <h1>Mon choix : Option SISR</h1>
+  <p>Le choix entre les options du BTS SIO, SISR (Solutions d'Infrastructure, Systèmes et Réseaux) et SLAM (Solutions Logicielles et Applications Métiers), n’a pas été facile. Cependant, après réflexion, j’ai opté pour l’option SISR. Cette spécialisation me semble plus stimulante, notamment dans l'administration des réseaux et la cybersécurité, des domaines qui m’intéressent particulièrement. L’option SISR offre aussi une solide base en réseaux, systèmes et virtualisation, des compétences essentielles pour une carrière en cybersécurité. Bien que SLAM soit intéressant, je trouve que SISR correspond davantage à mon objectif professionnel de devenir ingénieur en cybersécurité, en maîtrisant les infrastructures et la protection des systèmes d’information.</p>
+  </div>
+</section>
+
+  
+  
+
+
+<!-- Script -->
+<script src="horloge.js"></script> 
+<script src="lien-survolé.js"></script>
+
+</body>
+</html>

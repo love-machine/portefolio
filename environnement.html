@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environnement de Travail - Jules ROBERT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="environnement.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Barre de navigation -->
+<ul class="navbar">
+    <div id="clock"></div>
+    <br>
+    <li><a href="index.html"><i class="fa fa-home"></i> Accueil</a></li>
+    <li><a href="index.html"><i class="fa fa-info-circle"></i> À propos</a></li>
+    <li><a href="veille.html"><i class="fa-solid fa-laptop-code"></i> Veille technologique</a></li>
+    <li><a class="active" href="#"><i class="fa fa-cogs"></i> Environnement de travail</a></li>
+    <li><a href="contact.html"><i class="fa fa-phone"></i> Contact</a></li>
+</ul>
+
+<!-- Contenu principal -->
+<div class="main-content">
+    <header class="page-header">
+        <h1><i class="fa fa-cogs"></i> Mon Environnement de Travail</h1>
+        <p class="subtitle">Découvrez les outils et technologies que j'utilise au quotidien</p>
+    </header>
+
+    <!-- Section Introduction -->
+    <section class="intro-section">
+        <div class="intro-content">
+            <h2>Organisation & Méthodologie</h2>
+            <p>Mon environnement de travail est structuré autour d'outils professionnels qui me permettent d'optimiser ma productivité et de collaborer efficacement. Chaque outil a un rôle spécifique dans mon workflow quotidien.</p>
+        </div>
+    </section>
+
+    <!-- Section Outils Interactifs -->
+    <section class="tools-section">
+        <div class="tools-grid">
+            
+            <!-- Teams Card -->
+            <div class="tool-card" data-tool="teams">
+                <div class="tool-icon teams-icon">
+                    <i class="fab fa-microsoft"></i>
+                </div>
+                <h3>Microsoft Teams</h3>
+                <p class="tool-description">Communication et collaboration</p>
+                <div class="tool-status active">
+                    <i class="fa fa-circle"></i> Actif
+                </div>
+            </div>
+
+            <!-- OneNote Card -->
+            <div class="tool-card" data-tool="onenote">
+                <div class="tool-icon onenote-icon">
+                    <i class="fa fa-book"></i>
+                </div>
+                <h3>OneNote</h3>
+                <p class="tool-description">Prise de notes et organisation</p>
+                <div class="tool-status active">
+                    <i class="fa fa-circle"></i> Actif
+                </div>
+            </div>
+
+            <!-- Visual Studio Card -->
+            <div class="tool-card" data-tool="visualstudio">
+                <div class="tool-icon vs-icon">
+                    <i class="fa fa-code"></i>
+                </div>
+                <h3>Visual Studio</h3>
+                <p class="tool-description">Développement et programmation</p>
+                <div class="tool-status active">
+                    <i class="fa fa-circle"></i> Actif
+                </div>
+            </div>
+
+            <!-- Wireshark Card -->
+            <div class="tool-card" data-tool="wireshark">
+                <div class="tool-icon wireshark-icon">
+                    <i class="fa fa-network-wired"></i>
+                </div>
+                <h3>Wireshark</h3>
+                <p class="tool-description">Analyse réseau et protocoles</p>
+                <div class="tool-status active">
+                    <i class="fa fa-circle"></i> Actif
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section Détails Dynamique -->
+    <section class="details-section">
+        <div class="details-container" id="toolDetails">
+            <div class="welcome-message">
+                <h3><i class="fa fa-mouse-pointer"></i> Explorez mes outils</h3>
+                <p>Cliquez sur une carte ci-dessus pour découvrir comment j'utilise chaque outil dans mon environnement de travail.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Workflow -->
+    <section class="workflow-section">
+        <h2><i class="fa fa-project-diagram"></i> Mon Workflow Quotidien</h2>
+        <div class="workflow-timeline">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Organisation de révision </h4>
+                    <p>Consultation OneNote pour m'organisé mes révision</p>
+                </div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Communication équipe</h4>
+                    <p>Réunions et échanges via Microsoft Teams</p>
+                </div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Développement</h4>
+                    <p>Codage et tests avec Visual Studio</p>
+                </div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Analyse réseau</h4>
+                    <p>Diagnostique et analyse de trames réseau avec Wireshark</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script src="horloge.js"></script>
+<script src="environnement.js"></script>
+</body>
+</html>

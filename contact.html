@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Portfolio Jules ROBERT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <ul class="navbar">
+        <div id="clock"></div>
+        <br>
+        <li><a href="index.html"><i class="fa fa-home"></i> Accueil</a></li>
+        <li><a href="apropos.html"><i class="fa fa-info-circle"></i> À propos</a></li>
+        <li><a href="veille.html"><i class="fa-solid fa-laptop-code"></i>Veille technologique</a></li>
+        <li><a href="environnement.html"><i class="fa fa-cogs"></i>Environnement de travail</a></li>
+        <li><a class="active" href="contact.html"><i class="fa fa-phone"></i> Contact</a></li>
+    </ul>
+
+    <!-- Contenu principal -->
+    <div class="main-content">
+        <div class="contact-container">
+            <h1><i class="fas fa-envelope"></i> Contactez-moi</h1>
+
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" maxlength="120" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Sujet</label>
+                    <input type="text" id="subject" name="subject" maxlength="120" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" maxlength="500" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Envoyer le message</button>
+            </form>
+
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/jules--robert/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://groupesb.sharepoint.com/sites/BTSSIO2026/_layouts/15/Doc.aspx?sourcedoc=%7Bd19f7864-7ec3-4fc2-a84a-990667434dc3%7D&action=view&wd=target%2528Ateliers%2520S1.one%257Cc4ccab2e-d385-48bc-b7e9-d5138329797e%252FOutils%257Cd8acbc54-2d51-4a05-b968-b83c68327a5c%252F%2529&wdorigin=NavigationUrl" target="_blank">
+                    <i class="fas fa-sticky-note"></i> <!-- Utilisation d'une icône de note -->
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <script src="horloge.js"></script>
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Keolis - Jules ROBERT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            position: relative;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .header-overlay h1 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #00A9E0;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .header-overlay p {
+            font-size: 20px;
+            color: white;
+            margin: 10px 0 0 0;
+        }
+
+        .company-info {
+            background: linear-gradient(135deg, #232323, #2a2a2a);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #00A9E0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .company-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: #00A9E0;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .mission-card {
+            background: linear-gradient(135deg, #232323, #2a2a2a);
+            margin: 40px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #00A9E0;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 169, 224, 0.2);
+        }
+
+        .mission-header {
+            background: linear-gradient(135deg, #00A9E0, #0088cc);
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .mission-number {
+            background: white;
+            color: #00A9E0;
+            font-size: 24px;
+            font-weight: bold;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .mission-header h3 {
+            color: white;
+            margin: 0;
+            font-size: 1.5em;
+            flex: 1;
+        }
+
+        .mission-content {
+            padding: 30px;
+        }
+
+        .mission-description {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #e0e0e0;
+        }
+
+        .mission-details {
+            background: rgba(0, 169, 224, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 3px solid #00A9E0;
+        }
+
+        .mission-details h4 {
+            color: #00A9E0;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .mission-details ul {
+            margin-left: 20px;
+        }
+
+        .mission-details li {
+            margin-bottom: 8px;
+            color: #d0d0d0;
+        }
+
+        .mission-results {
+            background: rgba(46, 204, 113, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 3px solid #2ecc71;
+        }
+
+        .mission-results h4 {
+            color: #2ecc71;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .mission-challenges {
+            background: rgba(231, 76, 60, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 3px solid #e74c3c;
+        }
+
+        .mission-challenges h4 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .mission-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #00A9E0, #0088cc);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 169, 224, 0.3);
+        }
+
+        .stage-bilan {
+            background: linear-gradient(135deg, #00A9E0, #232323);
+            padding: 50px;
+            border-radius: 20px;
+            margin: 60px 0;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .competences-acquises {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .competence-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .competence-card h4 {
+            color: #00A9E0;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-left: 0;
+            }
+            
+            .navbar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 10px 0;
+            }
+            
+            .navbar li {
+                display: inline-block;
+                width: calc(50% - 10px);
+            }
+            
+            .navbar a {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            
+            .mission-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-overlay h1 {
+                font-size: 32px;
+            }
+            
+            .stat-card {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <header>
+            <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1200&h=400&fit=crop" alt="Keolis Banner" class="header-image">
+            <div class="header-overlay">
+                <h1>Mission Keolis Ginko</h1>
+                <p>Stage BTS SIO - Infrastructure Réseau</p>
+                <p><i class="fas fa-calendar-alt"></i> Mai - Juin 2025</p>
+            </div>
+        </header>
+
+        <section class="company-info">
+            <h2><i class="fas fa-building"></i> Présentation de l'entreprise</h2>
+            <p style="font-size: 1.2em; line-height: 1.8; margin: 20px 0;">
+                <strong>Keolis Besançon Mobilités</strong> gère le réseau de transport urbain Ginko à Besançon. 
+                L'entreprise exploite un réseau complexe de bus, tramways, et services connexes nécessitant 
+                une infrastructure informatique robuste pour assurer la continuité de service.
+            </p>
+            
+            <div class="company-stats">
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div>Lignes de tramway</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">25+</div>
+                    <div>Lignes de bus</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100+</div>
+                    <div>Distributeurs automatiques</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div>Équipements connectés</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="missions-container">
+            <h2 style="text-align: center; margin: 60px 0 40px 0; font-size: 2.5em;">Missions réalisées</h2>
+
+            <!-- Mission 1 -->
+            <div class="mission-card">
+                <div class="mission-header">
+                    <div class="mission-number">01</div>
+                    <h3><i class="fas fa-clipboard-list"></i> Gestion du parc informatique</h3>
+                </div>
+                <div class="mission-content">
+                    <p class="mission-description">
+                        Prise en charge complète de la gestion du parc informatique, incluant l'inventaire, 
+                        le déploiement et la maintenance des équipements utilisateurs.
+                    </p>
+                    
+                    <div class="mission-details">
+                        <h4><i class="fas fa-tasks"></i> Réalisations concrètes</h4>
+                        <ul>
+                            <li><strong>13 PC préparés</strong> : 9 fixes + 4 portables</li>
+                            <li>Déploiement avec <strong>Clonezilla</strong> pour optimiser les temps d'installation</li>
+                            <li>Création de 2 images distinctes (PC fixes et portables)</li>
+                            <li>Installation complète d'un poste multi-périphériques en agence</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-challenges">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Défis rencontrés</h4>
+                        <ul>
+                            <li>Optimisation du temps en mode multitâche</li>
+                            <li>Adaptation des images système selon les configurations matérielles</li>
+                            <li>Gestion des contraintes de compatibilité</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-results">
+                        <h4><i class="fas fa-check-circle"></i> Résultats obtenus</h4>
+                        <ul>
+                            <li>Temps de déploiement divisé par 3 grâce au clonage</li>
+                            <li>Uniformisation des configurations</li>
+                            <li>Mise à jour complète de l'inventaire GLPI</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-skills">
+                        <span class="skill-tag">GLPI</span>
+                        <span class="skill-tag">Clonezilla</span>
+                        <span class="skill-tag">Windows 10</span>
+                        <span class="skill-tag">Déploiement d'images</span>
+                        <span class="skill-tag">Gestion de parc</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 2 -->
+            <div class="mission-card">
+                <div class="mission-header">
+                    <div class="mission-number">02</div>
+                    <h3><i class="fas fa-shield-alt"></i> Projet MagicINFO - Sécurisation critique</h3>
+                </div>
+                <div class="mission-content">
+                    <p class="mission-description">
+                        Migration d'urgence du système d'affichage dynamique MagicINFO suite à l'identification 
+                        d'une faille critique exploitée par le botnet Mirai.
+                    </p>
+                    
+                    <div class="mission-details">
+                        <h4><i class="fas fa-cogs"></i> Interventions techniques</h4>
+                        <ul>
+                            <li><strong>Migration Windows Server 2008 R2 → 2025</strong></li>
+                            <li>Correction de la faille CVE-2025-4632</li>
+                            <li>Configuration réseau VLAN (172.20.251.66 → 172.20.223.80)</li>
+                            <li>Installation PostgreSQL + MagicINFO Server (port 7001)</li>
+                            <li>Tests de diffusion et programmation d'écrans</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-challenges">
+                        <h4><i class="fas fa-bug"></i> Problèmes résolus</h4>
+                        <ul>
+                            <li>Bug heure d'été/hiver affectant la planification</li>
+                            <li>Configuration VLAN incorrecte lors du changement d'IP</li>
+                            <li>Gestion des profils utilisateurs et des droits d'accès</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-results">
+                        <h4><i class="fas fa-trophy"></i> Impact et résultats</h4>
+                        <ul>
+                            <li>Système sécurisé avec 10 ans de support Microsoft</li>
+                            <li>Affichage dynamique opérationnel sur tous les sites</li>
+                            <li>Formation des utilisateurs du service Communication</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-skills">
+                        <span class="skill-tag">Windows Server 2025</span>
+                        <span class="skill-tag">ESXi/vSphere</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Cybersécurité</span>
+                        <span class="skill-tag">VLAN</span>
+                        <span class="skill-tag">Gestion de crise</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 3 -->
+            <div class="mission-card">
+                <div class="mission-header">
+                    <div class="mission-number">03</div>
+                    <h3><i class="fas fa-network-wired"></i> Support infrastructure critique</h3>
+                </div>
+                <div class="mission-content">
+                    <p class="mission-description">
+                        Interventions sur l'infrastructure réseau et support aux équipes techniques 
+                        lors d'incidents majeurs affectant les services de transport.
+                    </p>
+                    
+                    <div class="mission-details">
+                        <h4><i class="fas fa-ambulance"></i> Interventions d'urgence</h4>
+                        <ul>
+                            <li><strong>Panne nationale SFR</strong> : évaluation de l'impact sur les services</li>
+                            <li>Perte de connectivité des DAT (distributeurs de tickets)</li>
+                            <li>Dysfonctionnement open paiement (paiement CB en véhicules)</li>
+                            <li>Problème de remontée GPS des bus périurbains</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-tools"></i> Maintenance préventive</h4>
+                        <ul>
+                            <li>Remplacement TPV défaillants en agence</li>
+                            <li>Mise à jour hyperviseur ESXi</li>
+                            <li>Configuration caméras TruVision</li>
+                            <li>Paramétrage interphones et barrières</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-results">
+                        <h4><i class="fas fa-chart-line"></i> Apprentissages clés</h4>
+                        <ul>
+                            <li>Gestion des incidents en temps réel</li>
+                            <li>Impact des pannes sur les services métiers</li>
+                            <li>Importance de la redondance réseau</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-skills">
+                        <span class="skill-tag">Gestion d'incidents</span>
+                        <span class="skill-tag">Réseaux critiques</span>
+                        <span class="skill-tag">TPV/Billettique</span>
+                        <span class="skill-tag">Vidéosurveillance</span>
+                        <span class="skill-tag">EasyVista</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 4 -->
+            <div class="mission-card">
+                <div class="mission-header">
+                    <div class="mission-number">04</div>
+                    <h3><i class="fas fa-phone"></i> Modernisation téléphonie IP</h3>
+                </div>
+                <div class="mission-content">
+                    <p class="mission-description">
+                        Participation au projet stratégique de modernisation du système téléphonique, 
+                        migration du réseau cuivre vers une solution IP moderne.
+                    </p>
+                    
+                    <div class="mission-details">
+                        <h4><i class="fas fa-project-diagram"></i> Gestion de projet</h4>
+                        <ul>
+                            <li>Coordination avec prestataires spécialisés</li>
+                            <li>Mise à jour de 13 téléphones fixes</li>
+                            <li>Participation aux réunions projet</li>
+                            <li>Tests de compatibilité et configuration</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-skills">
+                        <span class="skill-tag">Téléphonie IP</span>
+                        <span class="skill-tag">Gestion de projet</span>
+                        <span class="skill-tag">Migration système</span>
+                        <span class="skill-tag">Prestataires</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 5 -->
+            <div class="mission-card">
+                <div class="mission-header">
+                    <div class="mission-number">05</div>
+                    <h3><i class="fas fa-camera"></i> Déploiement équipements mobiles</h3>
+                </div>
+                <div class="mission-content">
+                    <p class="mission-description">
+                        Installation et configuration d'équipements spécialisés sur les nouvelles rames Alstom, 
+                        incluant les systèmes de comptage passagers.
+                    </p>
+                    
+                    <div class="mission-details">
+                        <h4><i class="fas fa-train"></i> Intervention sur matériel roulant</h4>
+                        <ul>
+                            <li>Installation de <strong>12 caméras de comptage</strong> par rame</li>
+                            <li>Correction problème de connecteurs</li>
+                            <li>Réinstallation d'équerres de sécurité</li>
+                            <li>Collaboration avec équipes MSE</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-skills">
+                        <span class="skill-tag">Caméras IoT</span>
+                        <span class="skill-tag">Matériel roulant</span>
+                        <span class="skill-tag">Installation terrain</span>
+                        <span class="skill-tag">Comptage passagers</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stage-bilan" style="background: linear-gradient(135deg, #00A9E0, #232323); padding: 40px; border-radius: 15px; margin: 50px 0; text-align: center;">
+            <h2 style="color: white; margin-bottom: 20px;">Bilan du stage</h2>
+            
+            <div class="competences-acquises">
+                <div class="competence-card">
+                    <h4><i class="fas fa-server"></i> Infrastructures</h4>
+                    <p>Virtualisation ESXi, Windows Server, réseaux VLAN, Active Directory</p>
+                </div>
+                <div class="competence-card">
+                    <h4><i class="fas fa-shield-alt"></i> Sécurité</h4>
+                    <p>Identification vulnérabilités, gestion de crise, mise à jour critique</p>
+                </div>
+                <div class="competence-card">
+                    <h4><i class="fas fa-users"></i> Relationnel</h4>
+                    <p>Support utilisateur, coordination prestataires, travail en équipe</p>
+                </div>
+                <div class="competence-card">
+                    <h4><i class="fas fa-project-diagram"></i> Gestion</h4>
+                    <p>Planification, priorisation, gestion multi-projets, reporting</p>
+                </div>
+            </div>
+            
+            <p style="color: white; font-size: 1.2em; line-height: 1.8; margin-bottom: 30px;">
+                Cette expérience chez Keolis Ginko a été enrichissante et formatrice. Elle m'a permis de consolider mes compétences techniques 
+                tout en découvrant l'environnement professionnel du transport urbain. Les missions variées m'ont donné une vision complète 
+                des enjeux informatiques dans une grande entreprise de service public.
+            </p>
+            <a href="index.html" class="back-button" style="background: white; color: #00A9E0; padding: 15px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease;">
+                <i class="fas fa-arrow-left"></i> Retour au portfolio
+            </a>
+        </section>
+    </div>
+
+<script src="horloge.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

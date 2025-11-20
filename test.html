@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel avec Bordure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+New&display=swap" rel="stylesheet"> <!-- Police type code -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styles CSS pour le carousel avec la classe .carousel-passion */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .carousel-passion {
+            width: 80%;
+            max-width: 600px;
+            overflow: hidden;
+            border: 3px solid #007BFF; /* Bordure bleue */
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .slide-text {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .carousel-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .carousel-button:hover {
+            background-color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <script>
+        // JavaScript pour le carousel
+      
+    </script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Jules ROBERT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Barre de navigation -->
+<ul class="navbar">
+    <div id="clock"></div>
+    <br>
+    <li><a href="index.html"><i class="fa fa-home"></i> Accueil</a></li>
+    <li><a class="active" href="#"><i class="fa fa-info-circle"></i> À propos</a></li>
+    <li><a href="veille.html"><i class="fa-solid fa-laptop-code"></i>Veille technologique</a></li>
+    <li><a href="environnement.html"><i class="fa fa-cogs"></i>Environnement de travail</a></li>
+    <li><a href="contact.html"><i class="fa fa-phone"></i> Contact</a></li>
+</ul>
+
+<!-- Contenu principal -->
+<div class="main-content">
+  <header id="portfolio">
+    <div style="position: relative; text-align: center; color: black;">
+      <img src="images/bts-sio-fond.webp" alt="Bannière" style="width: 100%; height: 400px; object-fit: cover;">
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 50px; font-weight: bold; color: white;">
+        Jules ROBERT
+      </div>
+    </div>
+  </header>
+
+
+<h2>Mes passions :</h2>
+<!-- carousel !!!!!-->
+<div id="carousel-slideshow" class="slideshow-container">
+  <div class="mySlides fade">
+    <div class="numbertext">1 / 4</div>
+    <img class="img-carousel" src="images/cybersecurité.jpg" style="width:100%">
+    <div class="text">L'une de mes passions est d'explorer l'univers fascinant de la cybersécurité.</div>
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">2 / 4</div>
+    <img class="img-carousel" src="images/programmation.jpg" style="width:100%">
+    <div class="text">Informatique et programmation : Résolution de problèmes complexes.</div>
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">3 / 4</div>
+    <img class="img-carousel" src="images/judo.jpg" style="width:100%">
+    <div class="text">Arts martiaux : Discipline, force mentale et développement personnel.</div>
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">4 / 4</div>
+    <img class="img-carousel" src="images/jeu-video.webp" style="width:100%">
+    <div class="text">Jeux vidéo : Défis stratégiques et immersion.</div>
+  </div>
+
+  <a class="carousel-btn prev" onclick="plusSlides(-1)">❮</a>
+  <a class="carousel-btn next" onclick="plusSlides(1)">❯</a>
+</div>
+
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+  <span class="dot" onclick="currentSlide(4)"></span>
+</div>
+
+
+
+
+
+<section class="section">
+  <h2>Cursus scolaire 🏫</h2>
+  <ul class="timeline">
+      <li class="timeline-item">
+          <div class="timeline-content">
+              <span class="timeline-year">2024 - A ce jour</span>
+              <h3>BTS SIO - OPTION SISR</h3>
+              <p>LYCÉE SAINT-BÉNIGNE (21 - DIJON)</p>
+              <p><strong>Mention : </strong>En cours de formation (A déterminer)</p>
+          </div>
+      </li>
+      <li class="timeline-item">
+          <div class="timeline-content">
+              <span class="timeline-year">2021 - 2024</span>
+              <h3>LYCÉE PROFESSIONNEL</h3>
+              <p>BAC PRO SYSTÈMES NUMÉRIQUES</p>
+              <p>LYCÉE PROFESSIONNEL SAINT-JOSEPH (25 - BESANÇON)</p>
+              <p><strong>Mention : </strong> Bien</p>
+          </div>
+      </li>
+      <li class="timeline-item">
+          <div class="timeline-content">
+              <span class="timeline-year">2018 - 2021</span>
+              <h3>COLLÈGE</h3>
+              <p>COLLÈGE GEORGES POMPIDOU (71 - Pouilly-lès-Vignes)</p>
+              <p><strong>Mention : </strong>Assez Bien</p>
+          </div>
+      </li>
+  </ul>
+</section>
+
+<section>
+  <h2>Mes Diplômes</h2>
+  <div class="diplomes-container">
+    <div class="diplome">
+      <div class="diplome-icon">📚</div> <!-- Icône pour le BTS -->
+      <p class="diplome-description"><strong>BTS SIO, option SISR</strong><br> en cours de formation</p>
+    </div>
+    <div class="diplome">
+      <div class="diplome-icon">🎓</div> <!-- Icône pour le Bac -->
+      <p class="diplome-description"><strong>Baccalauréat Professionnel Systèmes Numériques</strong> - 2023</p>
+    </div>
+    <div class="diplome">
+      <div class="diplome-icon">🚗</div> <!-- Icône pour le Permis -->
+      <p class="diplome-description"><strong>Permis B</strong> - 2023</p>
+    </div>
+    <div class="diplome">
+      <div class="diplome-icon">🥋</div> <!-- Icône pour la ceinture noire de judo -->
+      <p class="diplome-description"><strong>Ceinture noire de judo</strong> - 2023</p>
+    </div>
+  </div>
+</section>
+
+  
+
+<h2>Expériences professionnelles :</h2>
+
+<div class="exp-carousel">
+  <div class="exp-carousel-container">
+    <!-- SDIS25 -->
+    <div class="exp-slide">
+      <div class="exp-card">
+        <img src="images/sdis25.jpg" alt="SDIS25" class="exp-img">
+        <div class="exp-content">
+          <h3>SDIS 25</h3>
+          <p>Stage en tant que technicien informatique(supervision) au Service Départemental d'Incendie et de Secours du Doubs.</p>
+        </div>
+      </div>
+    </div>
+    <!-- CHU -->
+    <div class="exp-slide">
+      <div class="exp-card">
+        <img src="images/chu.jpg" alt="CHU" class="exp-img">
+        <div class="exp-content">
+          <h3>CHU Besançon</h3>
+          <p>Stage au service informatique du Centre Hospitalier Universitaire de Besançon.</p>
+        </div>
+      </div>
+    </div>
+    <!-- CETRA -->
+    <div class="exp-slide">
+      <div class="exp-card">
+        <img src="images/logo-cetra.svg" alt="CETRA" class="exp-img">
+        <div class="exp-content">
+          <h3>CETRA</h3>
+          <p>Stage dans l'entreprise CETRA, spécialisée dans les solutions informatiques de l'agroalimentaire</p>
+        </div>
+      </div>
+    </div>
+    <!-- Admx Sticky -->
+    <div class="exp-slide">
+      <div class="exp-card">
+        <img src="images/admx-sticky.jpg" alt="Admx Sticky" class="exp-img">
+        <div class="exp-content">
+          <h3>Admx</h3>
+          <p>Stage administration système et découverte des cartes raid</p>
+        </div>
+      </div>
+    </div>
+    <!-- Neige Informatique -->
+    <div class="exp-slide">
+      <div class="exp-card">
+        <img src="images/neige-informatique.png" alt="Neige Informatique" class="exp-img">
+        <div class="exp-content">
+          <h3>Neige Informatique</h3>
+          <p>Stage en maintenance et support informatique.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Ginko -->
+    <!-- Ginko/Keolis - Avec lien cliquable -->
+    <div class="exp-slide">
+      <a href="missionkeolis.html" class="exp-card-link">
+        <div class="exp-card">
+          <img src="images/KEOLIS-WEB-SERIE_HD-1536x864-1091180545.jpg" alt="Ginko" class="exp-img">
+          <div class="exp-content">
+            <h3>Ginko</h3>
+            <p>prochain stage pour ma première année du BTS SIO</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <button class="exp-prev">❮</button>
+  <button class="exp-next">❯</button>
+</div>
+
+<section id="projets">
+  <div class="section-title">
+    <h2>Mes Projets</h2>
+  </div>
+  <div class="project-container">
+    <!-- Portfolio -->
+    <div class="project-card">
+      <a href="projet1.html" target="_blank">
+        <img src="images/projet1.png" alt="Portfolio" class="project-img">
+        <div class="project-info">
+          <h3>Portfolio</h3>
+          <p>Mon portfolio personnel présentant mon parcours et mes compétences</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Jeu des 7 différences -->
+    <div class="project-card">
+      <a href="projet2.html" target="_blank">
+        <img src="images/ripv2.jpg" alt="TP ripv2" class="project-img">
+        <div class="project-info">
+          <h3>Protocole RIP</h3>
+          <p>TP sur les fonctionnalités avancées du protocole OSPF</p>
+        </div>
+      </a>
+    </div>
+
+
+    <!-- Bikedle -->
+    <div class="project-card">
+      <a href="projet3.html" target="_blank">
+        <img src="images/bikedle1.png" alt="Bikedle" class="project-img">
+        <div class="project-info">
+          <h3>Bikedle</h3>
+          <p>Un jeu de devinettes sur les motos</p>
+        </div>
+      </a>
+    </div>
+    <div class="project-card">
+    <a href="projet4.html" target="_blank">
+      <img src="images/OSPF.webp" alt="TP Protocole OSPF" class="project-img">
+      <div class="project-info">
+        <h3>Protocole OSPF</h3>
+        <p>Un protocole de routage interne dynamique basé sur le plus court chemin</p>
+      </div>
+    </a>
+  </div>
+
+  </div>
+</section>
+
+
+</div>
+<script src="horloge.js"></script> 
+<script src="lien-survolé.js"></script>
+<script src="tab.js"></script>  <!-- Pour le carousel -->
+<script src="carousel2.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
