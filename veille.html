@@ -82,7 +82,6 @@
                 <p><strong>Fréquence :</strong> Actualités quotidiennes et alertes</p>
                 <p><strong>Intérêt :</strong> Nouvelles sur les cryptomonnaies, tendances du marché, alertes de sécurité liées à la blockchain</p>
             </div>
-
             
             <div class="source-card">
                 <h3><i class="fab fa-reddit"></i> Reddit (r/cybersecurity, r/sysadmin)</h3>
@@ -111,6 +110,32 @@
                 </a>
             </div>
         </div>
+
+        <!-- NOUVELLE SECTION : Articles depuis Notion -->
+        <div style="text-align: center; margin: 40px 0;">
+            <button onclick="rafraichirArticlesNotion()" style="
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                border: none;
+                padding: 15px 30px;
+                border-radius: 10px;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+            " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(102, 126, 234, 0.6)'"
+               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.4)'">
+                <i class="fas fa-sync-alt"></i>
+                Actualiser depuis Notion
+            </button>
+        </div>
+
+        <!-- Les articles Notion seront insérés ici automatiquement -->
+        <div id="articles-notion-container"></div>
 
         <!-- Technologies émergentes AUTOMATIQUES -->
         <div class="source-info">
@@ -241,1424 +266,13 @@
         <a href="https://www.linkedin.com/in/jules--robert/"><i class="fab fa-linkedin"></i></a>
     </div>
 </footer>
-<script>// ===== SYSTÈME COMPLET TECHNOLOGIES ÉMERGENTES =====
 
-// ===== SYSTÈME TECHNOLOGIES ÉMERGENTES - THÈME BUGATTI =====
-
-// Configuration des sources d'API et RSS pour les technologies émergentes
-const TECH_SOURCES = {
-    techcrunch: 'https://techcrunch.com/feed/',
-    arsTechnica: 'https://feeds.arstechnica.com/arstechnica/technology-lab',
-    wired: 'https://www.wired.com/feed/rss',  
-    verge: 'https://www.theverge.com/rss/index.xml'
-};
-
-// Base de données des technologies émergentes avec images - THÈME BUGATTI
-const EMERGING_TECH_DATABASE = [
-    {
-        name: "Intelligence Artificielle Générative",
-        description: "Les IA comme GPT-4, Claude et Gemini transforment la création de contenu, la programmation et l'automatisation des tâches complexes.",
-        trend: "Adoption massive",
-        impact: "Révolution créative",
-        category: "IA",
-        keywords: ["ai", "gpt", "claude", "intelligence artificielle", "machine learning"],
-        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop",
-        bugatti_relevance: "Automatisation et optimisation des processus"
-    },
-    {
-        name: "Quantum Computing",
-        description: "Les ordinateurs quantiques d'IBM, Google et IonQ promettent de révolutionner la cryptographie, la simulation moléculaire et l'optimisation.",
-        trend: "Recherche avancée",
-        impact: "Potentiel disruptif",
-        category: "Hardware",
-        keywords: ["quantum", "quantique", "ibm", "google quantum"],
-        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=250&fit=crop",
-        bugatti_relevance: "Puissance de calcul révolutionnaire"
-    },
-    {
-        name: "Edge Computing & 5G",
-        description: "Le traitement des données au plus près des utilisateurs avec la 5G permet une latence ultra-faible pour l'IoT et la réalité augmentée.",
-        trend: "Déploiement accéléré",
-        impact: "Optimisation réseau",
-        category: "Infrastructure",
-        keywords: ["edge computing", "5g", "latence", "iot"],
-        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop",
-        bugatti_relevance: "Performance et rapidité extrêmes"
-    },
-    {
-        name: "Cybersécurité Zero Trust",
-        description: "L'architecture Zero Trust devient la norme avec 'jamais faire confiance, toujours vérifier' face aux cybermenaces sophistiquées.",
-        trend: "Adoption entreprise",
-        impact: "Nouvelle norme sécurité",
-        category: "Sécurité",
-        keywords: ["zero trust", "cybersécurité", "siem", "soc"],
-        image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=250&fit=crop",
-        bugatti_relevance: "Sécurité de niveau premium"
-    },
-    {
-        name: "Web3 & Blockchain Evolution",
-        description: "Au-delà des cryptomonnaies, la blockchain trouve des applications en supply chain, identité numérique et contrats intelligents.",
-        trend: "Maturation",
-        impact: "Décentralisation",
-        category: "Blockchain",
-        keywords: ["web3", "blockchain", "smart contracts", "nft"],
-        image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=400&h=250&fit=crop",
-        bugatti_relevance: "Innovation et exclusivité"
-    },
-    {
-        name: "Réalité Mixte (AR/VR)",
-        description: "Apple Vision Pro, Meta Quest et HoloLens ouvrent de nouveaux usages en formation, collaboration et divertissement immersif.",
-        trend: "Adoption croissante",
-        impact: "Interface révolutionnaire",
-        category: "Immersif",
-        keywords: ["ar", "vr", "mixed reality", "apple vision", "meta quest"],
-        image: "https://images.unsplash.com/photo-1592478411213-6153e4ebc696?w=400&h=250&fit=crop",
-        bugatti_relevance: "Expérience utilisateur ultime"
-    },
-    {
-        name: "Informatique Neuromorphique",
-        description: "Les puces inspirées du cerveau humain comme Intel Loihi promettent une efficacité énergétique révolutionnaire pour l'IA.",
-        trend: "Recherche active",
-        impact: "Efficacité énergétique",
-        category: "Hardware",
-        keywords: ["neuromorphique", "intel loihi", "brain-inspired"],
-        image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=250&fit=crop",
-        bugatti_relevance: "Ingénierie de pointe"
-    },
-    {
-        name: "Sustainable Tech / Green IT",
-        description: "Technologies vertes, centres de données durables et calcul à faible empreinte carbone deviennent prioritaires.",
-        trend: "Impératif écologique",
-        impact: "Responsabilité environnementale",
-        category: "Durabilité",
-        keywords: ["green it", "sustainable tech", "carbon neutral"],
-        image: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=400&h=250&fit=crop",
-        bugatti_relevance: "Performance durable"
-    }
-];
-
-// Cache pour éviter les requêtes répétées
-let techCache = {
-    data: null,
-    timestamp: 0,
-    ttl: 15 * 60 * 1000 // 15 minutes
-};
-
-// Configuration proxy CORS pour récupérer les flux RSS
-const TECH_CORS_PROXIES = [
-    'https://api.allorigins.win/get?url=',
-    'https://corsproxy.io/?',
-    'https://thingproxy.freeboard.io/fetch/'
-];
-
-// ===== FONCTIONS UTILITAIRES - THÈME BUGATTI =====
-
-function getBugattiTrendEmoji(trend) {
-    const trendMap = {
-        'Adoption massive': '🚀',
-        'Recherche avancée': '⚡',
-        'Déploiement accéléré': '🏎️',
-        'Adoption entreprise': '🏢',
-        'Maturation': '🔧',
-        'Adoption croissante': '📈',
-        'Recherche active': '⚙️',
-        'Impératif écologique': '🌿'
-    };
-    return trendMap[trend] || '💎';
-}
-
-function getBugattiImpactStyle(impact) {
-    // Couleurs dans l'esprit Bugatti : bleu principal et variations sombres
-    const styleMap = {
-        'Révolution créative': {
-            primary: '#00A9E0',
-            secondary: '#0088B8',
-            accent: '#232323'
-        },
-        'Potentiel disruptif': {
-            primary: '#0088B8',
-            secondary: '#006B94',
-            accent: '#1a1a1a'
-        },
-        'Optimisation réseau': {
-            primary: '#006B94',
-            secondary: '#005577',
-            accent: '#232323'
-        },
-        'Nouvelle norme sécurité': {
-            primary: '#005577',
-            secondary: '#004455',
-            accent: '#1a1a1a'
-        },
-        'Décentralisation': {
-            primary: '#004455',
-            secondary: '#003344',
-            accent: '#232323'
-        },
-        'Interface révolutionnaire': {
-            primary: '#003344',
-            secondary: '#002233',
-            accent: '#1a1a1a'
-        },
-        'Efficacité énergétique': {
-            primary: '#002233',
-            secondary: '#001122',
-            accent: '#232323'
-        },
-        'Responsabilité environnementale': {
-            primary: '#001122',
-            secondary: '#000811',
-            accent: '#1a1a1a'
-        }
-    };
-    return styleMap[impact] || {
-        primary: '#00A9E0',
-        secondary: '#232323',
-        accent: '#1a1a1a'
-    };
-}
-
-// ===== RÉCUPÉRATION D'ARTICLES RSS =====
-
-async function fetchTechNewsFromRSS(sourceUrl, maxArticles = 3) {
-    for (const proxy of TECH_CORS_PROXIES) {
-        try {
-            const response = await fetch(proxy + encodeURIComponent(sourceUrl), {
-                method: 'GET',
-                timeout: 8000
-            });
-            
-            if (!response.ok) continue;
-            
-            let xmlContent;
-            if (proxy.includes('allorigins')) {
-                const data = await response.json();
-                xmlContent = data.contents;
-            } else {
-                xmlContent = await response.text();
-            }
-            
-            if (!xmlContent || !xmlContent.includes('<rss') && !xmlContent.includes('<feed')) {
-                continue;
-            }
-            
-            return await parseTechRSS(xmlContent, maxArticles);
-            
-        } catch (error) {
-            console.log(`Proxy ${proxy} échoué:`, error.message);
-            continue;
-        }
-    }
-    
-    return [];
-}
-
-async function parseTechRSS(xmlString, maxArticles) {
-    try {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlString, "text/xml");
-        
-        const items = xmlDoc.querySelectorAll('item, entry');
-        const articles = [];
-        
-        for (let i = 0; i < Math.min(items.length, maxArticles); i++) {
-            const item = items[i];
-            const title = item.querySelector('title')?.textContent || '';
-            const link = item.querySelector('link')?.textContent || item.querySelector('link')?.getAttribute('href') || '';
-            const description = item.querySelector('description, summary')?.textContent || '';
-            
-            // Filtrer les articles tech pertinents
-            if (isTechRelevant(title + ' ' + description)) {
-                articles.push({
-                    title: title.substring(0, 80) + (title.length > 80 ? '...' : ''),
-                    link: link,
-                    description: cleanDescription(description).substring(0, 120) + '...',
-                    source: getSourceName(link)
-                });
-            }
-        }
-        
-        return articles;
-    } catch (error) {
-        console.error('Erreur parsing RSS tech:', error);
-        return [];
-    }
-}
-
-function isTechRelevant(text) {
-    const relevantKeywords = [
-        'ai', 'artificial intelligence', 'machine learning', 'quantum', 
-        'blockchain', 'cryptocurrency', 'cybersecurity', 'cloud', 'edge computing',
-        '5g', 'iot', 'ar', 'vr', 'mixed reality', 'neuromorphic', 'green tech'
-    ];
-    
-    const textLower = text.toLowerCase();
-    return relevantKeywords.some(keyword => textLower.includes(keyword));
-}
-
-function getSourceName(url) {
-    if (url.includes('techcrunch')) return 'TechCrunch';
-    if (url.includes('arstechnica')) return 'Ars Technica';
-    if (url.includes('wired')) return 'Wired';
-    if (url.includes('theverge')) return 'The Verge';
-    return 'Tech News';
-}
-
-function cleanDescription(description) {
-    if (!description) return 'Description non disponible';
-    
-    return description
-        .replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1')
-        .replace(/<[^>]*>/g, '')
-        .replace(/&#8211;/g, '–')
-        .replace(/&#038;/g, '&')
-        .replace(/&#8217;/g, "'")
-        .replace(/\s+/g, ' ')
-        .trim();
-}
-
-// ===== FONCTION PRINCIPALE =====
-
-async function fetchEmergingTechnologies() {
-    console.log('🏎️ Actualisation des technologies émergentes - Thème Bugatti...');
-    
-    const loadingElement = document.getElementById('tech-loading');
-    const containerElement = document.getElementById('technologies-container');
-    const errorElement = document.getElementById('error-message');
-    const lastUpdateElement = document.getElementById('last-update');
-    
-    // Affichage du chargement avec style Bugatti
-    if (loadingElement) {
-        loadingElement.style.display = 'block';
-        loadingElement.innerHTML = `
-            <div style="text-align: center; padding: 30px; background: linear-gradient(135deg, #232323, #00A9E0); border-radius: 15px; color: white;">
-                <h3 style="margin: 0 0 15px 0; font-size: 24px;">⚡ Récupération des données tech</h3>
-                <p style="margin: 10px 0; opacity: 0.9;">Analyse des flux RSS TechCrunch, Ars Technica, Wired...</p>
-                <div style="margin: 20px 0;">
-                    <div style="width: 100%; background: rgba(255,255,255,0.2); border-radius: 10px; height: 8px; overflow: hidden;">
-                        <div style="width: 0%; background: linear-gradient(90deg, #00A9E0, #ffffff); height: 100%; border-radius: 10px; animation: bugatti-loading 3s ease-in-out infinite;" id="progress-bar"></div>
-                    </div>
-                </div>
-                <small style="opacity: 0.8;">Performance et innovation Bugatti</small>
-            </div>
-        `;
-    }
-    
-    if (errorElement) errorElement.style.display = 'none';
-    
-    try {
-        // Animation de la barre de progression
-        const progressBar = document.getElementById('progress-bar');
-        if (progressBar) {
-            progressBar.style.animation = 'bugatti-loading 3s ease-in-out infinite';
-        }
-        
-        // Vérifier le cache
-        const now = Date.now();
-        if (techCache.data && (now - techCache.timestamp) < techCache.ttl) {
-            console.log('💎 Cache technologies Bugatti disponible');
-            displayBugattiTechnologies(techCache.data);
-            return;
-        }
-        
-        // Récupération des actualités en parallèle
-        console.log('🌐 Récupération des flux RSS avec style Bugatti...');
-        const newsPromises = Object.entries(TECH_SOURCES).map(([source, url]) => 
-            fetchTechNewsFromRSS(url, 2).catch(err => {
-                console.log(`Source ${source} échoué:`, err.message);
-                return [];
-            })
-        );
-        
-        const newsResults = await Promise.all(newsPromises);
-        const allNews = newsResults.flat().slice(0, 6);
-        
-        // Mélanger les données statiques avec les actualités
-        const enhancedTechData = EMERGING_TECH_DATABASE.map(tech => {
-            // Trouver des actualités pertinentes
-            const relevantNews = allNews.filter(article => 
-                tech.keywords.some(keyword => 
-                    article.title.toLowerCase().includes(keyword) || 
-                    article.description.toLowerCase().includes(keyword)
-                )
-            );
-            
-            return {
-                ...tech,
-                recentNews: relevantNews.slice(0, 2),
-                hasNews: relevantNews.length > 0
-            };
-        });
-        
-        // Mettre en cache
-        techCache = {
-            data: enhancedTechData,
-            timestamp: now,
-            ttl: techCache.ttl
-        };
-        
-        console.log(`✨ ${allNews.length} actualités intégrées avec style Bugatti`);
-        displayBugattiTechnologies(enhancedTechData);
-        
-    } catch (error) {
-        console.error('❌ Erreur lors du chargement:', error);
-        
-        if (errorElement) {
-            errorElement.style.display = 'block';
-            errorElement.innerHTML = `
-                <div style="background: linear-gradient(135deg, #232323, #00A9E0); color: white; padding: 20px; border-radius: 12px; margin: 20px 0; border-left: 5px solid #00A9E0;">
-                    <i class="fas fa-exclamation-triangle" style="color: #ffffff; margin-right: 10px;"></i>
-                    <strong>Système Bugatti :</strong> ${error.message}
-                    <br><small style="opacity: 0.8;">Données de base affichées avec style premium.</small>
-                </div>
-            `;
-        }
-        
-        // Fallback avec données de base
-        displayBugattiTechnologies(EMERGING_TECH_DATABASE);
-        
-    } finally {
-        if (loadingElement) loadingElement.style.display = 'none';
-        
-        if (lastUpdateElement) {
-            lastUpdateElement.textContent = new Date().toLocaleDateString('fr-FR', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-        }
-    }
-}
-
-// ===== AFFICHAGE DES TECHNOLOGIES - STYLE BUGATTI =====
-
-function displayBugattiTechnologies(technologies) {
-    const containerElement = document.getElementById('technologies-container');
-    if (!containerElement) return;
-    
-    containerElement.innerHTML = technologies.map((tech, index) => {
-        const trendEmoji = getBugattiTrendEmoji(tech.trend);
-        const impactStyle = getBugattiImpactStyle(tech.impact);
-        
-        // Alternance des styles pour créer un effet dynamique
-        const isEven = index % 2 === 0;
-        const cardStyle = isEven 
-            ? `linear-gradient(135deg, ${impactStyle.primary}, ${impactStyle.secondary})`
-            : `linear-gradient(135deg, ${impactStyle.secondary}, ${impactStyle.accent})`;
-        
-        const newsSection = tech.recentNews && tech.recentNews.length > 0 ? `
-            <div style="margin-top: 20px; padding-top: 15px; border-top: 2px solid rgba(255,255,255,0.3);">
-                <h4 style="font-size: 14px; margin-bottom: 12px; color: #ffffff; display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-newspaper" style="color: #ffffff;"></i>
-                    Actualités récentes :
-                </h4>
-                ${tech.recentNews.map(article => `
-                    <div style="margin-bottom: 10px; background: rgba(255,255,255,0.1); padding: 8px; border-radius: 6px;">
-                        <a href="${article.link}" target="_blank" rel="noopener" 
-                           style="color: #ffffff; text-decoration: none; font-size: 12px; line-height: 1.4; display: block; font-weight: 500;">
-                            ${article.title}
-                        </a>
-                        <div style="font-size: 10px; color: rgba(255,255,255,0.7); margin-top: 4px; display: flex; align-items: center; gap: 4px;">
-                            <i class="fas fa-external-link-alt" style="font-size: 8px;"></i>
-                            ${article.source}
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        ` : '';
-        
-        return `
-            <div class="tech-card-bugatti" style="
-                background: ${cardStyle};
-                border-radius: 15px;
-                padding: 25px;
-                color: white;
-                position: relative;
-                overflow: hidden;
-                border: 2px solid ${impactStyle.primary};
-                box-shadow: 0 8px 25px rgba(0, 169, 224, 0.3);
-                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            " onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 15px 40px rgba(0, 169, 224, 0.5)'"
-               onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(0, 169, 224, 0.3)'">
-                
-                <!-- Accent décoratif Bugatti -->
-                <div style="position: absolute; top: 0; right: 0; width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 0 15px 0 60px;"></div>
-                
-                <div style="display: flex; align-items: flex-start; margin-bottom: 15px; position: relative; z-index: 2;">
-                    <img src="${tech.image}" alt="${tech.name}" 
-                         style="width: 70px; height: 70px; border-radius: 12px; object-fit: cover; margin-right: 18px; border: 2px solid rgba(255,255,255,0.3); box-shadow: 0 4px 12px rgba(0,0,0,0.3);"
-                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzAiIGhlaWdodD0iNzAiIHZpZXdCb3g9IjAgMCA3MCA3MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNzAiIGhlaWdodD0iNzAiIGZpbGw9IiMwMEE5RTAiLz48dGV4dCB4PSIzNSIgeT0iNDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIzMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPu+4jzwvdGV4dD48L3N2Zz4='">
-                    <div style="flex: 1;">
-                        <h3 style="margin: 0; font-size: 20px; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">${tech.name}</h3>
-                        <div style="font-size: 12px; color: rgba(255,255,255,0.8); margin-top: 5px; display: flex; align-items: center; gap: 8px;">
-                            <span style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 10px;">
-                                ${tech.category}
-                            </span>
-                            <span style="font-style: italic;">
-                                ${tech.bugatti_relevance}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                
-                <p style="font-size: 14px; line-height: 1.5; margin: 20px 0; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">
-                    ${tech.description}
-                </p>
-                
-                <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
-                    <span style="
-                        background: rgba(255,255,255,0.25); 
-                        padding: 8px 16px; 
-                        border-radius: 20px; 
-                        font-size: 13px; 
-                        font-weight: 600;
-                        display: flex;
-                        align-items: center;
-                        gap: 6px;
-                        border: 1px solid rgba(255,255,255,0.3);
-                    ">
-                        ${trendEmoji} ${tech.trend}
-                    </span>
-                    <span style="
-                        background: rgba(255,255,255,0.25); 
-                        padding: 8px 16px; 
-                        border-radius: 20px; 
-                        font-size: 13px; 
-                        font-weight: 600;
-                        display: flex;
-                        align-items: center;
-                        gap: 6px;
-                        border: 1px solid rgba(255,255,255,0.3);
-                    ">
-                        💎 ${tech.impact}
-                    </span>
-                    ${tech.hasNews ? `
-                        <span style="
-                            background: linear-gradient(135deg, #ffffff, #00A9E0); 
-                            color: #232323; 
-                            padding: 6px 12px; 
-                            border-radius: 15px; 
-                            font-size: 11px; 
-                            font-weight: bold;
-                            text-transform: uppercase;
-                            letter-spacing: 0.5px;
-                            box-shadow: 0 2px 6px rgba(255,255,255,0.3);
-                        ">
-                            📡 LIVE NEWS
-                        </span>
-                    ` : ''}
-                </div>
-                
-                ${newsSection}
-            </div>
-        `;
-    }).join('');
-    
-    // Ajouter les styles CSS pour les animations Bugatti
-    if (!document.getElementById('bugatti-tech-styles')) {
-        const style = document.createElement('style');
-        style.id = 'bugatti-tech-styles';
-        style.textContent = `
-            @keyframes bugatti-loading {
-                0% { width: 0%; }
-                50% { width: 70%; background: linear-gradient(90deg, #00A9E0, #ffffff); }
-                100% { width: 100%; background: linear-gradient(90deg, #ffffff, #00A9E0); }
-            }
-            
-            .tech-card-bugatti {
-                position: relative;
-            }
-            
-            .tech-card-bugatti::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1), transparent);
-                border-radius: 15px;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-                pointer-events: none;
-            }
-            
-            .tech-card-bugatti:hover::before {
-                opacity: 1;
-            }
-            
-            #technologies-container {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-                gap: 25px;
-                margin: 30px 0;
-            }
-            
-            @media (max-width: 768px) {
-                #technologies-container {
-                    grid-template-columns: 1fr;
-                    gap: 20px;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-    
-    console.log(`🏎️ ${technologies.length} technologies affichées avec style Bugatti premium`);
-}
-
-// ===== INITIALISATION ET UTILITAIRES =====
-
-// Nettoyage automatique du cache
-setInterval(() => {
-    if (techCache.timestamp && (Date.now() - techCache.timestamp) > techCache.ttl) {
-        techCache.data = null;
-        console.log('🧹 Cache Bugatti nettoyé');
-    }
-}, 5 * 60 * 1000); // Vérifier toutes les 5 minutes
-
-// Fonctions utilitaires pour le debugging Bugatti
-window.debugBugattiTechCache = () => {
-    console.log('🏎️ État du cache technologies Bugatti:', {
-        hasData: !!techCache.data,
-        age: techCache.timestamp ? (Date.now() - techCache.timestamp) / 1000 + 's' : 'N/A',
-        itemCount: techCache.data ? techCache.data.length : 0,
-        theme: 'Bugatti Premium'
-    });
-};
-
-window.clearBugattiTechCache = () => {
-    techCache.data = null;
-    techCache.timestamp = 0;
-    console.log('🧹 Cache technologies Bugatti vidé manuellement');
-};
-
-// Chargement automatique au démarrage de la page
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('🏎️ Système technologies émergentes Bugatti initialisé');
-    console.log('💎 Thème: Performance, Innovation, Excellence');
-    // Petit délai pour laisser la page se charger complètement
-    setTimeout(fetchEmergingTechnologies, 1000);
-});
-
-// Auto-refresh toutes les 20 minutes avec style
-setInterval(() => {
-    console.log('🔄 Actualisation automatique Bugatti - Technologies émergentes');
-    fetchEmergingTechnologies();
-}, 20 * 60 * 1000);
-</script>
-
-<script>
-// ===== SYSTÈME D'IMAGES ULTRA-AMÉLIORÉ POUR IT-CONNECT =====
-
-// Cache global pour éviter la répétition d'images
-const imageCache = {
-    used: new Set(),
-    resetThreshold: 10 // Réinitialiser le cache après 10 images utilisées
-};
-
-// Base de données étendue d'images avec variantes pour éviter la répétition
-const ENHANCED_IMAGE_DATABASE = {
-    // Cybersécurité - Multiple variantes
-    'cybersécurité': [
-        'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=250&fit=crop'
-    ],
-    'sécurité': [
-        'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop'
-    ],
-    'malware': [
-        'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=250&fit=crop'
-    ],
-    'ransomware': [
-        'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=250&fit=crop'
-    ],
-    'phishing': [
-        'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop'
-    ],
-    'hack': [
-        'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop'
-    ],
-    'cyberattaque': [
-        'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=250&fit=crop'
-    ],
-
-    // Windows - Variantes
-    'windows': [
-        'https://images.unsplash.com/photo-1633265486064-086b219458ec?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1611262588024-d12430b98920?w=400&h=250&fit=crop'
-    ],
-    'microsoft': [
-        'https://images.unsplash.com/photo-1633265486064-086b219458ec?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=250&fit=crop'
-    ],
-    'office': [
-        'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1611262588024-d12430b98920?w=400&h=250&fit=crop'
-    ],
-    'outlook': [
-        'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1611262588024-d12430b98920?w=400&h=250&fit=crop'
-    ],
-    'powershell': [
-        'https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop'
-    ],
-    'active directory': [
-        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=250&fit=crop'
-    ],
-
-    // Linux - Variantes
-    'linux': [
-        'https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=400&h=250&fit=crop'
-    ],
-    'ubuntu': [
-        'https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=400&h=250&fit=crop'
-    ],
-    'debian': [
-        'https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop'
-    ],
-
-    // Réseau - Variantes
-    'réseau': [
-        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop'
-    ],
-    'serveur': [
-        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=250&fit=crop'
-    ],
-    'firewall': [
-        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=250&fit=crop'
-    ],
-    'routeur': [
-        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop'
-    ],
-    'switch': [
-        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=250&fit=crop'
-    ],
-
-    // Cloud - Variantes
-    'cloud': [
-        'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop'
-    ],
-    'azure': [
-        'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop'
-    ],
-    'aws': [
-        'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=250&fit=crop'
-    ],
-
-    // Matériel - Variantes étendues
-    'matériel': [
-        'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=250&fit=crop'
-    ],
-    'mini pc': [
-        'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop'
-    ],
-    'ordinateur': [
-        'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop'
-    ],
-    'usb': [
-        'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&h=250&fit=crop'
-    ],
-    'bootable': [
-        'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop'
-    ],
-
-    // Nouveaux mots-clés pour une détection plus précise
-    'password': [
-        'https://images.unsplash.com/photo-1555421689-491a97ff2040?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=250&fit=crop'
-    ],
-    'authentification': [
-        'https://images.unsplash.com/photo-1555421689-491a97ff2040?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=250&fit=crop'
-    ],
-    'api': [
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?w=400&h=250&fit=crop'
-    ],
-    'base de données': [
-        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=250&fit=crop'
-    ],
-    'docker': [
-        'https://images.unsplash.com/photo-1605745341112-85968b19335b?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop'
-    ],
-    'virtualisation': [
-        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop'
-    ],
-    'backup': [
-        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=250&fit=crop'
-    ],
-    'sauvegarde': [
-        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=250&fit=crop'
-    ],
-    'dns': [
-        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop'
-    ],
-    'vpn': [
-        'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop'
-    ],
-    'ssl': [
-        'https://images.unsplash.com/photo-1555421689-491a97ff2040?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=250&fit=crop'
-    ],
-    'tls': [
-        'https://images.unsplash.com/photo-1555421689-491a97ff2040?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=250&fit=crop'
-    ],
-    'certificat': [
-        'https://images.unsplash.com/photo-1555421689-491a97ff2040?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=250&fit=crop'
-    ],
-    'hyper-v': [
-        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop'
-    ],
-    'vmware': [
-        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop'
-    ],
-    'monitoring': [
-        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop'
-    ],
-    'supervision': [
-        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop'
-    ],
-    'iot': [
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=250&fit=crop'
-    ],
-    'blockchain': [
-        'https://images.unsplash.com/photo-1639322537228-f710d846310a?w=400&h=250&fit=crop',
-        'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop'
-    ]
-};
-
-// Images par défaut avec variantes
-const DEFAULT_IMAGES = [
-    'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop',
-    'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&h=250&fit=crop',
-    'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop',
-    'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop'
-];
-
-// Cache de préchargement d'images
-const imagePreloadCache = new Map();
-
-// Configuration CORS (existant)
-const CORS_PROXIES = {
-    allorigins: 'https://api.allorigins.win/get?url=',
-    corsproxy: 'https://corsproxy.io/?',
-    thingproxy: 'https://thingproxy.freeboard.io/fetch/'
-};
-
-const IT_CONNECT_RSS = 'https://www.it-connect.fr/feed/';
-
-// Articles de fallback (existant)
-const CACHED_ARTICLES = [
-    {
-        title: "IFA 2025 – Geekom A9 Mega : le mini PC le plus puissant du monde ?",
-        link: "https://www.it-connect.fr/ifa-2025-geekom-a9-mega-le-mini-pc-le-plus-puissant-du-monde/",
-        description: "Lors de l'IFA 2025, Geekom va dévoiler son modèle Geekom A9 Mega, une alternative à l'Apple Mac Studio, et deux laptops : GeekBook X14 Pro et X16 Pro.",
-        pubDate: "6 septembre 2025",
-        category: "Matériel",
-        imageUrl: "https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&h=250&fit=crop"
-    },
-    {
-        title: "Comment créer une clé USB bootable Windows 11 ?",
-        link: "https://www.it-connect.fr/tuto-creer-cle-usb-bootable-windows-11-rufus/",
-        description: "Apprenez à créer une clé USB bootable Windows 11 étape par étape avec Rufus. Suivez ce guide pour installer Windows 11 à partir d'une image ISO.",
-        pubDate: "6 septembre 2025",
-        category: "Windows Client",
-        imageUrl: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=250&fit=crop"
-    },
-    {
-        title: "Local-First et Open Source : 2FAS Pass, une alternative aux gestionnaires de mots de passe Cloud",
-        link: "https://www.it-connect.fr/2fas-pass-gestionnaire-mot-de-passe-open-source/",
-        description: "Découvrez 2FAS Pass, un gestionnaire de mots de passe Local-First et Open Source qui garantit la confidentialité et la sécurité de vos données.",
-        pubDate: "5 septembre 2025",
-        category: "Cybersécurité",
-        imageUrl: "https://images.unsplash.com/photo-1555421689-491a97ff2040?w=400&h=250&fit=crop"
-    }
-];
-
-// ===== FONCTIONS SYSTÈME D'IMAGES AMÉLIORÉ =====
-
-// Fonction pour sélectionner une image avec évitement de répétition
-function selectImageWithVariation(imageArray, fallbackKey = null) {
-    if (!imageArray || imageArray.length === 0) {
-        return selectImageWithVariation(DEFAULT_IMAGES, 'default');
-    }
-    
-    // Créer une clé unique pour ce type d'image
-    const cacheKey = fallbackKey || imageArray[0];
-    
-    // Filtrer les images non utilisées
-    const availableImages = imageArray.filter(img => !imageCache.used.has(img));
-    
-    let selectedImage;
-    if (availableImages.length > 0) {
-        // Choisir aléatoirement parmi les images non utilisées
-        selectedImage = availableImages[Math.floor(Math.random() * availableImages.length)];
-    } else {
-        // Si toutes les images ont été utilisées, réinitialiser le cache et choisir
-        if (imageCache.used.size >= imageCache.resetThreshold) {
-            console.log('🔄 Cache d\'images réinitialisé pour éviter la répétition');
-            imageCache.used.clear();
-        }
-        selectedImage = imageArray[Math.floor(Math.random() * imageArray.length)];
-    }
-    
-    // Ajouter au cache
-    imageCache.used.add(selectedImage);
-    
-    console.log(`🎨 Image sélectionnée: ${selectedImage.substring(30, 60)}... (Cache: ${imageCache.used.size}/${imageCache.resetThreshold})`);
-    return selectedImage;
-}
-
-// Fonction améliorée avec système de cache et plus de mots-clés
-function getEnhancedSmartImage(title, category) {
-    const titleLower = title.toLowerCase();
-    const categoryLower = category.toLowerCase();
-    
-    console.log(`🔍 Analyse intelligente pour: "${title.substring(0, 50)}..." (Catégorie: ${category})`);
-    
-    // Recherche par mots-clés dans le titre avec priorité
-    const keywordPriority = [
-        // Cybersécurité (haute priorité)
-        'ransomware', 'malware', 'phishing', 'cyberattaque', 'hack',
-        // Windows/Microsoft
-        'windows', 'microsoft', 'office', 'outlook', 'powershell', 'active directory',
-        // Linux
-        'linux', 'ubuntu', 'debian',
-        // Réseau/Infrastructure
-        'réseau', 'serveur', 'firewall', 'routeur', 'switch', 'dns', 'vpn',
-        // Cloud
-        'cloud', 'azure', 'aws',
-        // Sécurité générale
-        'ssl', 'tls', 'certificat', 'password', 'authentification',
-        // Matériel
-        'mini pc', 'ordinateur', 'usb', 'bootable',
-        // Technologies
-        'docker', 'virtualisation', 'hyper-v', 'vmware', 'iot', 'blockchain',
-        // Général IT
-        'api', 'base de données', 'backup', 'sauvegarde', 'monitoring', 'supervision'
-    ];
-    
-    // Rechercher le premier mot-clé correspondant par ordre de priorité
-    for (const keyword of keywordPriority) {
-        if (titleLower.includes(keyword) && ENHANCED_IMAGE_DATABASE[keyword]) {
-            const selectedImage = selectImageWithVariation(
-                ENHANCED_IMAGE_DATABASE[keyword], 
-                keyword
-            );
-            console.log(`✅ Correspondance trouvée pour "${keyword}"`);
-            return selectedImage;
-        }
-    }
-    
-    // Recherche par catégorie si aucun mot-clé n'est trouvé
-    for (const [cat, images] of Object.entries(ENHANCED_IMAGE_DATABASE)) {
-        if (categoryLower.includes(cat)) {
-            const selectedImage = selectImageWithVariation(images, cat);
-            console.log(`✅ Correspondance par catégorie pour "${cat}"`);
-            return selectedImage;
-        }
-    }
-    
-    // Image par défaut avec variation
-    const defaultImage = selectImageWithVariation(DEFAULT_IMAGES, 'default');
-    console.log('🎨 Aucune correspondance, image par défaut sélectionnée');
-    return defaultImage;
-}
-
-// Fonction de mise en cache d'images avec préchargement
-function preloadAndCacheImage(imageUrl, title) {
-    if (imagePreloadCache.has(imageUrl)) {
-        console.log(`💾 Image "${imageUrl.substring(30, 60)}..." déjà en cache`);
-        return Promise.resolve(imageUrl);
-    }
-    
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        
-        img.onload = () => {
-            imagePreloadCache.set(imageUrl, {
-                url: imageUrl,
-                loaded: true,
-                timestamp: Date.now(),
-                title: title
-            });
-            console.log(`✅ Image préchargée et mise en cache: "${title?.substring(0, 30)}..."`);
-            resolve(imageUrl);
-        };
-        
-        img.onerror = () => {
-            console.warn(`❌ Erreur de préchargement pour: "${title?.substring(0, 30)}..."`);
-            // En cas d'erreur, utiliser une image de fallback
-            const fallbackImage = selectImageWithVariation(DEFAULT_IMAGES, 'fallback');
-            resolve(fallbackImage);
-        };
-        
-        img.src = imageUrl;
-        
-        // Timeout après 5 secondes
-        setTimeout(() => {
-            if (!imagePreloadCache.has(imageUrl)) {
-                console.warn(`⏰ Timeout de préchargement pour: "${title?.substring(0, 30)}..."`);
-                const fallbackImage = selectImageWithVariation(DEFAULT_IMAGES, 'timeout');
-                resolve(fallbackImage);
-            }
-        }, 5000);
-    });
-}
-
-// Fonction principale avec préchargement
-async function getSmartImageWithCache(title, category) {
-    const smartImageUrl = getEnhancedSmartImage(title, category);
-    
-    // Précharger et mettre en cache l'image
-    try {
-        const cachedImageUrl = await preloadAndCacheImage(smartImageUrl, title);
-        return cachedImageUrl;
-    } catch (error) {
-        console.error('Erreur lors de la mise en cache:', error);
-        return selectImageWithVariation(DEFAULT_IMAGES, 'error');
-    }
-}
-
-// ===== FONCTIONS RSS EXISTANTES AMÉLIORÉES =====
-
-// Image SVG par défaut en base64 pour les cas d'erreur
-const DEFAULT_IMAGE_SVG = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzQ5OGRiIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5JVC1Db25uZWN0PC90ZXh0Pjwvc3ZnPg==';
-
-// Fonctions utilitaires existantes (conservées)
-function extractImageFromDescription(description) {
-    if (!description) return null;
-    
-    try {
-        const cleanedDescription = description.replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1');
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = cleanedDescription;
-        const imgElement = tempDiv.querySelector('img');
-        
-        if (imgElement && imgElement.src) {
-            let imageUrl = imgElement.src;
-            if (imageUrl.startsWith('/')) {
-                imageUrl = 'https://www.it-connect.fr' + imageUrl;
-            } else if (!imageUrl.startsWith('http')) {
-                imageUrl = 'https://www.it-connect.fr/' + imageUrl;
-            }
-            return imageUrl;
-        }
-        
-        const imgRegex = /<img[^>]+src\s*=\s*["']([^"']+)["'][^>]*>/i;
-        const match = cleanedDescription.match(imgRegex);
-        
-        if (match && match[1]) {
-            let imageUrl = match[1];
-            if (imageUrl.startsWith('/')) {
-                imageUrl = 'https://www.it-connect.fr' + imageUrl;
-            } else if (!imageUrl.startsWith('http')) {
-                imageUrl = 'https://www.it-connect.fr/' + imageUrl;
-            }
-            return imageUrl;
-        }
-    } catch (error) {
-        console.log('Erreur lors de l\'extraction d\'image:', error);
-    }
-    
-    return null;
-}
-
-function extractEnclosureImage(item) {
-    const enclosure = item.querySelector('enclosure');
-    if (enclosure) {
-        const type = enclosure.getAttribute('type');
-        const url = enclosure.getAttribute('url');
-        
-        if (type && type.startsWith('image/') && url) {
-            return url;
-        }
-    }
-    return null;
-}
-
-function cleanDescription(description) {
-    if (!description) return 'Description non disponible';
-    
-    return description
-        .replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1')
-        .replace(/<[^>]*>/g, '')
-        .replace(/&#8211;/g, '–')
-        .replace(/&#038;/g, '&')
-        .replace(/&#8217;/g, "'")
-        .trim()
-        .substring(0, 150) + '...';
-}
-
-function formatDate(pubDateStr) {
-    if (!pubDateStr) return 'Récemment';
-    
-    try {
-        const date = new Date(pubDateStr);
-        if (isNaN(date.getTime())) return 'Récemment';
-        
-        return date.toLocaleDateString('fr-FR', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        });
-    } catch (e) {
-        return 'Récemment';
-    }
-}
-
-// ===== PARSER RSS AMÉLIORÉ AVEC SYSTÈME D'IMAGES =====
-
-async function parseRSSFeedImprovedWithSmartImages(xmlString) {
-    try {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlString, "text/xml");
-        
-        const parserError = xmlDoc.querySelector('parsererror');
-        if (parserError) {
-            console.error('Erreur parsing XML:', parserError.textContent);
-            return [];
-        }
-        
-        const items = xmlDoc.querySelectorAll('item');
-        const articlesPromises = [];
-        
-        items.forEach((item, index) => {
-            if (index < 6) {
-                const title = item.querySelector('title')?.textContent || 'Titre non disponible';
-                const link = item.querySelector('link')?.textContent || '#';
-                const description = item.querySelector('description')?.textContent || '';
-                const pubDate = item.querySelector('pubDate')?.textContent || '';
-                const category = item.querySelector('category')?.textContent || 'IT-Connect';
-                
-                const articlePromise = (async () => {
-                    let imageUrl = null;
-                    
-                    // 1. Essayer enclosure
-                    imageUrl = extractEnclosureImage(item);
-                    console.log(`🔍 Article "${title.substring(0,30)}..." - Enclosure: ${imageUrl || 'Aucune'}`);
-                    
-                    // 2. Essayer description
-                    if (!imageUrl) {
-                        imageUrl = extractImageFromDescription(description);
-                        console.log(`🔍 Article "${title.substring(0,30)}..." - Description: ${imageUrl || 'Aucune'}`);
-                    }
-                    
-                    // 3. Système intelligent amélioré
-                    if (!imageUrl) {
-                        imageUrl = await getSmartImageWithCache(title, category);
-                        console.log(`🎨 Article "${title.substring(0,30)}..." - Image intelligente améliorée: ${imageUrl}`);
-                    }
-                    
-                    return {
-                        title: title.replace(/&#8211;/g, '–').replace(/&#038;/g, '&'),
-                        link: link.trim(),
-                        description: cleanDescription(description),
-                        pubDate: formatDate(pubDate),
-                        category: category,
-                        imageUrl: imageUrl
-                    };
-                })();
-                
-                articlesPromises.push(articlePromise);
-            }
-        });
-        
-        const articles = await Promise.all(articlesPromises);
-        
-        // Statistiques améliorées
-        const realImages = articles.filter(a => a.imageUrl && a.imageUrl.startsWith('https://www.it-connect.fr')).length;
-        const smartImages = articles.filter(a => a.imageUrl && a.imageUrl.includes('unsplash')).length;
-        
-        console.log(`📸 SYSTÈME ULTRA-AMÉLIORÉ: ${realImages} images réelles / ${smartImages} images intelligentes sur ${articles.length} articles`);
-        console.log(`💾 Cache d'images: ${imagePreloadCache.size} images en mémoire`);
-        console.log(`🔄 Cache anti-répétition: ${imageCache.used.size}/${imageCache.resetThreshold} utilisées`);
-        
-        return articles;
-    } catch (error) {
-        console.error('Erreur lors du parsing RSS:', error);
-        return [];
-    }
-}
-
-// ===== FONCTIONS D'AFFICHAGE ET DE CHARGEMENT =====
-
-function displayITConnectArticles(articles) {
-    const container = document.getElementById('articles-grid');
-    const loading = document.getElementById('articles-loading');
-    
-    if (loading) loading.style.display = 'none';
-    
-    if (!container) {
-        console.error('Container articles-grid non trouvé');
-        return;
-    }
-    
-    if (articles.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: #bdc3c7;">Aucun article trouvé.</p>';
-        return;
-    }
-    
-    container.innerHTML = articles.map(article => `
-        <article class="article-card">
-            <img src="${article.imageUrl}" alt="${article.title}" 
-                 style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px 8px 0 0;"
-                 onerror="this.src='${DEFAULT_IMAGE_SVG}'"
-                 loading="lazy">
-            <div class="article-content">
-                <h3 class="titre-article">${article.title}</h3>
-                <div class="article-meta">
-                    <span class="category"><i class="fas fa-tag"></i> ${article.category}</span>
-                    <span style="margin-left: 10px;"><i class="fas fa-calendar"></i> ${article.pubDate}</span>
-                </div>
-                <p>${article.description}</p>
-                <a href="${article.link}" class="read-more" target="_blank" rel="noopener">
-                    Lire la suite <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-        </article>
-    `).join('');
-}
-
-function showArticlesError(message) {
-    const errorDiv = document.getElementById('articles-error');
-    const loading = document.getElementById('articles-loading');
-    
-    if (loading) loading.style.display = 'none';
-    
-    if (errorDiv) {
-        errorDiv.style.display = 'block';
-        errorDiv.innerHTML = `
-            <i class="fas fa-exclamation-triangle"></i>
-            <strong>Information :</strong> ${message}
-        `;
-    }
-}
-
-// ===== FONCTION PRINCIPALE DE CHARGEMENT =====
-
-async function loadITConnectArticlesWithEnhancedFallback() {
-    const loading = document.getElementById('articles-loading');
-    const errorDiv = document.getElementById('articles-error');
-    
-    if (loading) loading.style.display = 'block';
-    if (errorDiv) errorDiv.style.display = 'none';
-    
-    const proxiesToTest = [
-        { 
-            name: 'AllOrigins', 
-            url: CORS_PROXIES.allorigins, 
-            parseResponse: async (response) => {
-                const data = await response.json();
-                if (!data.contents || data.contents.length < 100) {
-                    throw new Error('Contenu RSS invalide ou vide');
-                }
-                return data.contents;
-            }
-        },
-        { 
-            name: 'CORS Proxy', 
-            url: CORS_PROXIES.corsproxy, 
-            parseResponse: async (response) => {
-                const text = await response.text();
-                if (!text || text.length < 100) {
-                    throw new Error('Contenu RSS invalide ou vide');
-                }
-                return text;
-            }
-        },
-        { 
-            name: 'ThingProxy', 
-            url: CORS_PROXIES.thingproxy, 
-            parseResponse: async (response) => {
-                const text = await response.text();
-                if (!text || text.length < 100) {
-                    throw new Error('Contenu RSS invalide ou vide');
-                }
-                return text;
-            }
-        }
-    ];
-    
-    // Tester chaque proxy
-    for (const proxy of proxiesToTest) {
-        try {
-            console.log(`🔄 Tentative de chargement via ${proxy.name}...`);
-            
-            const response = await fetch(proxy.url + encodeURIComponent(IT_CONNECT_RSS), {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json, text/plain, */*'
-                },
-                timeout: 10000
-            });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
-            const xmlContent = await proxy.parseResponse(response);
-            
-            if (xmlContent && xmlContent.includes('<rss')) {
-                const articles = await parseRSSFeedImprovedWithSmartImages(xmlContent);
-                
-                if (articles.length > 0) {
-                    console.log(`✅ SUCCÈS avec ${proxy.name}: ${articles.length} articles trouvés`);
-                    displayITConnectArticles(articles);
-                    
-                    if (loading) loading.style.display = 'none';
-                    return;
-                }
-            }
-            
-            throw new Error('Contenu RSS invalide ou vide');
-            
-        } catch (error) {
-            console.log(`❌ ${proxy.name} a échoué:`, error.message);
-        }
-        
-        await new Promise(resolve => setTimeout(resolve, 1000));
-    }
-    
-    // Fallback avec articles en cache améliorés
-    console.log('⚠️ Tous les proxies ont échoué, application des images améliorées au cache...');
-    
-    const enhancedCachedArticles = await Promise.all(
-        CACHED_ARTICLES.map(async (article) => ({
-            ...article,
-            imageUrl: await getSmartImageWithCache(article.title, article.category)
-        }))
-    );
-    
-    showArticlesError('Impossible de charger les articles en temps réel. Articles récents affichés depuis le cache avec images optimisées.');
-    displayITConnectArticles(enhancedCachedArticles);
-}
-
-// ===== FONCTIONS UTILITAIRES ET DE DEBUG =====
-
-function cleanImageCache() {
-    const now = Date.now();
-    const maxAge = 30 * 60 * 1000; // 30 minutes
-    
-    let cleaned = 0;
-    for (const [url, data] of imagePreloadCache.entries()) {
-        if (now - data.timestamp > maxAge) {
-            imagePreloadCache.delete(url);
-            cleaned++;
-        }
-    }
-    
-    if (cleaned > 0) {
-        console.log(`🧹 Cache nettoyé: ${cleaned} images supprimées`);
-    }
-}
-
-function showImageCacheStats() {
-    console.log('📊 STATISTIQUES DU CACHE D\'IMAGES:');
-    console.log(`💾 Images préchargées: ${imagePreloadCache.size}`);
-    console.log(`🔄 Images utilisées (anti-répétition): ${imageCache.used.size}/${imageCache.resetThreshold}`);
-    
-    if (imagePreloadCache.size > 0) {
-        console.log('📋 Détail du cache:');
-        imagePreloadCache.forEach((data, url) => {
-            console.log(`  - ${url.substring(30, 60)}... (${data.title?.substring(0, 20)}...)`);
-        });
-    }
-}
-
-function resetImageCache() {
-    imageCache.used.clear();
-    imagePreloadCache.clear();
-    console.log('🧹 Cache d\'images complètement réinitialisé');
-}
-
-// ===== FONCTIONS PUBLIQUES =====
-
-function loadITConnectArticles() {
-    loadITConnectArticlesWithEnhancedFallback();
-}
-
-// Ajouter des commandes de debug dans la console
-if (typeof window !== 'undefined') {
-    window.showImageCacheStats = showImageCacheStats;
-    window.resetImageCache = resetImageCache;
-    window.cleanImageCache = cleanImageCache;
-}
-
-// ===== INITIALISATION =====
-
-// Nettoyage automatique du cache toutes les 15 minutes
-setInterval(cleanImageCache, 15 * 60 * 1000);
-
-// Chargement automatique au démarrage
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Page chargée, initialisation du système d\'images ULTRA-AMÉLIORÉ...');
-    console.log('🎨 Fonctionnalités: +50 mots-clés, variantes d\'images, cache intelligent, préchargement');
-    console.log('💡 Tapez window.showImageCacheStats() dans la console pour voir les statistiques');
-    loadITConnectArticlesWithEnhancedFallback();
-});
-
-// Auto-refresh avec système amélioré
-setInterval(() => {
-    console.log('🔄 Actualisation automatique avec système d\'images ultra-amélioré');
-    loadITConnectArticlesWithEnhancedFallback();
-}, 10 * 60 * 1000);
-</script>
-
+<!-- SCRIPTS -->
 <script src="horloge.js"></script>
 <script src="lien-survolé.js"></script>
+
+<!-- Script Accordéon -->
 <script>
-// Gestion des accordéons intégrée (pour éviter l'erreur 404)
 document.addEventListener('DOMContentLoaded', function() {
     const accordionHeaders = document.querySelectorAll('.accordion-header');
     
@@ -1668,10 +282,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const accordionBody = accordionItem.querySelector('.accordion-body');
             const chevron = this.querySelector('.chevron');
             
-            // Toggle de la classe active
             accordionItem.classList.toggle('active');
             
-            // Animation du chevron
             if (accordionItem.classList.contains('active')) {
                 chevron.style.transform = 'rotate(180deg)';
                 accordionBody.style.maxHeight = accordionBody.scrollHeight + 'px';
@@ -1683,6 +295,199 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<!-- NOUVEAU : Script Notion Integration -->
+<script>
+// ===== SYSTÈME NOTION POUR ARTICLES DE VEILLE =====
+
+async function chargerArticlesNotion() {
+  console.log('🔄 Chargement des articles depuis Notion...');
+  
+  const container = document.getElementById('articles-notion-container');
+  if (!container) {
+    console.error('❌ Container articles-notion-container introuvable');
+    return;
+  }
+  
+  // Loader
+  container.innerHTML = `
+    <div style="text-align: center; padding: 40px; background: linear-gradient(135deg, #3498db, #2ecc71); border-radius: 15px; color: white; margin: 20px 0;">
+      <h3 style="margin: 0 0 10px 0;">⚡ Chargement depuis Notion</h3>
+      <p style="margin: 0; opacity: 0.9;">Récupération de ta veille technologique...</p>
+      <div style="margin-top: 15px;">
+        <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
+      </div>
+    </div>
+  `;
+  
+  try {
+    const response = await fetch('/.netlify/functions/articles-notion');
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    
+    if (!data.success) {
+      throw new Error(data.message || 'Erreur API');
+    }
+    
+    console.log(`✅ ${data.count} articles Notion récupérés`);
+    afficherArticlesNotion(data.articles);
+    
+  } catch (error) {
+    console.error('❌ Erreur chargement Notion:', error);
+    container.innerHTML = `
+      <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 12px; margin: 20px 0; text-align: center;">
+        <i class="fas fa-exclamation-triangle" style="font-size: 24px; margin-bottom: 10px;"></i>
+        <h3 style="margin: 10px 0;">Erreur de connexion à Notion</h3>
+        <p style="margin: 5px 0; opacity: 0.9;">${error.message}</p>
+        <small style="opacity: 0.8;">Les articles statiques restent affichés ci-dessous</small>
+      </div>
+    `;
+  }
+}
+
+function afficherArticlesNotion(articles) {
+  const container = document.getElementById('articles-notion-container');
+  if (!container) return;
+  
+  const notionSection = `
+    <div style="margin: 30px 0; padding: 20px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 15px; text-align: center; color: white;">
+      <h2 style="margin: 0 0 10px 0;">
+        <i class="fas fa-database"></i> Articles depuis Notion
+      </h2>
+      <p style="margin: 0; opacity: 0.9;">
+        ${articles.length} articles de veille synchronisés depuis ta base Notion
+      </p>
+    </div>
+    
+    <div class="articles-grid" style="margin-top: 20px;">
+      ${articles.map(article => {
+        const imageUrl = getImageForTechnologies(article.technologies);
+        const techBadges = article.technologies.map(tech => 
+          `<span style="background: #3498db; color: white; padding: 4px 10px; border-radius: 15px; font-size: 11px; margin: 2px; display: inline-block;">${tech}</span>`
+        ).join('');
+        
+        const scoreColor = article.score >= 4 ? '#2ecc71' : article.score >= 3 ? '#f39c12' : '#e74c3c';
+        const scoreBadge = `<span style="background: ${scoreColor}; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 14px;">⭐ ${article.score}/5</span>`;
+        
+        return `
+          <article class="article-card" style="border: 2px solid #667eea; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);">
+            <img src="${imageUrl}" 
+                 alt="${article.titre}" 
+                 style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px 8px 0 0;"
+                 onerror="this.src='https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop'">
+            
+            <div class="article-content">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                ${scoreBadge}
+                <span style="color: #7f8c8d; font-size: 12px;">
+                  <i class="fas fa-calendar"></i> ${new Date(article.date).toLocaleDateString('fr-FR')}
+                </span>
+              </div>
+              
+              <h3 class="titre-article">${article.titre}</h3>
+              
+              <div class="article-meta" style="margin: 10px 0;">
+                <span class="category">
+                  <i class="fas fa-rss"></i> ${article.source}
+                </span>
+              </div>
+              
+              ${article.analyse ? `<p style="color: #555; line-height: 1.6;">${article.analyse}</p>` : ''}
+              
+              ${techBadges ? `
+                <div style="margin: 15px 0; padding: 10px 0; border-top: 1px solid #ecf0f1;">
+                  <strong style="display: block; margin-bottom: 8px; color: #555;">
+                    <i class="fas fa-code"></i> Technologies :
+                  </strong>
+                  ${techBadges}
+                </div>
+              ` : ''}
+              
+              ${article.interet_professionnel ? `
+                <div style="background: #ecf0f1; padding: 12px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #3498db;">
+                  <strong style="color: #3498db; display: block; margin-bottom: 5px;">
+                    <i class="fas fa-briefcase"></i> Intérêt professionnel :
+                  </strong>
+                  <small style="color: #555; line-height: 1.4;">${article.interet_professionnel}</small>
+                </div>
+              ` : ''}
+              
+              ${article.interet_personnel ? `
+                <div style="background: #fef9e7; padding: 12px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f39c12;">
+                  <strong style="color: #f39c12; display: block; margin-bottom: 5px;">
+                    <i class="fas fa-user"></i> Intérêt personnel :
+                  </strong>
+                  <small style="color: #555; line-height: 1.4;">${article.interet_personnel}</small>
+                </div>
+              ` : ''}
+              
+              <div style="display: flex; gap: 10px; margin-top: 15px;">
+                ${article.url ? `
+                  <a href="${article.url}" class="read-more" target="_blank" rel="noopener" style="flex: 1;">
+                    Lire l'article <i class="fas fa-external-link-alt"></i>
+                  </a>
+                ` : ''}
+                <a href="${article.notionUrl}" target="_blank" rel="noopener" 
+                   style="background: #667eea; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: all 0.3s ease;">
+                  <i class="fas fa-sticky-note"></i> Notion
+                </a>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('')}
+    </div>
+  `;
+  
+  container.innerHTML = notionSection;
+}
+
+function getImageForTechnologies(technologies) {
+  const techImages = {
+    'AD CS': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=250&fit=crop',
+    'PKI': 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=250&fit=crop',
+    'Certificats numériques': 'https://images.unsplash.com/photo-1555421689-491a97ff2040?w=400&h=250&fit=crop',
+    'Sauvegarde': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop',
+    'Restauration': 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=250&fit=crop',
+    'Serveur': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
+    'IA': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop',
+    'Cloud': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=250&fit=crop',
+    'Azure': 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop',
+    'Sécurité': 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=250&fit=crop',
+    'Windows': 'https://images.unsplash.com/photo-1633265486064-086b219458ec?w=400&h=250&fit=crop'
+  };
+  
+  for (const tech of technologies) {
+    if (techImages[tech]) return techImages[tech];
+  }
+  
+  return 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop';
+}
+
+function rafraichirArticlesNotion() {
+  chargerArticlesNotion();
+}
+
+// Charger au démarrage
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    chargerArticlesNotion();
+  }, 1000);
+});
+
+// Auto-refresh toutes les 15 minutes
+setInterval(() => {
+  console.log('🔄 Actualisation automatique Notion');
+  rafraichirArticlesNotion();
+}, 15 * 60 * 1000);
+</script>
+
+<!-- Ton script existant pour IT-Connect et technologies émergentes -->
+<script src="veille-scripts.js"></script>
 
 </body>
 </html>
