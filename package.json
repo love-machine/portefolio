@@ -1,0 +1,8 @@
+{
+  "name": "portfolio-veille",
+  "version": "1.0.0",
+  "description": "Portfolio avec veille technologique",
+  "dependencies": {
+    "@notionhq/client": "^2.2.15"
+  }
+}
