@@ -19,7 +19,7 @@ exports.handler = async function(event, context) {
       auth: process.env.NOTION_API_KEY
     });
 
-    // Récupérer TOUS les articles (pas de filtre pour voir tout le contenu)
+    // Récupérer SEULEMENT les 3 articles les plus récents
     const response = await notion.databases.query({
       database_id: process.env.NOTION_VEILLE_DATABASE_ID,
       sorts: [
@@ -28,7 +28,7 @@ exports.handler = async function(event, context) {
           direction: 'descending'
         }
       ],
-      page_size: 50 // Récupérer jusqu'à 50 articles
+      page_size: 3 // Récupérer SEULEMENT les 3 plus récents
     });
 
     // Formater les articles selon TA structure Notion
