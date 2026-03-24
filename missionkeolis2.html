@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Keolis 2 - Jules ROBERT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            position: relative;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            white-space: nowrap;
+        }
+
+        .header-overlay h1 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #00A9E0;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .header-overlay p {
+            font-size: 20px;
+            color: white;
+            margin: 10px 0 0 0;
+        }
+
+        .company-info {
+            background: linear-gradient(135deg, #232323, #2a2a2a);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #00A9E0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .company-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: #00A9E0;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .mission-card {
+            background: linear-gradient(135deg, #232323, #2a2a2a);
+            margin: 40px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #00A9E0;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 169, 224, 0.2);
+        }
+
+        .mission-header {
+            background: linear-gradient(135deg, #00A9E0, #0088cc);
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .mission-number {
+            background: white;
+            color: #00A9E0;
+            font-size: 24px;
+            font-weight: bold;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .mission-header h3 {
+            color: white;
+            margin: 0;
+            font-size: 1.5em;
+            flex: 1;
+        }
+
+        .mission-content {
+            padding: 30px;
+        }
+
+        .mission-description {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #e0e0e0;
+        }
+
+        .mission-details {
+            background: rgba(0, 169, 224, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 3px solid #00A9E0;
+        }
+
+        .mission-details h4 {
+            color: #00A9E0;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .mission-details ul {
+            margin-left: 20px;
+        }
+
+        .mission-details li {
+            margin-bottom: 8px;
+            color: #d0d0d0;
+        }
+
+        .mission-results {
+            background: rgba(46, 204, 113, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 3px solid #2ecc71;
+        }
+
+        .mission-results h4 {
+            color: #2ecc71;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .mission-results ul {
+            margin-left: 20px;
+        }
+
+        .mission-results li {
+            margin-bottom: 8px;
+            color: #d0d0d0;
+        }
+
+        .mission-challenges {
+            background: rgba(231, 76, 60, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 3px solid #e74c3c;
+        }
+
+        .mission-challenges h4 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .mission-challenges ul {
+            margin-left: 20px;
+        }
+
+        .mission-challenges li {
+            margin-bottom: 8px;
+            color: #d0d0d0;
+        }
+
+        .mission-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #00A9E0, #0088cc);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 169, 224, 0.3);
+        }
+
+        .stage-bilan {
+            background: linear-gradient(135deg, #00A9E0, #232323);
+            padding: 50px;
+            border-radius: 20px;
+            margin: 60px 0;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .competences-acquises {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .competence-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .competence-card h4 {
+            color: #00A9E0;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .mission-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .header-overlay h1 {
+                font-size: 28px;
+            }
+            .header-overlay {
+                white-space: normal;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+
+        <header>
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=400&fit=crop" alt="Keolis Banner" class="header-image">
+            <div class="header-overlay">
+                <h1>Mission Keolis Ginko — Stage 2</h1>
+                <p>Stage BTS SIO — Infrastructure Réseau &amp; Sécurité</p>
+                <p><i class="fas fa-calendar-alt"></i> Février — Mars 2026</p>
+            </div>
+        </header>
+
+        <section class="company-info">
+            <h2><i class="fas fa-building"></i> Contexte du stage</h2>
+            <p style="font-size: 1.2em; line-height: 1.8; margin: 20px 0;">
+                Deuxième période de stage chez <strong>Keolis Besançon Mobilités</strong>, opérateur du réseau de transport urbain Ginko.
+                Ce stage de 2ème année a été axé sur des projets d'automatisation, de sécurisation de l'infrastructure
+                et de gestion de flotte mobile, en complément des compétences acquises lors du premier stage.
+            </p>
+
+            <div class="company-stats">
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div>Stages réalisés</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">18</div>
+                    <div>Tâches réalisées</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div>Grandes missions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">7</div>
+                    <div>Semaines de stage</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="missions-container">
+            <h2 style="text-align: center; margin: 60px 0 40px 0; font-size: 2.5em;">Missions réalisées</h2>
+
+            <!-- Mission 1 -->
+            <div class="mission-card">
+                <div class="mission-header">
+                    <div class="mission-number">01</div>
+                    <h3><i class="fas fa-save"></i> Automatisation des sauvegardes réseau</h3>
+                </div>
+                <div class="mission-content">
+                    <p class="mission-description">
+                        Mise en place d'un système complet de sauvegarde automatique des configurations des équipements réseau
+                        (switchs Aruba et Moxa) ainsi que des sauvegardes vCenter, sur un serveur dédié Linux Debian.
+                        Cette mission couvre l'ensemble de la chaîne : serveur, sécurisation des accès, scripts et planification.
+                    </p>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-server"></i> Mise en place du serveur Debian</h4>
+                        <ul>
+                            <li>Installation de <strong>Debian 13</strong> sur un serveur dédié aux sauvegardes</li>
+                            <li>Configuration réseau : VLANs, adressage IP, règles pare-feu</li>
+                            <li>Création d'un environnement <strong>chroot</strong> par type de sauvegarde (isolation des utilisateurs)</li>
+                            <li>Configuration du serveur SFTP avec authentification dédiée</li>
+                            <li>Principe retenu : les équipements <em>poussent</em> leurs configs vers le serveur (approche Push)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-terminal"></i> Script Bash — Switchs Aruba</h4>
+                        <ul>
+                            <li>Développement d'un script Bash de sauvegarde automatique des configurations</li>
+                            <li>Intégration de <strong>Keychain</strong> pour la persistance de l'agent SSH entre redémarrages</li>
+                            <li>Utilisation de la variable <strong>SSH_OPTS</strong> pour forcer les algorithmes et le mode BatchMode</li>
+                            <li>Migration du script vers <code>/etc/</code> pour une structure système robuste</li>
+                            <li>Planification via <strong>Crontab</strong> (exécution toutes les 20h)</li>
+                            <li>Debugging via les logs système : résolution des problèmes de clés SSH et d'authentification</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-network-wired"></i> Switchs Moxa — MXview</h4>
+                        <ul>
+                            <li>Abandon de la méthode par script (non supportée sur les switchs Moxa)</li>
+                            <li>Mise à jour de l'outil <strong>MXview</strong> développé par Moxa</li>
+                            <li>Configuration et planification de jobs de sauvegarde via MXview</li>
+                            <li>Analyse des logs : résolution de l'erreur <em>"authentication failed"</em> (mauvais mot de passe global)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-cloud-upload-alt"></i> Sauvegardes vCenter (Push SFTP)</h4>
+                        <ul>
+                            <li>Configuration du vCenter pour exporter automatiquement ses sauvegardes en mode <strong>Push SFTP</strong></li>
+                            <li>Création d'un compte utilisateur de service dédié avec accès SFTP uniquement</li>
+                            <li>Configuration du fichier <strong>sshd_config</strong> avec un bloc <em>Match Group</em> ciblé :</li>
+                            <li><code>ForceCommand internal-sftp</code> — interdit toute commande shell</li>
+                            <li><code>ChrootDirectory</code> — confine l'utilisateur dans le répertoire de sauvegarde</li>
+                            <li>Désactivation du tunneling, du forwarding agent et de X11 (durcissement maximal)</li>
+                            <li>Diagnostic via <code>journalctl -u ssh</code> : résolution de l'échec d'authentification par mot de passe</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-challenges">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Difficultés rencontrées</h4>
+                        <ul>
+                            <li>Les switchs Aruba ne supportaient pas les clés SSH pour les connexions sortantes → changement d'approche</li>
+                            <li>L'agent SSH étant temporaire (lié à la session), utilisation de Keychain pour la persistance</li>
+                            <li>Les switchs Moxa ne supportaient pas le scripting → recours à MXview</li>
+                            <li>Échec SFTP vCenter : le serveur SSH exigeait une clé publique alors que vCenter utilisait un mot de passe</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-results">
+                        <h4><i class="fas fa-check-circle"></i> Résultats obtenus</h4>
+                        <ul>
+                            <li>Sauvegardes automatiques opérationnelles sur les switchs Aruba et Moxa</li>
+                            <li>Sauvegardes vCenter fonctionnelles en Push SFTP sécurisé</li>
+                            <li>Serveur Debian isolé et durci (chroot, nologin, pas de shell)</li>
+                            <li>Procédure documentée et démontrée à l'équipe</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-skills">
+                        <span class="skill-tag">Linux Debian</span>
+                        <span class="skill-tag">Bash scripting</span>
+                        <span class="skill-tag">SFTP / SSH</span>
+                        <span class="skill-tag">Keychain</span>
+                        <span class="skill-tag">Crontab</span>
+                        <span class="skill-tag">sshd_config</span>
+                        <span class="skill-tag">Chroot</span>
+                        <span class="skill-tag">MXview (Moxa)</span>
+                        <span class="skill-tag">vCenter</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 2 -->
+            <div class="mission-card">
+                <div class="mission-header">
+                    <div class="mission-number">02</div>
+                    <h3><i class="fas fa-mobile-alt"></i> Gestion de flotte mobile — SOTI MobiControl</h3>
+                </div>
+                <div class="mission-content">
+                    <p class="mission-description">
+                        Déploiement et administration complète de la solution MDM (Mobile Device Management)
+                        <strong>SOTI MobiControl</strong> pour la gestion des smartphones et tablettes des agents de terrain
+                        (lutte anti-fraude, magasin Tram...). La mission couvre la création des profils, l'enrôlement des appareils
+                        et la sécurisation en mode Kiosque.
+                    </p>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-sliders-h"></i> Création de profils et déploiement téléphones</h4>
+                        <ul>
+                            <li>Création de <strong>3 profils distincts</strong> adaptés aux besoins métiers (profils personnalisés et génériques)</li>
+                            <li>Chaque profil dispose de son propre ensemble d'applications métier</li>
+                            <li>Déploiement des profils sur les téléphones agents de terrain</li>
+                            <li>Résolution de dysfonctionnements applicatifs : paquets manquants (Google Photos), app obsolète (PingTools 2022)</li>
+                            <li>Diagnostic : identification des noms de paquets Play Store et incompatibilités Samsung Galaxy A17</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-tablet-alt"></i> Enrôlement des tablettes métiers</h4>
+                        <ul>
+                            <li>Test de la méthode d'enrôlement préconisée par le groupe : <strong>7 tapes sur l'écran d'usine</strong> pour activer le lecteur QR Code</li>
+                            <li>Scan du QR Code groupe → enrôlement réussi des tablettes de test</li>
+                            <li>Tests approfondis suite à l'installation (risques de conflits MDM/système natif)</li>
+                            <li>Enrôlement et configuration de <strong>7 nouvelles tablettes métier</strong></li>
+                            <li>Création de profils spécifiques par domaine métier : Magasin Tram (gestion stock pièces de rechange)</li>
+                            <li>Tests d'enrôlement sur tablette Samsung Galaxy Tab Active5 (sans IMEI/Wi-Fi uniquement)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-lock"></i> Mode Kiosque — Sécurisation</h4>
+                        <ul>
+                            <li>Déploiement du mode <strong>Kiosque</strong> pour restreindre la navigation aux applications autorisées</li>
+                            <li>Identification d'une faille de contournement : sélection de texte → "Recherche Web" → navigateur libre</li>
+                            <li>Recherche et application de correctifs pour verrouiller l'interface Chrome</li>
+                            <li>Mise en place d'une politique de mise à jour automatique nocturne (00h00–03h00)</li>
+                            <li>Investigation sur le blocage du contrôle à distance sans Wi-Fi</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-challenges">
+                        <h4><i class="fas fa-bug"></i> Difficultés rencontrées</h4>
+                        <ul>
+                            <li>Applications non fonctionnelles après déploiement (paquets Play Store non supportés)</li>
+                            <li>Conflits potentiels entre MDM et système natif des tablettes</li>
+                            <li>Faille de sécurité identifiée dans le mode Kiosque sur Chrome</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-results">
+                        <h4><i class="fas fa-check-circle"></i> Résultats obtenus</h4>
+                        <ul>
+                            <li>Flotte de smartphones et tablettes entièrement gérée via SOTI MobiControl</li>
+                            <li>Mode Kiosque sécurisé et faille Chrome corrigée</li>
+                            <li>Profils métiers adaptés déployés sur tous les appareils</li>
+                            <li>Mises à jour automatiques planifiées hors heures de service</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-skills">
+                        <span class="skill-tag">SOTI MobiControl</span>
+                        <span class="skill-tag">MDM / EMM</span>
+                        <span class="skill-tag">Android</span>
+                        <span class="skill-tag">Profils MDM</span>
+                        <span class="skill-tag">Mode Kiosque</span>
+                        <span class="skill-tag">Samsung Knox</span>
+                        <span class="skill-tag">Play Store</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 3 -->
+            <div class="mission-card">
+                <div class="mission-header">
+                    <div class="mission-number">03</div>
+                    <h3><i class="fas fa-search"></i> Diagnostic et sécurité réseau</h3>
+                </div>
+                <div class="mission-content">
+                    <p class="mission-description">
+                        Interventions de diagnostic sur des dysfonctionnements réseau critiques et réalisation d'audits
+                        de sécurité terrain sur les deux principaux sites de l'entreprise,
+                        dans le cadre d'une démarche de hardening de l'infrastructure.
+                    </p>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-vpn-key"></i> Diagnostic VPN — Site de Planoise</h4>
+                        <ul>
+                            <li>Déplacement sur site pour reproduire et analyser le dysfonctionnement VPN</li>
+                            <li>Symptôme : accès aux lecteurs réseau OK mais perte totale de la connexion Internet en VPN</li>
+                            <li>Diagnostic : le trafic Internet transitait par la passerelle entreprise (tunnel intégral) au lieu de sortir localement</li>
+                            <li>Identification de l'anomalie : <strong>métriques d'interfaces Windows incorrectes</strong> → mauvais routage</li>
+                            <li>Développement d'un <strong>script PowerShell</strong> pour automatiser la collecte des tables de routage et métriques à distance</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-project-diagram"></i> Analyse STP/BPDU — Cœurs de réseau</h4>
+                        <ul>
+                            <li>Investigation sur des erreurs de paquets entre les deux cœurs de réseau répartis sur deux sites</li>
+                            <li>Révision des mécanismes <strong>Spanning Tree Protocol</strong> (BPDU, états de ports, auto-edge)</li>
+                            <li>Diagnostic orienté vers une erreur de configuration logicielle malgré une bande passante de 6 Gb/s</li>
+                            <li>Détection de phénomènes de <strong>flapping</strong> (instabilité de ports) sur des équipements en aval</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-map-marked-alt"></i> Audit réseau terrain — Hauts de Chazal &amp; Planoise</h4>
+                        <ul>
+                            <li>Inventaire complet des prises réseau murales (RJ45) sur le site Hauts de Chazal (dépôt tram)</li>
+                            <li>Relevé de localisation, étiquetage et état de chaque prise dans toutes les zones</li>
+                            <li>Identification des prises actives légitimes vs prises inutilisées à désactiver</li>
+                            <li>Application de la même méthodologie sur le site de Planoise (dépôt bus)</li>
+                            <li>Désactivation des ports inutilisés côté switch → neutralisation du risque d'intrusion physique</li>
+                            <li>Documentation consolidée multi-sites conforme aux référentiels <strong>ISO 27001 / ANSSI</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-challenges">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Enjeux identifiés</h4>
+                        <ul>
+                            <li>Un port réseau actif non surveillé = vecteur d'intrusion réel (branchement d'un équipement non autorisé)</li>
+                            <li>Complexité du diagnostic STP : phénomènes de flapping masquant la cause racine</li>
+                            <li>VPN : mauvais routage causé par les métriques Windows, difficile à diagnostiquer sans script dédié</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-results">
+                        <h4><i class="fas fa-check-circle"></i> Résultats obtenus</h4>
+                        <ul>
+                            <li>Cartographie complète des prises réseau sur 2 sites</li>
+                            <li>Ports inutilisés désactivés → surface d'attaque réduite</li>
+                            <li>Script PowerShell de collecte réseau livré pour faciliter les diagnostics futurs</li>
+                            <li>Cause du dysfonctionnement VPN identifiée et documentée</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-skills">
+                        <span class="skill-tag">PowerShell</span>
+                        <span class="skill-tag">VPN</span>
+                        <span class="skill-tag">Spanning Tree (STP)</span>
+                        <span class="skill-tag">BPDU</span>
+                        <span class="skill-tag">Audit réseau</span>
+                        <span class="skill-tag">Hardening</span>
+                        <span class="skill-tag">ISO 27001</span>
+                        <span class="skill-tag">ANSSI</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 4 -->
+            <div class="mission-card">
+                <div class="mission-header">
+                    <div class="mission-number">04</div>
+                    <h3><i class="fas fa-shield-alt"></i> Infrastructure et haute disponibilité</h3>
+                </div>
+                <div class="mission-content">
+                    <p class="mission-description">
+                        Renforcement de la résilience de l'infrastructure réseau et lancement du projet de sécurité physique.
+                        Cette mission regroupe les travaux visant à garantir la continuité de service et à préparer
+                        l'autonomie administrative du pare-feu local.
+                    </p>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-project-diagram"></i> Projet Sécurité Intrusion — Lancement</h4>
+                        <ul>
+                            <li>Démarrage d'un projet stratégique de refonte du <strong>contrôle d'accès physique</strong> de l'entreprise</li>
+                            <li>Inventaire exhaustif des équipements existants sur tous les sites :</li>
+                            <li>Contrôleurs d'accès (lecteurs de badges, claviers à code)</li>
+                            <li>Détecteurs d'intrusion (capteurs de mouvement, contacts portes/fenêtres)</li>
+                            <li>Centrale d'alarme et équipements de supervision</li>
+                            <li>Objectif : cartographie complète pour préparer la migration (nommage, remplacement, reconfiguration)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-link"></i> Fibre optique redondante — Failover FAI</h4>
+                        <ul>
+                            <li>Suivi de l'installation d'une nouvelle ligne <strong>fibre optique SFR</strong> en lien de secours</li>
+                            <li>Objectif : haute disponibilité réseau en cas de coupure du lien principal</li>
+                            <li>Mise en place d'un mécanisme de <strong>Failover</strong> automatique entre les deux FAI</li>
+                            <li>Double fournisseur d'accès Internet pour garantir la continuité de service</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-fire-alt"></i> Architecture FortiGate — VDOM</h4>
+                        <ul>
+                            <li>Problématique : gestion des règles pare-feu centralisée par la DSI du Groupe → manque de réactivité locale</li>
+                            <li>Réunion stratégique avec le Groupe pour récupérer l'autonomie d'administration locale</li>
+                            <li>Deux solutions étudiées : pare-feu d'interconnexion dédié vs <strong>VDOM (Virtual Domain)</strong></li>
+                            <li>Solution privilégiée : création d'un VDOM sur le FortiGate existant</li>
+                            <li>Avantage : partitionner virtuellement le pare-feu sans impacter le reste du groupe</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-challenges">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Défis rencontrés</h4>
+                        <ul>
+                            <li>Dépendance vis-à-vis de la DSI groupe pour toute modification des règles pare-feu</li>
+                            <li>Nécessité de négocier avec le groupe pour obtenir une délégation d'administration</li>
+                            <li>Inventaire physique complexe sur plusieurs sites distants</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-results">
+                        <h4><i class="fas fa-check-circle"></i> Résultats obtenus</h4>
+                        <ul>
+                            <li>Lien de secours fibre opératif → haute disponibilité réseau assurée</li>
+                            <li>Architecture VDOM validée techniquement → autonomie locale en cours d'obtention</li>
+                            <li>Cartographie complète des équipements de contrôle d'accès physique sur tous les sites</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-skills">
+                        <span class="skill-tag">FortiGate</span>
+                        <span class="skill-tag">VDOM</span>
+                        <span class="skill-tag">Haute disponibilité</span>
+                        <span class="skill-tag">Failover FAI</span>
+                        <span class="skill-tag">Fibre optique</span>
+                        <span class="skill-tag">Contrôle d'accès</span>
+                        <span class="skill-tag">Gestion de projet</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission 5 -->
+            <div class="mission-card">
+                <div class="mission-header">
+                    <div class="mission-number">05</div>
+                    <h3><i class="fas fa-headset"></i> Administration, sécurité et support</h3>
+                </div>
+                <div class="mission-content">
+                    <p class="mission-description">
+                        Missions transversales d'administration des outils de sécurité périmétrique et d'affichage dynamique,
+                        ainsi que du support Helpdesk quotidien auprès des utilisateurs et des prestataires.
+                    </p>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-filter"></i> Administration FortiGate — Interception &amp; RBAC</h4>
+                        <ul>
+                            <li>Personnalisation de la <strong>page d'interception FortiGate</strong> affichée lors de l'accès à un site bloqué</li>
+                            <li>Audit complet des comptes utilisateurs ayant accès à la base de données de billettique (<strong>Kuba</strong>)</li>
+                            <li>Création d'un tableau de suivi avec les dates de dernière connexion</li>
+                            <li>Nettoyage des comptes inactifs pour renforcer la sécurité du système billettique</li>
+                            <li>Création d'un compte de service dédié sur les switchs avec le rôle <strong>Manager</strong> (RBAC)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-tv"></i> Samsung MagicINFO — Résolution d'incidents</h4>
+                        <ul>
+                            <li>Retour support Samsung suite au ticket ouvert lors de la migration Windows Server 2025</li>
+                            <li>Diagnostic : conflit de versions de licences sur le serveur MagicINFO (une licence par écran)</li>
+                            <li>Résolution : fusion des licences par l'ingénieur support → licence unique pour <strong>6 écrans</strong></li>
+                            <li>Résolution d'un incident bloquant lors d'une montée de version :</li>
+                            <li>Analyse des logs → utilisateur d'exécution sans droits d'écriture sur une table BDD</li>
+                            <li>Élévation des privilèges sur la base de données → mise à jour validée avec succès</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-details">
+                        <h4><i class="fas fa-life-ring"></i> Support Helpdesk &amp; prestataires</h4>
+                        <ul>
+                            <li>Journée dédiée au support de proximité et à distance en binôme avec le maître de stage</li>
+                            <li>Résolution d'incident sur un <strong>vidéoprojecteur</strong> (paramètres d'affichage par défaut modifiés)</li>
+                            <li>Diagnostic interphone site Planoise : problème organisationnel (visiteurs appelaient le mauvais poste)</li>
+                            <li>Accompagnement d'un prestataire pour le déploiement d'une <strong>mallette de diagnostic bus</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-challenges">
+                        <h4><i class="fas fa-bug"></i> Difficultés rencontrées</h4>
+                        <ul>
+                            <li>Conflit de licences MagicINFO non documenté lors de la migration → nécessite l'intervention du support Samsung</li>
+                            <li>Droits BDD insuffisants bloquant la mise à jour MagicINFO → diagnostic uniquement via les logs</li>
+                            <li>Principe de moindre privilège : le rôle "Operator" insuffisant pour extraire les running-config des switchs</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-results">
+                        <h4><i class="fas fa-check-circle"></i> Résultats obtenus</h4>
+                        <ul>
+                            <li>Service MagicINFO stabilisé avec licence unifiée sur 6 écrans</li>
+                            <li>Montée de version MagicINFO réussie après élévation des droits BDD</li>
+                            <li>Base de données Kuba sécurisée (comptes inactifs supprimés)</li>
+                            <li>Incidents utilisateurs résolus dans la journée</li>
+                        </ul>
+                    </div>
+
+                    <div class="mission-skills">
+                        <span class="skill-tag">FortiGate</span>
+                        <span class="skill-tag">Samsung MagicINFO</span>
+                        <span class="skill-tag">RBAC</span>
+                        <span class="skill-tag">Audit d'accès</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Helpdesk</span>
+                        <span class="skill-tag">Support utilisateur</span>
+                        <span class="skill-tag">Billettique Kuba</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="stage-bilan" style="background: linear-gradient(135deg, #00A9E0, #232323); padding: 40px; border-radius: 15px; margin: 50px 0; text-align: center;">
+            <h2 style="color: white; margin-bottom: 20px;">Bilan du stage</h2>
+
+            <div class="competences-acquises">
+                <div class="competence-card">
+                    <h4><i class="fas fa-terminal"></i> Scripting &amp; Automatisation</h4>
+                    <p>Bash, PowerShell, Crontab, Keychain, SSH avancé, sshd_config</p>
+                </div>
+                <div class="competence-card">
+                    <h4><i class="fas fa-shield-alt"></i> Sécurité réseau</h4>
+                    <p>Chroot, RBAC, audit d'accès, hardening, ISO 27001, FortiGate VDOM</p>
+                </div>
+                <div class="competence-card">
+                    <h4><i class="fas fa-mobile-alt"></i> Mobilité &amp; MDM</h4>
+                    <p>SOTI MobiControl, profils MDM, mode Kiosque, Android Enterprise</p>
+                </div>
+                <div class="competence-card">
+                    <h4><i class="fas fa-project-diagram"></i> Gestion de projet</h4>
+                    <p>Planification, audit terrain, cartographie réseau, coordination prestataires</p>
+                </div>
+            </div>
+
+            <p style="color: white; font-size: 1.2em; line-height: 1.8; margin-bottom: 30px;">
+                Ce deuxième stage chez Keolis Ginko m'a permis de monter en compétences sur des sujets plus complexes :
+                automatisation des sauvegardes, sécurisation des accès et gestion de flotte mobile.
+                J'ai également pu mener des projets de A à Z, de l'analyse des besoins jusqu'à la mise en production,
+                en collaboration avec les équipes techniques et la DSI groupe.
+            </p>
+            <a href="index.html" class="back-button" style="background: white; color: #00A9E0; padding: 15px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s ease;">
+                <i class="fas fa-arrow-left"></i> Retour au portfolio
+            </a>
+        </section>
+
+    </div>
+
+<script src="horloge.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
