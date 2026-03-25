@@ -39,24 +39,88 @@
         max-width: 1200px; margin: 0 auto; padding: 20px;
     }
 
-    /* --- Filters --- */
-    .veille-filters {
-        display: flex; flex-wrap: wrap; gap: 8px;
-        justify-content: center; margin: 24px auto 6px;
-        padding: 14px; background: #232323; border-radius: 12px;
-        max-width: 1200px;
+    /* --- Search Bar --- */
+    .veille-search-wrap {
+        max-width: 500px; margin: 24px auto 6px;
+        position: relative;
     }
-    .veille-filter-btn {
-        background: #333; color: #aaa; border: 2px solid transparent;
-        padding: 6px 16px; border-radius: 20px; cursor: pointer;
-        font-size: .85rem; font-weight: 500; font-family: inherit;
-        transition: all .25s ease;
+    .veille-search {
+        display: flex; align-items: center;
+        background: #232323; border: 2px solid #333;
+        border-radius: 12px; padding: 0 14px;
+        transition: border-color .3s ease, box-shadow .3s ease;
     }
-    .veille-filter-btn:hover { background: #444; color: #fff; border-color: #00A9E0; }
-    .veille-filter-btn.active {
-        background: #00A9E0; color: #fff; border-color: #00A9E0;
-        box-shadow: 0 3px 12px rgba(0,169,224,.35);
+    .veille-search:focus-within {
+        border-color: #00A9E0;
+        box-shadow: 0 0 16px rgba(0,169,224,.2);
     }
+    .veille-search__icon {
+        color: #555; font-size: 1rem; flex-shrink: 0;
+        transition: color .3s ease;
+    }
+    .veille-search:focus-within .veille-search__icon {
+        color: #00A9E0;
+    }
+    .veille-search__input {
+        flex: 1; background: none; border: none; outline: none;
+        color: #eee; font-size: .95rem; font-family: inherit;
+        padding: 12px 10px;
+    }
+    .veille-search__input::placeholder { color: #555; }
+    .veille-search__clear {
+        background: none; border: none; color: #555; cursor: pointer;
+        font-size: 1.1rem; padding: 4px; border-radius: 50%;
+        transition: all .2s ease; display: none;
+    }
+    .veille-search__clear.visible { display: flex; }
+    .veille-search__clear:hover { color: #e74c3c; background: rgba(231,76,60,.1); }
+
+    /* --- Suggestions Dropdown --- */
+    .veille-suggestions {
+        position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+        background: #1e1e1e; border: 1px solid #333;
+        border-radius: 10px; max-height: 220px; overflow-y: auto;
+        z-index: 100; display: none;
+        box-shadow: 0 8px 32px rgba(0,0,0,.5);
+    }
+    .veille-suggestions.open { display: block; }
+    .veille-suggestions__item {
+        padding: 10px 16px; color: #ccc; font-size: .88rem;
+        cursor: pointer; transition: all .15s ease;
+        display: flex; align-items: center; gap: 8px;
+    }
+    .veille-suggestions__item:hover,
+    .veille-suggestions__item.highlighted {
+        background: rgba(0,169,224,.12); color: #fff;
+    }
+    .veille-suggestions__item i {
+        color: #00A9E0; font-size: .75rem; flex-shrink: 0;
+    }
+    .veille-suggestions__item .match {
+        color: #00A9E0; font-weight: 700;
+    }
+    .veille-suggestions::-webkit-scrollbar { width: 4px; }
+    .veille-suggestions::-webkit-scrollbar-thumb { background: #00A9E0; border-radius: 2px; }
+
+    /* --- Active filter pill --- */
+    .veille-active-filter {
+        text-align: center; margin: 8px auto 0;
+        display: none;
+    }
+    .veille-active-filter.visible { display: block; }
+    .veille-active-pill {
+        display: inline-flex; align-items: center; gap: 6px;
+        background: linear-gradient(135deg, #00A9E0, #0077b6);
+        color: #fff; padding: 5px 14px; border-radius: 20px;
+        font-size: .8rem; font-weight: 600;
+        box-shadow: 0 2px 10px rgba(0,169,224,.3);
+    }
+    .veille-active-pill button {
+        background: none; border: none; color: rgba(255,255,255,.7);
+        cursor: pointer; font-size: .9rem; padding: 0;
+        transition: color .2s ease;
+    }
+    .veille-active-pill button:hover { color: #fff; }
 
     /* --- Counter --- */
     .veille-counter { text-align: center; color: #666; font-size: .85rem; margin: 6px 0 18px; }
@@ -354,9 +418,18 @@
             </div>
         </div>
 
-        <!-- Filtres -->
-        <div class="veille-filters" id="veille-filters">
-            <button class="veille-filter-btn active" data-filter="all"><i class="fas fa-th"></i> Tous</button>
+        <!-- Recherche -->
+        <div class="veille-search-wrap" id="search-wrap">
+            <div class="veille-search">
+                <i class="fas fa-search veille-search__icon"></i>
+                <input type="text" class="veille-search__input" id="veille-search"
+                       placeholder="Rechercher une technologie…" autocomplete="off">
+                <button class="veille-search__clear" id="search-clear" title="Effacer">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="veille-suggestions" id="veille-suggestions"></div>
+            <div class="veille-active-filter" id="active-filter"></div>
         </div>
         <p class="veille-counter" id="veille-counter"></p>
     </section>
@@ -489,7 +562,7 @@ async function chargerArticles() {
         if (!data.success) throw new Error(data.message || 'Erreur API');
 
         allArticles = data.articles;
-        genererFiltres(allArticles);
+        initSearch(allArticles);
         afficherArticles(allArticles);
     } catch (err) {
         console.error('❌', err);
@@ -500,7 +573,7 @@ async function chargerArticles() {
     }
 }
 
-// --- Swiper init (3D Coverflow) ---
+// --- Swiper init (3D Coverflow + Trackpad) ---
 function initSwiper() {
     if (swiper) swiper.destroy(true, true);
     swiper = new Swiper('#veille-swiper', {
@@ -515,6 +588,11 @@ function initSwiper() {
             depth: 220,
             modifier: 1,
             slideShadows: true,
+        },
+        mousewheel: {
+            forceToAxis: true,
+            sensitivity: 1,
+            thresholdDelta: 6,
         },
         pagination: {
             el: '.swiper-pagination',
@@ -531,27 +609,123 @@ function initSwiper() {
     });
 }
 
-// --- Filters ---
-function genererFiltres(articles) {
-    const box = document.getElementById('veille-filters');
-    const tags = [...new Set(articles.flatMap(a => a.technologies))].sort();
-    box.innerHTML = `
-        <button class="veille-filter-btn ${activeFilter==='all'?'active':''}" data-filter="all"><i class="fas fa-th"></i> Tous</button>
-        ${tags.map(t => `<button class="veille-filter-btn ${activeFilter===t?'active':''}" data-filter="${t}">${t}</button>`).join('')}
-    `;
-    box.querySelectorAll('.veille-filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            activeFilter = btn.dataset.filter;
-            box.querySelectorAll('.veille-filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            filtrerArticles();
+// --- Search + Autocomplete ---
+let allTags = [];
+let highlightIdx = -1;
+
+function initSearch(articles) {
+    allTags = [...new Set(articles.flatMap(a => a.technologies))].sort();
+
+    const input   = document.getElementById('veille-search');
+    const clear   = document.getElementById('search-clear');
+    const sugBox  = document.getElementById('veille-suggestions');
+    const pillBox = document.getElementById('active-filter');
+
+    // Input event — show suggestions
+    input.addEventListener('input', () => {
+        const q = input.value.trim().toLowerCase();
+        clear.classList.toggle('visible', q.length > 0);
+        highlightIdx = -1;
+
+        if (!q) {
+            sugBox.classList.remove('open');
+            activeFilter = 'all';
+            afficherArticles(allArticles);
+            pillBox.classList.remove('visible');
+            return;
+        }
+
+        const matches = allTags.filter(t => t.toLowerCase().includes(q));
+        if (!matches.length) {
+            sugBox.innerHTML = '<div class="veille-suggestions__item" style="color:#666;cursor:default"><i class="fas fa-info-circle"></i> Aucun résultat</div>';
+        } else {
+            sugBox.innerHTML = matches.map((t, i) => {
+                const idx = t.toLowerCase().indexOf(q);
+                const before = t.slice(0, idx);
+                const match  = t.slice(idx, idx + q.length);
+                const after  = t.slice(idx + q.length);
+                return `<div class="veille-suggestions__item" data-tag="${t}" data-idx="${i}"><i class="fas fa-tag"></i> ${before}<span class="match">${match}</span>${after}</div>`;
+            }).join('');
+        }
+        sugBox.classList.add('open');
+
+        // Click on suggestion
+        sugBox.querySelectorAll('.veille-suggestions__item[data-tag]').forEach(el => {
+            el.addEventListener('click', () => selectTag(el.dataset.tag));
         });
+    });
+
+    // Keyboard navigation
+    input.addEventListener('keydown', (e) => {
+        const items = sugBox.querySelectorAll('.veille-suggestions__item[data-tag]');
+        if (!items.length || !sugBox.classList.contains('open')) return;
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            highlightIdx = Math.min(highlightIdx + 1, items.length - 1);
+            updateHighlight(items);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            highlightIdx = Math.max(highlightIdx - 1, 0);
+            updateHighlight(items);
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (highlightIdx >= 0 && items[highlightIdx]) {
+                selectTag(items[highlightIdx].dataset.tag);
+            }
+        } else if (e.key === 'Escape') {
+            sugBox.classList.remove('open');
+        }
+    });
+
+    // Clear button
+    clear.addEventListener('click', () => {
+        input.value = '';
+        clear.classList.remove('visible');
+        sugBox.classList.remove('open');
+        pillBox.classList.remove('visible');
+        activeFilter = 'all';
+        afficherArticles(allArticles);
+        input.focus();
+    });
+
+    // Close suggestions on outside click
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('#search-wrap')) {
+            sugBox.classList.remove('open');
+        }
     });
 }
 
-function filtrerArticles() {
-    const f = activeFilter === 'all' ? allArticles : allArticles.filter(a => a.technologies.includes(activeFilter));
-    afficherArticles(f);
+function updateHighlight(items) {
+    items.forEach((el, i) => el.classList.toggle('highlighted', i === highlightIdx));
+    if (items[highlightIdx]) items[highlightIdx].scrollIntoView({ block: 'nearest' });
+}
+
+function selectTag(tag) {
+    const input   = document.getElementById('veille-search');
+    const sugBox  = document.getElementById('veille-suggestions');
+    const pillBox = document.getElementById('active-filter');
+    const clear   = document.getElementById('search-clear');
+
+    activeFilter = tag;
+    input.value = '';
+    clear.classList.remove('visible');
+    sugBox.classList.remove('open');
+
+    // Show active pill
+    pillBox.innerHTML = `<span class="veille-active-pill"><i class="fas fa-tag"></i> ${tag} <button onclick="clearFilter()" title="Retirer le filtre"><i class="fas fa-times"></i></button></span>`;
+    pillBox.classList.add('visible');
+
+    const filtered = allArticles.filter(a => a.technologies.includes(tag));
+    afficherArticles(filtered);
+}
+
+function clearFilter() {
+    const pillBox = document.getElementById('active-filter');
+    pillBox.classList.remove('visible');
+    activeFilter = 'all';
+    afficherArticles(allArticles);
 }
 
 // --- Render cards ---
