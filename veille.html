@@ -102,25 +102,42 @@
     .veille-suggestions::-webkit-scrollbar { width: 4px; }
     .veille-suggestions::-webkit-scrollbar-thumb { background: #00A9E0; border-radius: 2px; }
 
-    /* --- Active filter pill --- */
-    .veille-active-filter {
-        text-align: center; margin: 8px auto 0;
-        display: none;
+    /* --- Active filter chips --- */
+    .veille-chips {
+        display: flex; flex-wrap: wrap; gap: 6px;
+        justify-content: center; align-items: center;
+        margin: 10px auto 0; max-width: 500px;
     }
-    .veille-active-filter.visible { display: block; }
-    .veille-active-pill {
-        display: inline-flex; align-items: center; gap: 6px;
-        background: linear-gradient(135deg, #00A9E0, #0077b6);
-        color: #fff; padding: 5px 14px; border-radius: 20px;
-        font-size: .8rem; font-weight: 600;
-        box-shadow: 0 2px 10px rgba(0,169,224,.3);
+    .veille-chip {
+        display: inline-flex; align-items: center; gap: 5px;
+        background: #333; color: #fff;
+        padding: 5px 10px 5px 12px; border-radius: 20px;
+        font-size: .78rem; font-weight: 600;
+        border: 1px solid #444;
+        transition: all .2s ease;
+        animation: chipIn .25s ease;
     }
-    .veille-active-pill button {
-        background: none; border: none; color: rgba(255,255,255,.7);
-        cursor: pointer; font-size: .9rem; padding: 0;
+    @keyframes chipIn {
+        from { opacity: 0; transform: scale(.85); }
+        to   { opacity: 1; transform: scale(1); }
+    }
+    .veille-chip:hover { border-color: #00A9E0; }
+    .veille-chip__color {
+        width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .veille-chip__x {
+        background: none; border: none; color: #777; cursor: pointer;
+        font-size: .75rem; padding: 2px; border-radius: 50%;
+        transition: all .2s ease; line-height: 1;
+    }
+    .veille-chip__x:hover { color: #e74c3c; background: rgba(231,76,60,.15); }
+    .veille-chips__clear {
+        color: #00A9E0; font-size: .75rem; cursor: pointer;
+        background: none; border: none; font-family: inherit;
+        text-decoration: underline; padding: 4px 6px;
         transition: color .2s ease;
     }
-    .veille-active-pill button:hover { color: #fff; }
+    .veille-chips__clear:hover { color: #fff; }
 
     /* --- Counter --- */
     .veille-counter { text-align: center; color: #666; font-size: .85rem; margin: 6px 0 18px; }
@@ -456,7 +473,7 @@
         <i class="fas fa-exclamation-triangle" style="font-size:36px;"></i>
         <h3>Impossible de charger les articles</h3>
         <p id="veille-error-msg"></p>
-        <button class="veille-filter-btn" onclick="chargerArticles()"><i class="fas fa-redo"></i> Réessayer</button>
+        <button style="background:#333;color:#aaa;border:2px solid #00A9E0;padding:6px 16px;border-radius:20px;cursor:pointer;font-size:.85rem;font-family:inherit" onclick="chargerArticles()"><i class="fas fa-redo"></i> Réessayer</button>
     </div>
 
     <!-- Événements terrain -->
@@ -521,7 +538,7 @@ const TAG_COLORS = {
 const DEFAULT_COLOR = '#00A9E0';
 
 let allArticles = [];
-let activeFilter = 'all';
+let activeFilters = [];
 let swiper = null;
 
 // --- Init ---
@@ -619,7 +636,6 @@ function initSearch(articles) {
     const input   = document.getElementById('veille-search');
     const clear   = document.getElementById('search-clear');
     const sugBox  = document.getElementById('veille-suggestions');
-    const pillBox = document.getElementById('active-filter');
 
     // Input event — show suggestions
     input.addEventListener('input', () => {
@@ -629,13 +645,12 @@ function initSearch(articles) {
 
         if (!q) {
             sugBox.classList.remove('open');
-            activeFilter = 'all';
-            afficherArticles(allArticles);
-            pillBox.classList.remove('visible');
             return;
         }
 
-        const matches = allTags.filter(t => t.toLowerCase().includes(q));
+        // Exclude already-selected tags from suggestions
+        const available = allTags.filter(t => !activeFilters.includes(t));
+        const matches = available.filter(t => t.toLowerCase().includes(q));
         if (!matches.length) {
             sugBox.innerHTML = '<div class="veille-suggestions__item" style="color:#666;cursor:default"><i class="fas fa-info-circle"></i> Aucun résultat</div>';
         } else {
@@ -678,14 +693,11 @@ function initSearch(articles) {
         }
     });
 
-    // Clear button
+    // Clear search input (not filters)
     clear.addEventListener('click', () => {
         input.value = '';
         clear.classList.remove('visible');
         sugBox.classList.remove('open');
-        pillBox.classList.remove('visible');
-        activeFilter = 'all';
-        afficherArticles(allArticles);
         input.focus();
     });
 
@@ -702,30 +714,63 @@ function updateHighlight(items) {
     if (items[highlightIdx]) items[highlightIdx].scrollIntoView({ block: 'nearest' });
 }
 
+// --- Multi-select logic ---
 function selectTag(tag) {
-    const input   = document.getElementById('veille-search');
-    const sugBox  = document.getElementById('veille-suggestions');
-    const pillBox = document.getElementById('active-filter');
-    const clear   = document.getElementById('search-clear');
+    if (activeFilters.includes(tag)) return; // already selected
+    activeFilters.push(tag);
 
-    activeFilter = tag;
+    const input  = document.getElementById('veille-search');
+    const sugBox = document.getElementById('veille-suggestions');
+    const clear  = document.getElementById('search-clear');
+
     input.value = '';
     clear.classList.remove('visible');
     sugBox.classList.remove('open');
 
-    // Show active pill
-    pillBox.innerHTML = `<span class="veille-active-pill"><i class="fas fa-tag"></i> ${tag} <button onclick="clearFilter()" title="Retirer le filtre"><i class="fas fa-times"></i></button></span>`;
-    pillBox.classList.add('visible');
-
-    const filtered = allArticles.filter(a => a.technologies.includes(tag));
-    afficherArticles(filtered);
+    renderChips();
+    applyFilters();
 }
 
-function clearFilter() {
-    const pillBox = document.getElementById('active-filter');
-    pillBox.classList.remove('visible');
-    activeFilter = 'all';
-    afficherArticles(allArticles);
+function removeTag(tag) {
+    activeFilters = activeFilters.filter(t => t !== tag);
+    renderChips();
+    applyFilters();
+}
+
+function clearAllFilters() {
+    activeFilters = [];
+    renderChips();
+    applyFilters();
+}
+
+function renderChips() {
+    const container = document.getElementById('active-filter');
+    if (!activeFilters.length) {
+        container.innerHTML = '';
+        return;
+    }
+    const chips = activeFilters.map(tag => {
+        const color = TAG_COLORS[tag] || DEFAULT_COLOR;
+        return `<span class="veille-chip">
+            <span class="veille-chip__color" style="background:${color}"></span>
+            ${tag}
+            <button class="veille-chip__x" onclick="removeTag('${tag.replace(/'/g, "\\'")}')"
+                    title="Retirer"><i class="fas fa-times"></i></button>
+        </span>`;
+    }).join('');
+    container.innerHTML = `<div class="veille-chips">${chips}<button class="veille-chips__clear" onclick="clearAllFilters()">Effacer tout</button></div>`;
+}
+
+function applyFilters() {
+    if (!activeFilters.length) {
+        afficherArticles(allArticles);
+        return;
+    }
+    // AND logic: article must have ALL selected tags
+    const filtered = allArticles.filter(a =>
+        activeFilters.every(tag => a.technologies.includes(tag))
+    );
+    afficherArticles(filtered);
 }
 
 // --- Render cards ---
