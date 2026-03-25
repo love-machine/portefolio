@@ -7,6 +7,392 @@
     <meta name="description" content="Veille technologique de Jules ROBERT — Articles cybersécurité, cloud, réseau et IA récupérés automatiquement depuis Notion.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Swiper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <style>
+    /* =====================================================
+       VEILLE — Carousel Swiper + Cards
+       ===================================================== */
+
+    /* --- Section hero --- */
+    .veille-hero {
+        position: relative;
+        text-align: center;
+        overflow: hidden;
+    }
+    .veille-hero img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        display: block;
+    }
+    .veille-hero__overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(28,28,28,0) 40%, rgba(28,28,28,.95) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .veille-hero__title {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #fff;
+        text-shadow: 0 4px 20px rgba(0,0,0,.6);
+        letter-spacing: 1px;
+    }
+
+    /* --- Stratégie --- */
+    .veille-strategy-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* --- Filtres --- */
+    .veille-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin: 30px auto 10px;
+        padding: 16px;
+        background: #232323;
+        border-radius: 12px;
+        max-width: 1200px;
+    }
+    .veille-filter-btn {
+        background: #333;
+        color: #ccc;
+        border: 2px solid transparent;
+        padding: 8px 18px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.25s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: inherit;
+    }
+    .veille-filter-btn:hover {
+        background: #444;
+        color: #fff;
+        border-color: #00A9E0;
+    }
+    .veille-filter-btn.active {
+        background: #00A9E0;
+        color: #fff;
+        border-color: #00A9E0;
+        box-shadow: 0 4px 14px rgba(0,169,224,0.35);
+    }
+
+    /* --- Counter --- */
+    .veille-counter {
+        text-align: center;
+        color: #777;
+        font-size: 0.9rem;
+        margin: 8px 0 20px;
+    }
+
+    /* --- Swiper container --- */
+    .veille-swiper-wrapper {
+        max-width: 1260px;
+        margin: 0 auto;
+        padding: 0 50px 60px;
+        position: relative;
+    }
+
+    .veille-swiper .swiper-slide {
+        height: auto;
+        display: flex;
+    }
+
+    /* Swiper navigation arrows */
+    .veille-swiper-wrapper .swiper-button-prev,
+    .veille-swiper-wrapper .swiper-button-next {
+        color: #00A9E0;
+        background: rgba(35,35,35,0.85);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        backdrop-filter: blur(4px);
+        transition: background 0.25s ease;
+    }
+    .veille-swiper-wrapper .swiper-button-prev:hover,
+    .veille-swiper-wrapper .swiper-button-next:hover {
+        background: rgba(0,169,224,0.3);
+    }
+    .veille-swiper-wrapper .swiper-button-prev::after,
+    .veille-swiper-wrapper .swiper-button-next::after {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    /* Swiper pagination */
+    .veille-swiper-wrapper .swiper-pagination-bullet {
+        background: #555;
+        opacity: 1;
+        width: 10px;
+        height: 10px;
+        transition: all 0.25s ease;
+    }
+    .veille-swiper-wrapper .swiper-pagination-bullet-active {
+        background: #00A9E0;
+        width: 28px;
+        border-radius: 5px;
+    }
+
+    /* --- Card article --- */
+    .veille-card {
+        background: #252525;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #333;
+        width: 100%;
+    }
+    .veille-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 36px rgba(0,169,224,0.18);
+        border-color: #00A9E0;
+    }
+
+    /* Image */
+    .veille-card__img-wrap {
+        height: 200px;
+        overflow: hidden;
+        background: #1a1a1a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .veille-card__img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+    .veille-card:hover .veille-card__img-wrap img {
+        transform: scale(1.06);
+    }
+    /* Favicon fallback: display smaller & centered */
+    .veille-card__img-wrap img.favicon-fallback {
+        width: 96px;
+        height: 96px;
+        object-fit: contain;
+        border-radius: 12px;
+    }
+
+    /* Card body */
+    .veille-card__body {
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 10px;
+    }
+
+    /* Header row */
+    .veille-card__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .veille-card__source {
+        background: #00A9E0;
+        color: #fff;
+        padding: 4px 14px;
+        border-radius: 14px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    .veille-card__date {
+        color: #999;
+        font-size: 0.8rem;
+    }
+
+    /* Title */
+    .veille-card__title {
+        color: #fff;
+        font-size: 1.12rem;
+        font-weight: 700;
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    /* Score */
+    .veille-card__score {
+        margin: 2px 0;
+    }
+    .veille-stars {
+        color: #f1c40f;
+        font-size: 1.05rem;
+        letter-spacing: 2px;
+    }
+    .veille-stars--empty {
+        color: #444;
+    }
+    .veille-stars__label {
+        color: #888;
+        font-size: 0.78rem;
+        margin-left: 6px;
+        letter-spacing: 0;
+    }
+
+    /* Tags */
+    .veille-card__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .veille-tag {
+        color: #fff;
+        padding: 3px 11px;
+        border-radius: 12px;
+        font-size: 0.72rem;
+        font-weight: 600;
+    }
+
+    /* Analysis block */
+    .veille-card__analysis {
+        background: rgba(0,169,224,0.07);
+        border-left: 3px solid #00A9E0;
+        padding: 14px;
+        border-radius: 8px;
+        flex: 1;
+    }
+    .veille-card__analysis h4 {
+        color: #00A9E0;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin: 0 0 8px;
+        letter-spacing: 0.4px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .veille-card__analysis p {
+        color: #ccc;
+        font-size: 0.88rem;
+        line-height: 1.55;
+        margin: 0;
+    }
+
+    /* CTA button */
+    .veille-card__cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #00A9E0;
+        color: #fff;
+        text-decoration: none;
+        padding: 11px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.92rem;
+        transition: background 0.25s ease, transform 0.2s ease;
+        margin-top: auto;
+    }
+    .veille-card__cta:hover {
+        background: #008abb;
+        transform: translateY(-2px);
+    }
+
+    /* --- Skeleton loader --- */
+    .skeleton-slide {
+        width: 100%;
+    }
+    .skeleton-card {
+        background: #252525;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid #333;
+        width: 100%;
+    }
+    .skeleton-img {
+        height: 200px;
+        background: linear-gradient(110deg, #2a2a2a 30%, #363636 50%, #2a2a2a 70%);
+        background-size: 200% 100%;
+        animation: skel-pulse 1.4s ease-in-out infinite;
+    }
+    .skeleton-body {
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .skel-line {
+        height: 14px;
+        border-radius: 7px;
+        background: linear-gradient(110deg, #2a2a2a 30%, #3a3a3a 50%, #2a2a2a 70%);
+        background-size: 200% 100%;
+        animation: skel-pulse 1.4s ease-in-out infinite;
+    }
+    .skel-line.w80 { width: 80%; }
+    .skel-line.w60 { width: 60%; }
+    .skel-line.w50 { width: 50%; }
+    .skel-line.w40 { width: 40%; }
+    .skel-line.w100 { width: 100%; }
+    .skel-line.h10 { height: 10px; }
+
+    @keyframes skel-pulse {
+        0%   { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+
+    /* --- Error state --- */
+    .veille-error {
+        text-align: center;
+        padding: 50px 20px;
+        background: #2a1a1a;
+        border: 1px solid #e74c3c;
+        border-radius: 14px;
+        color: #e74c3c;
+        max-width: 600px;
+        margin: 30px auto;
+    }
+    .veille-error h3 {
+        color: #e74c3c;
+        margin: 14px 0 8px;
+    }
+    .veille-error p {
+        color: #ccc;
+        margin-bottom: 20px;
+    }
+
+    /* --- Empty state --- */
+    .veille-empty {
+        text-align: center;
+        padding: 60px 20px;
+        color: #777;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+        .veille-hero__title { font-size: 2rem; }
+        .veille-swiper-wrapper { padding: 0 20px 50px; }
+        .veille-card__img-wrap { height: 170px; }
+        .veille-card__body { padding: 16px; }
+    }
+    @media (max-width: 480px) {
+        .veille-hero__title { font-size: 1.5rem; }
+        .veille-card__header { flex-direction: column; align-items: flex-start; }
+        .veille-card__title { font-size: 1rem; }
+    }
+    </style>
 </head>
 <body style="margin:0;background-color:#1c1c1c;color:white;">
 
@@ -24,18 +410,16 @@
 <!-- Contenu principal -->
 <div class="main-content">
 
-    <!-- Bannière -->
-    <header>
-        <div style="position:relative;text-align:center;color:black;">
-            <img src="images/bts-sio-fond.webp" alt="Bannière veille technologique" style="width:100%;height:400px;object-fit:cover;">
-            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:50px;font-weight:bold;color:white;text-shadow:0 2px 12px rgba(0,0,0,.6);">
-                Veille Technologique
-            </div>
+    <!-- Hero banner -->
+    <header class="veille-hero">
+        <img src="images/bts-sio-fond.webp" alt="Bannière veille technologique">
+        <div class="veille-hero__overlay">
+            <h1 class="veille-hero__title">Veille Technologique</h1>
         </div>
     </header>
 
-    <!-- Section stratégie de veille -->
-    <section class="veille-section" id="veille-intro">
+    <!-- Stratégie -->
+    <section class="veille-strategy-section">
         <div class="veille-strategy">
             <h2><i class="fas fa-satellite-dish"></i> Ma Stratégie de Veille</h2>
             <p>
@@ -51,42 +435,46 @@
             </div>
         </div>
 
-        <!-- Barre de filtres (générée dynamiquement par JS) -->
+        <!-- Filtres (générés dynamiquement par JS) -->
         <div class="veille-filters" id="veille-filters">
             <button class="veille-filter-btn active" data-filter="all">
                 <i class="fas fa-th"></i> Tous
             </button>
-            <!-- Les autres boutons seront ajoutés dynamiquement -->
         </div>
 
-        <!-- Compteur d'articles -->
+        <!-- Compteur -->
         <p class="veille-counter" id="veille-counter"></p>
+    </section>
 
-        <!-- Grille d'articles / Skeleton loaders -->
-        <div class="veille-grid" id="veille-grid">
-            <!-- Skeleton loaders (visibles pendant le chargement) -->
-            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w100"></div><div class="skeleton-line w100"></div><div class="skeleton-line w50"></div></div></div>
-            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w100"></div><div class="skeleton-line w100"></div><div class="skeleton-line w50"></div></div></div>
-            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w100"></div><div class="skeleton-line w100"></div><div class="skeleton-line w50"></div></div></div>
-            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w100"></div><div class="skeleton-line w100"></div><div class="skeleton-line w50"></div></div></div>
-            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w100"></div><div class="skeleton-line w100"></div><div class="skeleton-line w50"></div></div></div>
-            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w100"></div><div class="skeleton-line w100"></div><div class="skeleton-line w50"></div></div></div>
+    <!-- Carousel Swiper -->
+    <div class="veille-swiper-wrapper" id="veille-swiper-wrapper">
+        <div class="swiper veille-swiper" id="veille-swiper">
+            <div class="swiper-wrapper" id="veille-slides">
+                <!-- Skeleton loaders (remplacés par les vrais articles au chargement) -->
+                <div class="swiper-slide skeleton-slide"><div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skel-line w60"></div><div class="skel-line w80"></div><div class="skel-line w40"></div><div class="skel-line w100"></div><div class="skel-line w100"></div><div class="skel-line w50"></div></div></div></div>
+                <div class="swiper-slide skeleton-slide"><div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skel-line w60"></div><div class="skel-line w80"></div><div class="skel-line w40"></div><div class="skel-line w100"></div><div class="skel-line w100"></div><div class="skel-line w50"></div></div></div></div>
+                <div class="swiper-slide skeleton-slide"><div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skel-line w60"></div><div class="skel-line w80"></div><div class="skel-line w40"></div><div class="skel-line w100"></div><div class="skel-line w100"></div><div class="skel-line w50"></div></div></div></div>
+            </div>
+            <!-- Pagination & Navigation -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
+    </div>
 
-        <!-- Message d'erreur (caché par défaut) -->
-        <div class="veille-error" id="veille-error" style="display:none;">
-            <i class="fas fa-exclamation-triangle"></i>
-            <h3>Impossible de charger les articles</h3>
-            <p id="veille-error-msg"></p>
-            <button class="veille-filter-btn" onclick="chargerArticles()">
-                <i class="fas fa-redo"></i> Réessayer
-            </button>
-        </div>
+    <!-- Erreur (masqué) -->
+    <div class="veille-error" id="veille-error" style="display:none;">
+        <i class="fas fa-exclamation-triangle" style="font-size:40px;"></i>
+        <h3>Impossible de charger les articles</h3>
+        <p id="veille-error-msg"></p>
+        <button class="veille-filter-btn" onclick="chargerArticles()">
+            <i class="fas fa-redo"></i> Réessayer
+        </button>
+    </div>
 
-        <!-- Événements de veille terrain -->
-        <div style="margin-top:60px;">
-            <h3 class="acceuil_evenement"><i class="fas fa-calendar"></i> Événements de Veille Terrain</h3>
-        </div>
+    <!-- Événements terrain -->
+    <section class="veille-strategy-section" style="margin-top:40px;">
+        <h3 class="acceuil_evenement"><i class="fas fa-calendar"></i> Événements de Veille Terrain</h3>
         <div class="accordion">
             <div class="accordion-item">
                 <h3 class="accordion-header">
@@ -125,44 +513,36 @@
 <!-- Scripts -->
 <script src="horloge.js"></script>
 <script src="lien-survolé.js"></script>
+<!-- Swiper.js -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
 // =====================================================
-//  VEILLE TECHNOLOGIQUE — Client-side JS
-//  Récupère et affiche les articles depuis Notion
-//  via la Netlify Function get-notion-data
+//  VEILLE TECHNOLOGIQUE — Carousel Swiper + Notion
 // =====================================================
 
-/** Couleurs prédéfinies pour les badges de tags */
+/** Couleurs pour les badges de tags */
 const TAG_COLORS = {
-    'Cybersécurité': '#e74c3c',
-    'Sécurité':      '#e74c3c',
-    'Microsoft':     '#0078d4',
-    'Windows':       '#0078d4',
-    'Cloud':         '#3498db',
-    'Azure':         '#0089d6',
-    'IA':            '#8e44ad',
-    'Réseau':        '#e67e22',
-    'Linux':         '#f1c40f',
-    'DevOps':        '#2ecc71',
-    'Sauvegarde':    '#1abc9c',
-    'Active Directory': '#0078d4',
-    'PKI':           '#9b59b6',
-    'Serveur':       '#34495e',
-    'Virtualisation':'#16a085',
+    'Cybersécurité': '#e74c3c', 'Sécurité': '#e74c3c',
+    'Microsoft': '#0078d4', 'Windows': '#0078d4', 'Active Directory': '#0078d4',
+    'Cloud': '#3498db', 'Azure': '#0089d6',
+    'IA': '#8e44ad', 'Réseau': '#e67e22',
+    'Linux': '#f1c40f', 'DevOps': '#2ecc71',
+    'Sauvegarde': '#1abc9c', 'PKI': '#9b59b6',
+    'Serveur': '#34495e', 'Virtualisation': '#16a085',
 };
 const DEFAULT_TAG_COLOR = '#00A9E0';
-const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=350&fit=crop';
 
 /** Données globales */
 let allArticles = [];
 let activeFilter = 'all';
+let swiperInstance = null;
 
-// ----- Chargement au démarrage -----
+// ---- Init ----
 document.addEventListener('DOMContentLoaded', () => {
     chargerArticles();
 
-    // Accordéon (événements terrain)
+    // Accordéon
     document.querySelectorAll('.accordion-header').forEach(header => {
         header.addEventListener('click', function () {
             const item = this.parentElement;
@@ -180,31 +560,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// ----- Fetch des articles -----
+// ---- Fetch articles ----
 async function chargerArticles() {
-    const grid = document.getElementById('veille-grid');
+    const slidesContainer = document.getElementById('veille-slides');
     const errorBox = document.getElementById('veille-error');
     errorBox.style.display = 'none';
 
-    // Afficher les skeletons
-    grid.innerHTML = Array(6).fill(0).map(() => `
-        <div class="skeleton-card">
-            <div class="skeleton-image"></div>
-            <div class="skeleton-body">
-                <div class="skeleton-line w80"></div>
-                <div class="skeleton-line w60"></div>
-                <div class="skeleton-line w40"></div>
-                <div class="skeleton-line w100"></div>
-                <div class="skeleton-line w100"></div>
-                <div class="skeleton-line w50"></div>
+    // Skeleton slides
+    slidesContainer.innerHTML = Array(3).fill(0).map(() => `
+        <div class="swiper-slide skeleton-slide">
+            <div class="skeleton-card">
+                <div class="skeleton-img"></div>
+                <div class="skeleton-body">
+                    <div class="skel-line w60"></div>
+                    <div class="skel-line w80"></div>
+                    <div class="skel-line w40"></div>
+                    <div class="skel-line w100"></div>
+                    <div class="skel-line w100"></div>
+                    <div class="skel-line w50"></div>
+                </div>
             </div>
         </div>
     `).join('');
 
+    // Init a temporary Swiper for skeletons
+    initSwiper();
+
     try {
         const res = await fetch('/.netlify/functions/get-notion-data');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
         const data = await res.json();
         if (!data.success) throw new Error(data.message || 'Erreur API');
 
@@ -214,22 +598,45 @@ async function chargerArticles() {
 
     } catch (err) {
         console.error('❌ Erreur chargement:', err);
-        grid.innerHTML = '';
+        slidesContainer.innerHTML = '';
+        if (swiperInstance) { swiperInstance.destroy(true, true); swiperInstance = null; }
         errorBox.style.display = 'block';
         document.getElementById('veille-error-msg').textContent = err.message;
     }
 }
 
-// ----- Génération dynamique des boutons de filtre -----
+// ---- Swiper init / reinit ----
+function initSwiper() {
+    if (swiperInstance) swiperInstance.destroy(true, true);
+
+    swiperInstance = new Swiper('#veille-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 24,
+        grabCursor: true,
+        loop: false,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            640:  { slidesPerView: 1, spaceBetween: 20 },
+            768:  { slidesPerView: 2, spaceBetween: 22 },
+            1024: { slidesPerView: 3, spaceBetween: 26 },
+        },
+    });
+}
+
+// ---- Filtres ----
 function genererFiltres(articles) {
     const container = document.getElementById('veille-filters');
-
-    // Collecter tous les tags uniques
     const tagsSet = new Set();
     articles.forEach(a => a.technologies.forEach(t => tagsSet.add(t)));
     const tags = [...tagsSet].sort();
 
-    // Reconstruire la barre
     container.innerHTML = `
         <button class="veille-filter-btn ${activeFilter === 'all' ? 'active' : ''}" data-filter="all">
             <i class="fas fa-th"></i> Tous
@@ -241,7 +648,6 @@ function genererFiltres(articles) {
         `).join('')}
     `;
 
-    // Événements de clic
     container.querySelectorAll('.veille-filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             activeFilter = btn.dataset.filter;
@@ -252,7 +658,6 @@ function genererFiltres(articles) {
     });
 }
 
-// ----- Filtrage -----
 function filtrerArticles() {
     const filtered = activeFilter === 'all'
         ? allArticles
@@ -260,69 +665,92 @@ function filtrerArticles() {
     afficherArticles(filtered);
 }
 
-// ----- Affichage des cartes -----
+// ---- Afficher les articles ----
 function afficherArticles(articles) {
-    const grid = document.getElementById('veille-grid');
+    const slidesContainer = document.getElementById('veille-slides');
     const counter = document.getElementById('veille-counter');
 
     counter.textContent = `${articles.length} article${articles.length > 1 ? 's' : ''} trouvé${articles.length > 1 ? 's' : ''}`;
 
     if (articles.length === 0) {
-        grid.innerHTML = `
-            <div class="veille-empty">
-                <i class="fas fa-search" style="font-size:48px;color:#00A9E0;margin-bottom:16px;"></i>
-                <p>Aucun article trouvé pour ce filtre.</p>
-            </div>
-        `;
+        slidesContainer.innerHTML = `
+            <div class="swiper-slide">
+                <div class="veille-empty">
+                    <i class="fas fa-search" style="font-size:48px;color:#00A9E0;margin-bottom:16px;display:block;"></i>
+                    <p>Aucun article trouvé pour ce filtre.</p>
+                </div>
+            </div>`;
+        initSwiper();
         return;
     }
 
-    grid.innerHTML = articles.map(article => {
-        const dateStr = formaterDate(article.date);
-        const stars = genererEtoiles(article.score);
-        const imageUrl = article.image || FALLBACK_IMAGE;
-        const tagsBadges = article.technologies.map(tag => {
+    slidesContainer.innerHTML = articles.map(art => {
+        const dateStr = formaterDate(art.date);
+        const stars = genererEtoiles(art.score);
+        const tagsBadges = art.technologies.map(tag => {
             const color = TAG_COLORS[tag] || DEFAULT_TAG_COLOR;
             return `<span class="veille-tag" style="background:${color};">${tag}</span>`;
         }).join('');
 
+        // --- Image logic: art.image > Google Favicon > grey placeholder ---
+        let imgHtml = '';
+        if (art.image) {
+            imgHtml = `<img src="${art.image}" alt="${art.titre}" loading="lazy"
+                            onerror="this.onerror=null;this.classList.add('favicon-fallback');this.src=getFaviconUrl('${art.url}');">`;
+        } else if (art.url) {
+            imgHtml = `<img src="${getFaviconUrl(art.url)}" alt="${art.source}" class="favicon-fallback" loading="lazy"
+                            onerror="this.onerror=null;this.style.display='none';">`;
+        } else {
+            imgHtml = `<div style="width:100%;height:100%;background:#1c1c1c;display:flex;align-items:center;justify-content:center;">
+                            <i class="fas fa-newspaper" style="font-size:48px;color:#333;"></i>
+                       </div>`;
+        }
+
         return `
-        <article class="veille-card" data-tags="${article.technologies.join(',')}" id="article-${article.id}">
-            <div class="veille-card__image-wrap">
-                <img class="veille-card__image" src="${imageUrl}" alt="${article.titre}" loading="lazy"
-                     onerror="this.src='${FALLBACK_IMAGE}'">
-            </div>
-            <div class="veille-card__body">
-                <div class="veille-card__header">
-                    <span class="veille-card__source">
-                        <i class="fas fa-rss"></i> ${article.source}
-                    </span>
-                    <span class="veille-card__date">
-                        <i class="fas fa-calendar-alt"></i> ${dateStr}
-                    </span>
-                </div>
-                <h3 class="veille-card__title">${article.titre}</h3>
-                <div class="veille-card__score">${stars}</div>
-                ${tagsBadges ? `<div class="veille-card__tags">${tagsBadges}</div>` : ''}
-                ${article.analyse ? `
-                    <div class="veille-card__analysis">
-                        <h4><i class="fas fa-robot"></i> Analyse IA</h4>
-                        <p>${article.analyse}</p>
+        <div class="swiper-slide">
+            <article class="veille-card" id="article-${art.id}">
+                <div class="veille-card__img-wrap">${imgHtml}</div>
+                <div class="veille-card__body">
+                    <div class="veille-card__header">
+                        <span class="veille-card__source"><i class="fas fa-rss"></i> ${art.source}</span>
+                        <span class="veille-card__date"><i class="fas fa-calendar-alt"></i> ${dateStr}</span>
                     </div>
-                ` : ''}
-                ${article.url ? `
-                    <a href="${article.url}" target="_blank" rel="noopener noreferrer" class="veille-card__cta">
-                        Lire l'article <i class="fas fa-external-link-alt"></i>
-                    </a>
-                ` : ''}
-            </div>
-        </article>`;
+                    <h3 class="veille-card__title">${art.titre}</h3>
+                    <div class="veille-card__score">${stars}</div>
+                    ${tagsBadges ? `<div class="veille-card__tags">${tagsBadges}</div>` : ''}
+                    ${art.analyse ? `
+                        <div class="veille-card__analysis">
+                            <h4><i class="fas fa-robot"></i> Analyse IA</h4>
+                            <p>${art.analyse}</p>
+                        </div>
+                    ` : ''}
+                    ${art.url ? `
+                        <a href="${art.url}" target="_blank" rel="noopener noreferrer" class="veille-card__cta">
+                            Lire l'article <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    ` : ''}
+                </div>
+            </article>
+        </div>`;
     }).join('');
+
+    initSwiper();
 }
 
-// ----- Helpers -----
+// ---- Helpers ----
 
-/** Formate une date ISO en français lisible */
+/** Construit l'URL favicon Google depuis l'URL de l'article */
+function getFaviconUrl(articleUrl) {
+    if (!articleUrl) return '';
+    try {
+        const domain = new URL(articleUrl).hostname;
+        return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+    } catch {
+        return '';
+    }
+}
+
+/** Formate une date ISO en français : "25 mars 2026" */
 function formaterDate(iso) {
     try {
         return new Date(iso).toLocaleDateString('fr-FR', {
@@ -333,7 +761,7 @@ function formaterDate(iso) {
     }
 }
 
-/** Génère un score en étoiles (⭐) */
+/** Génère un score en étoiles dorées */
 function genererEtoiles(score) {
     const max = 5;
     const full = Math.min(Math.max(Math.round(score), 0), max);
