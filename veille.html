@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veille Technologique - Jules ROBERT</title>
+    <title>Veille Technologique - Jules ROBERT | Portfolio BTS SIO</title>
+    <meta name="description" content="Veille technologique de Jules ROBERT — Articles cybersécurité, cloud, réseau et IA récupérés automatiquement depuis Notion.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body style="margin: 0;background-color: #1c1c1c;color: white;">
+<body style="margin:0;background-color:#1c1c1c;color:white;">
 
 <!-- Barre de navigation -->
 <ul class="navbar">
@@ -16,225 +17,80 @@
     <li><a href="index.html"><i class="fa fa-home"></i> Accueil</a></li>
     <li><a href="apropos.html"><i class="fa fa-info-circle"></i> À propos</a></li>
     <li><a class="active" href="veille.html"><i class="fa-solid fa-laptop-code"></i> Veille technologique</a></li>
-    <li><a href="environnement.html"><i class="fa fa-cogs"></i>Environnement de travail</a></li>
+    <li><a href="environnement.html"><i class="fa fa-cogs"></i> Environnement de travail</a></li>
     <li><a href="contact.html"><i class="fa fa-phone"></i> Contact</a></li>
 </ul>
 
 <!-- Contenu principal -->
 <div class="main-content">
+
+    <!-- Bannière -->
     <header>
-        <div style="position: relative; text-align: center; color: black;">
-            <img src="images/bts-sio-fond.webp" alt="Bannière" style="width: 100%; height: 400px; object-fit: cover;">
-                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 50px; font-weight: bold; color: white;">
+        <div style="position:relative;text-align:center;color:black;">
+            <img src="images/bts-sio-fond.webp" alt="Bannière veille technologique" style="width:100%;height:400px;object-fit:cover;">
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:50px;font-weight:bold;color:white;text-shadow:0 2px 12px rgba(0,0,0,.6);">
                 Veille Technologique
             </div>
         </div>
     </header>
 
-    <section class="veille-section">
-        <!-- Stratégie de veille -->
+    <!-- Section stratégie de veille -->
+    <section class="veille-section" id="veille-intro">
         <div class="veille-strategy">
-            <h2><i class="fas fa-radar"></i> Ma Stratégie de Veille Informationnelle</h2>
+            <h2><i class="fas fa-satellite-dish"></i> Ma Stratégie de Veille</h2>
             <p>
-                Dans le cadre de ma formation BTS SIO option SISR, j'ai développé une stratégie de veille technologique 
-                structurée et automatisée pour rester à jour sur les dernières évolutions en cybersécurité, réseaux et 
-                technologies émergentes. Cette veille me permet d'anticiper les tendances et d'adapter mes compétences 
-                aux besoins du marché.
+                Dans le cadre de ma formation BTS SIO option SISR, j'ai développé une stratégie de veille technologique
+                structurée et <strong>automatisée</strong> pour rester à jour sur les dernières évolutions en cybersécurité, réseaux et
+                technologies émergentes.
             </p>
-            
             <div class="methodology">
-                <h3><i class="fas fa-cogs"></i> Méthodologie adoptée</h3>
-                <p><strong>1. Identification des domaines clés :</strong> Cybersécurité, Infrastructure réseau, Cloud computing, DevOps</p>
-                <p><strong>2. Sélection de sources fiables :</strong> Mix entre sources techniques spécialisées et réseaux sociaux professionnels</p>
-                <p><strong>3. Automatisation :</strong> Utilisation de flux RSS, alertes Google, et réseaux sociaux pour une collecte continue</p>
-                <p><strong>4. Curation :</strong> Tri, analyse et archivage via Wakelet pour faciliter la consultation</p>
+                <h3><i class="fas fa-cogs"></i> Pipeline automatisé</h3>
+                <p><strong>1.</strong> Les articles sont collectés automatiquement via <strong>n8n</strong> (flux RSS, alertes).</p>
+                <p><strong>2.</strong> Ils sont enrichis par l'<strong>IA</strong> (résumé, score, tags) puis stockés dans <strong>Notion</strong>.</p>
+                <p><strong>3.</strong> Cette page récupère dynamiquement les données depuis Notion via une <strong>Netlify Function</strong>.</p>
             </div>
         </div>
 
-        <!-- Sources d'information -->
-        <h2><i class="fas fa-rss"></i> Mes Sources d'Information</h2>
-        <div class="sources-grid">
-            <div class="source-card">
-                <h3><i class="fas fa-globe"></i> IT-Connect</h3>
-                <p><strong>Type :</strong> Site web spécialisé</p>
-                <p><strong>Fréquence :</strong> Consultation quotidienne</p>
-                <p><strong>Intérêt :</strong> Tutoriels techniques, actualités IT, guides pratiques pour administrateurs système et réseau</p>
-                <div class="alert-info">
-                    <i class="fas fa-lightbulb"></i>
-                    <span>Source principale pour les aspects techniques et pratiques</span>
-                </div>
-            </div>
-            
-            <div class="source-card">
-                <h3><i class="fab fa-twitter"></i> Bluesky</h3>
-                <p><strong>Type :</strong> Réseau social décentralisé (bêta)</p>
-                <p><strong>Fréquence :</strong> Plusieurs fois par jour</p>
-                <p><strong>Intérêt :</strong> Actualités en temps réel, discussions d'experts, signalements de vulnérabilités</p>
-                <div class="alert-info">
-                    <i class="fas fa-rocket"></i>
-                    <span>Plateforme innovante pour suivre les experts en cybersécurité</span>
-                </div>
-            </div>
-            
-            <div class="source-card">
-                <h3><i class="fas fa-shield-alt"></i> CoinAnk</h3>
-                <p><strong>Type :</strong> Sources officielles et spécialisées</p>
-                <p><strong>Fréquence :</strong> Actualités quotidiennes et alertes</p>
-                <p><strong>Intérêt :</strong> Nouvelles sur les cryptomonnaies, tendances du marché, alertes de sécurité liées à la blockchain</p>
-            </div>
-            
-            <div class="source-card">
-                <h3><i class="fab fa-reddit"></i> Reddit (r/cybersecurity, r/sysadmin)</h3>
-                <p><strong>Type :</strong> Communauté</p>
-                <p><strong>Fréquence :</strong> Consultation lorsque j'ai certain bug</p>
-                <p><strong>Intérêt :</strong> Retours d'expérience, discussions techniques, outils communautaires</p>
-            </div>
+        <!-- Barre de filtres (générée dynamiquement par JS) -->
+        <div class="veille-filters" id="veille-filters">
+            <button class="veille-filter-btn active" data-filter="all">
+                <i class="fas fa-th"></i> Tous
+            </button>
+            <!-- Les autres boutons seront ajoutés dynamiquement -->
         </div>
 
-        <!-- Wakelet intégration -->
-        <div class="wakelet-section">
-            <h2><i class="fas fa-bookmark"></i> Ma Collection Wakelet</h2>
-            <p>J'utilise Wakelet pour organiser et archiver ma veille technologique. Cette plateforme me permet de :</p>
-            <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
-                <li>📚 Classer les articles par thématiques</li>
-                <li>🔍 Retrouver rapidement des informations</li>
-                <li>📊 Suivre l'évolution des technologies</li>
-                <li>💼 Partager avec mes collègues et formateurs</li>
-            </ul>
-            
-            <div style="margin: 20px 0; padding: 20px; background: #333; border-radius: 8px; border: 2px solid #00A9E0;">
-                <h3 style="color: #00A9E0;">🔗 Accéder à ma collection Wakelet</h3>
-                <p>Ma veille technologique organisée en collections thématiques</p>
-                <a href="https://wakelet.com/workspace/PPUMqrxB4m7bvAnaCcEZW/collections" style="background: #00A9E0; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s ease;">
-                    Voir ma collection Wakelet <i class="fas fa-external-link-alt"></i>
-                </a>
-            </div>
+        <!-- Compteur d'articles -->
+        <p class="veille-counter" id="veille-counter"></p>
+
+        <!-- Grille d'articles / Skeleton loaders -->
+        <div class="veille-grid" id="veille-grid">
+            <!-- Skeleton loaders (visibles pendant le chargement) -->
+            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w100"></div><div class="skeleton-line w100"></div><div class="skeleton-line w50"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w100"></div><div class="skeleton-line w100"></div><div class="skeleton-line w50"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w100"></div><div class="skeleton-line w100"></div><div class="skeleton-line w50"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w100"></div><div class="skeleton-line w100"></div><div class="skeleton-line w50"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w100"></div><div class="skeleton-line w100"></div><div class="skeleton-line w50"></div></div></div>
+            <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div><div class="skeleton-line w40"></div><div class="skeleton-line w100"></div><div class="skeleton-line w100"></div><div class="skeleton-line w50"></div></div></div>
         </div>
 
-        <!-- NOUVELLE SECTION : Articles depuis Notion -->
-        <div style="text-align: center; margin: 40px 0;">
-            <button onclick="rafraichirArticlesNotion()" style="
-                background: linear-gradient(135deg, #667eea, #764ba2);
-                color: white;
-                border: none;
-                padding: 15px 30px;
-                border-radius: 10px;
-                font-size: 16px;
-                font-weight: bold;
-                cursor: pointer;
-                box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-                transition: all 0.3s ease;
-                display: inline-flex;
-                align-items: center;
-                gap: 10px;
-            " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(102, 126, 234, 0.6)'"
-               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.4)'">
-                <i class="fas fa-sync-alt"></i>
-                Actualiser depuis Notion
+        <!-- Message d'erreur (caché par défaut) -->
+        <div class="veille-error" id="veille-error" style="display:none;">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Impossible de charger les articles</h3>
+            <p id="veille-error-msg"></p>
+            <button class="veille-filter-btn" onclick="chargerArticles()">
+                <i class="fas fa-redo"></i> Réessayer
             </button>
         </div>
 
-        <!-- Les articles Notion seront insérés ici automatiquement -->
-        <div id="articles-notion-container"></div>
-
-        <!-- Technologies émergentes AUTOMATIQUES -->
-        <div class="source-info">
-            <h2>🔬 Technologies Émergentes - Veille Automatique</h2>
-            <p>Cette section récupère automatiquement les dernières informations sur les technologies émergentes depuis plusieurs sources :</p>
-            <ul>
-                <li><strong>TechCrunch RSS</strong> - Actualités tech internationales</li>
-                <li><strong>Ars Technica RSS</strong> - Analyses techniques approfondies</li>
-                <li><strong>Wired AI RSS</strong> - Actualités IA et tech émergentes</li>
-            </ul>
-            <p><strong>Dernière mise à jour :</strong> <span id="last-update">Chargement...</span></p>
-        </div>
-
-        <button class="refresh-tech-btn" onclick="fetchEmergingTechnologies()">
-            🔄 Actualiser depuis les sources
-        </button>
-
-        <div class="tech-loading" id="tech-loading">
-            <h3>🔍 Récupération des données depuis les sources...</h3>
-            <p>Analyse en cours des flux RSS et APIs</p>
-        </div>
-
-        <div class="error-message" id="error-message"></div>
-
-        <div class="tech-emergentes" id="technologies-container">
-            <!-- Les technologies seront récupérées automatiquement -->
-        </div>
-
-        <!-- Section RSS IT-Connect -->
-        <section id="articles-section">
-            <h2><i class="fas fa-newspaper"></i> Articles Récents IT-Connect</h2>
-            
-            <button class="refresh-btn" onclick="loadITConnectArticles()">
-                🔄 Actualiser les articles
-            </button>
-            
-            <div id="articles-loading" style="text-align: center; padding: 20px; color: #3498db;">
-                Chargement des articles IT-Connect...
-            </div>
-            
-            <div id="articles-error" style="display: none; background: #e74c3c; color: white; padding: 15px; border-radius: 8px; margin: 20px 0;">
-            </div>
-            
-            <div id="articles-grid" class="articles-grid">
-                <!-- Les articles seront insérés ici automatiquement -->
-            </div>
-        </section>
-
-        <!-- Articles statiques existants -->
-        <h2><i class="fas fa-newspaper"></i> Articles de ma Veille</h2>
-        <div class="articles-grid">
-            <article class="article-card">
-                <img src="images/Signal-malware-2-1360x905.webp" alt="" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px 8px 0 0;">
-                <div class="article-content">
-                    <h3 class="titre-article">Cyberattaque éclair : un hacker a ridiculisé la sécurité du gouvernement Trump</h3>
-                    <div class="article-meta">
-                        <span class="category"><i class="fas fa-tag"></i> CyberEspionnage</span>
-                        <span style="margin-left: 10px;"><i class="fas fa-rss"></i> Source: IT-Connect</span>
-                    </div>
-                    <p>Analyse d'une intrusion rapide sur les serveurs TeleMessage utilisés par l'administration. Cet incident illustre l'importance des audits de sécurité réguliers et de la formation des utilisateurs.</p>
-                    <a href="https://www.01net.com/actualites/cyberattaque-eclair-hacker-ridiculise-securite-gouvernement-trump-moins-20-minutes.html" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <img src="images/shutterstock_1191927595-730x480.jpg" alt="Cybersécurité" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px 8px 0 0;">
-                <div class="article-content">
-                    <h3 class="titre-article">LockBit frappé par une cyberattaque</h3>
-                    <div class="article-meta">
-                        <span class="category"><i class="fas fa-tag"></i> Ransomware</span>
-                        <span style="margin-left: 10px;"><i class="fab fa-twitter"></i> Source: Bluesky</span>
-                    </div>
-                    <p>Retournement de situation : le groupe cybercriminel LockBit devient victime. Cette attaque révèle les vulnérabilités internes des organisations criminelles et l'efficacité des contre-attaques.</p>
-                    <a href="https://itdaily.fr/nouvelles/securite/lockbit-frappe-par-une-cyberattaque/" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <img src="images/cyberattaque-mondiale-sante-1360x907.webp" alt="Cloud Computing" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px 8px 0 0;">
-                <div class="article-content">
-                    <h3 class="titre-article">ResolverRAT : menace mondiale sur la santé</h3>
-                    <div class="article-meta">
-                        <span class="category"><i class="fas fa-tag"></i> Malware</span>
-                        <span style="margin-left: 10px;"><i class="fas fa-shield-alt"></i> Source: CERT-FR</span>
-                    </div>
-                    <p>Campagne ciblant le secteur médical via des emails de phishing. Cet incident souligne l'importance de la sensibilisation du personnel médical aux risques cybernétiques.</p>
-                    <a href="https://www.01net.com/actualites/cyberattaque-mondiale-virus-resolverrat-prend-assaut-secteur-sante-pharmacie.html" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </article>
-        </div>
-
-        <!-- Événements -->
-        <div>
+        <!-- Événements de veille terrain -->
+        <div style="margin-top:60px;">
             <h3 class="acceuil_evenement"><i class="fas fa-calendar"></i> Événements de Veille Terrain</h3>
         </div>
         <div class="accordion">
             <div class="accordion-item">
                 <h3 class="accordion-header">
-                    l'Audace d'Entreprendre  
+                    L'Audace d'Entreprendre
                     <span class="chevron">▼</span>
                 </h3>
                 <div class="accordion-body">
@@ -243,7 +99,6 @@
                     <p><strong>Apports pour ma veille :</strong> Découverte de nouvelles solutions tech, networking avec des entrepreneurs du numérique, identification de tendances émergentes dans l'écosystème local.</p>
                 </div>
             </div>
-            
             <div class="accordion-item">
                 <h3 class="accordion-header">
                     Forum InCyber Europe 2025
@@ -263,349 +118,232 @@
 
 <footer>
     <div class="social-links">
-        <a href="https://www.linkedin.com/in/jules--robert/"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.linkedin.com/in/jules--robert/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
     </div>
 </footer>
 
-<!-- SCRIPTS -->
+<!-- Scripts -->
 <script src="horloge.js"></script>
 <script src="lien-survolé.js"></script>
 
-<!-- Script Accordéon -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', function() {
-            const accordionItem = this.parentElement;
-            const accordionBody = accordionItem.querySelector('.accordion-body');
+// =====================================================
+//  VEILLE TECHNOLOGIQUE — Client-side JS
+//  Récupère et affiche les articles depuis Notion
+//  via la Netlify Function get-notion-data
+// =====================================================
+
+/** Couleurs prédéfinies pour les badges de tags */
+const TAG_COLORS = {
+    'Cybersécurité': '#e74c3c',
+    'Sécurité':      '#e74c3c',
+    'Microsoft':     '#0078d4',
+    'Windows':       '#0078d4',
+    'Cloud':         '#3498db',
+    'Azure':         '#0089d6',
+    'IA':            '#8e44ad',
+    'Réseau':        '#e67e22',
+    'Linux':         '#f1c40f',
+    'DevOps':        '#2ecc71',
+    'Sauvegarde':    '#1abc9c',
+    'Active Directory': '#0078d4',
+    'PKI':           '#9b59b6',
+    'Serveur':       '#34495e',
+    'Virtualisation':'#16a085',
+};
+const DEFAULT_TAG_COLOR = '#00A9E0';
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=350&fit=crop';
+
+/** Données globales */
+let allArticles = [];
+let activeFilter = 'all';
+
+// ----- Chargement au démarrage -----
+document.addEventListener('DOMContentLoaded', () => {
+    chargerArticles();
+
+    // Accordéon (événements terrain)
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', function () {
+            const item = this.parentElement;
+            const body = item.querySelector('.accordion-body');
             const chevron = this.querySelector('.chevron');
-            
-            accordionItem.classList.toggle('active');
-            
-            if (accordionItem.classList.contains('active')) {
+            item.classList.toggle('active');
+            if (item.classList.contains('active')) {
                 chevron.style.transform = 'rotate(180deg)';
-                accordionBody.style.maxHeight = accordionBody.scrollHeight + 'px';
+                body.style.maxHeight = body.scrollHeight + 'px';
             } else {
                 chevron.style.transform = 'rotate(0deg)';
-                accordionBody.style.maxHeight = '0px';
+                body.style.maxHeight = '0px';
             }
         });
     });
 });
-</script>
 
-<!-- NOUVEAU : Script Notion Integration -->
-<script>
-// ===== SYSTÈME NOTION POUR ARTICLES DE VEILLE =====
+// ----- Fetch des articles -----
+async function chargerArticles() {
+    const grid = document.getElementById('veille-grid');
+    const errorBox = document.getElementById('veille-error');
+    errorBox.style.display = 'none';
 
-async function chargerArticlesNotion() {
-  console.log('🔄 Chargement des articles depuis Notion...');
-  
-  const container = document.getElementById('articles-notion-container');
-  if (!container) {
-    console.error('❌ Container articles-notion-container introuvable');
-    return;
-  }
-  
-  // Loader
-  container.innerHTML = `
-    <div style="text-align: center; padding: 40px; background: linear-gradient(135deg, #3498db, #2ecc71); border-radius: 15px; color: white; margin: 20px 0;">
-      <h3 style="margin: 0 0 10px 0;">⚡ Chargement depuis Notion</h3>
-      <p style="margin: 0; opacity: 0.9;">Récupération de ta veille technologique...</p>
-      <div style="margin-top: 15px;">
-        <i class="fas fa-spinner fa-spin" style="font-size: 24px;"></i>
-      </div>
-    </div>
-  `;
-  
-  try {
-    const response = await fetch('/.netlify/functions/articles-notion');
-    
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    
-    const data = await response.json();
-    
-    if (!data.success) {
-      throw new Error(data.message || 'Erreur API');
-    }
-    
-    console.log(`✅ ${data.count} articles Notion récupérés`);
-    afficherArticlesNotion(data.articles);
-    
-  } catch (error) {
-    console.error('❌ Erreur chargement Notion:', error);
-    container.innerHTML = `
-      <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 12px; margin: 20px 0; text-align: center;">
-        <i class="fas fa-exclamation-triangle" style="font-size: 24px; margin-bottom: 10px;"></i>
-        <h3 style="margin: 10px 0;">Erreur de connexion à Notion</h3>
-        <p style="margin: 5px 0; opacity: 0.9;">${error.message}</p>
-        <small style="opacity: 0.8;">Les articles statiques restent affichés ci-dessous</small>
-      </div>
-    `;
-  }
-}
-
-function afficherArticlesNotion(articles) {
-  const container = document.getElementById('articles-notion-container');
-  if (!container) return;
-  
-  const notionSection = `
-    <div style="margin: 30px 0; padding: 20px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 15px; text-align: center; color: white;">
-      <h2 style="margin: 0 0 10px 0;">
-        <i class="fas fa-database"></i> Articles depuis Notion
-      </h2>
-      <p style="margin: 0; opacity: 0.9;">
-        ${articles.length} articles de veille synchronisés depuis ta base Notion
-      </p>
-    </div>
-    
-    <div class="articles-grid" style="margin-top: 20px;">
-      ${articles.map(article => {
-        const imageUrl = getImageForTechnologies(article.technologies);
-        const techBadges = article.technologies.map(tech => 
-          `<span style="background: #1e40af; color: #bfdbfe; padding: 4px 12px; border-radius: 16px; font-size: 11px; margin: 4px; display: inline-block; font-weight: 500;">${tech}</span>`
-        ).join('');
-        
-        const scoreColor = article.score >= 4 ? '#2ecc71' : article.score >= 3 ? '#f39c12' : '#e74c3c';
-        const scoreBadge = `<span style="background: ${scoreColor}; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 14px;">⭐ ${article.score}/5</span>`;
-        
-        return `
-          <article class="article-card" style="
-            border: 2px solid #667eea; 
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
-            background: #1f2937;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-          ">
-            <img src="${imageUrl}" 
-                 alt="${article.titre}" 
-                 style="width: 100%; height: 200px; object-fit: cover;"
-                 onerror="this.src='https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop'">
-            
-            <div class="article-content" style="padding: 20px;">
-              
-              <!-- En-tête : Score + Date -->
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                ${scoreBadge}
-                <span style="color: #9ca3af; font-size: 12px;">
-                  <i class="fas fa-calendar"></i> ${new Date(article.date).toLocaleDateString('fr-FR')}
-                </span>
-              </div>
-              
-              <!-- Titre -->
-              <h3 style="
-                color: #ffffff;
-                font-size: 20px;
-                font-weight: 700;
-                margin: 0 0 15px 0;
-                line-height: 1.3;
-              ">${article.titre}</h3>
-              
-              <!-- Source -->
-              <div style="margin-bottom: 15px;">
-                <span style="
-                  background: #3b82f6;
-                  color: white;
-                  padding: 4px 12px;
-                  border-radius: 15px;
-                  font-size: 12px;
-                  font-weight: 500;
-                ">
-                  <i class="fas fa-rss"></i> ${article.source}
-                </span>
-              </div>
-              
-              <!-- 📄 RÉSUMÉ - BLOC PRINCIPAL EN BLANC -->
-              ${article.analyse ? `
-                <div style="
-                  background: rgba(59, 130, 246, 0.1);
-                  border-left: 3px solid #3b82f6;
-                  padding: 16px;
-                  margin: 20px 0;
-                  border-radius: 8px;
-                ">
-                  <h4 style="
-                    color: #60a5fa;
-                    font-size: 13px;
-                    margin: 0 0 10px 0;
-                    text-transform: uppercase;
-                    font-weight: 600;
-                    letter-spacing: 0.5px;
-                  ">
-                    📄 Résumé de l'article
-                  </h4>
-                  <p style="
-                    color: #ffffff;
-                    line-height: 1.6;
-                    margin: 0;
-                    font-size: 15px;
-                  ">${article.analyse}</p>
-                </div>
-              ` : ''}
-              
-              <!-- 🏷️ Technologies en badges -->
-              ${techBadges ? `
-                <div style="margin: 15px 0; padding: 15px 0; border-top: 1px solid rgba(255,255,255,0.1);">
-                  <strong style="
-                    display: block; 
-                    margin-bottom: 10px; 
-                    color: #60a5fa;
-                    font-size: 13px;
-                    text-transform: uppercase;
-                    font-weight: 600;
-                  ">
-                    <i class="fas fa-code"></i> Technologies détectées
-                  </strong>
-                  ${techBadges}
-                </div>
-              ` : ''}
-              
-              <!-- 📘 Intérêt professionnel -->
-              ${article.interet_professionnel ? `
-                <div style="
-                  background: rgba(59, 130, 246, 0.15);
-                  border-left: 3px solid #3b82f6;
-                  padding: 12px;
-                  border-radius: 8px;
-                  margin: 15px 0;
-                ">
-                  <strong style="
-                    color: #60a5fa;
-                    display: block;
-                    margin-bottom: 8px;
-                    font-size: 13px;
-                  ">
-                    <i class="fas fa-briefcase"></i> Intérêt professionnel
-                  </strong>
-                  <p style="
-                    color: #e5e7eb;
-                    line-height: 1.5;
-                    margin: 0;
-                    font-size: 14px;
-                  ">${article.interet_professionnel}</p>
-                </div>
-              ` : ''}
-              
-              <!-- 🟠 Intérêt personnel -->
-              ${article.interet_personnel ? `
-                <div style="
-                  background: rgba(251, 146, 60, 0.15);
-                  border-left: 3px solid #fb923c;
-                  padding: 12px;
-                  border-radius: 8px;
-                  margin: 15px 0;
-                ">
-                  <strong style="
-                    color: #fb923c;
-                    display: block;
-                    margin-bottom: 8px;
-                    font-size: 13px;
-                  ">
-                    <i class="fas fa-user"></i> Intérêt personnel
-                  </strong>
-                  <p style="
-                    color: #e5e7eb;
-                    line-height: 1.5;
-                    margin: 0;
-                    font-size: 14px;
-                  ">${article.interet_personnel}</p>
-                </div>
-              ` : ''}
-              
-              <!-- Boutons d'action -->
-              <div style="display: flex; gap: 10px; margin-top: 20px;">
-                ${article.url ? `
-                  <a href="${article.url}" target="_blank" rel="noopener" style="
-                    flex: 1;
-                    background: #3b82f6;
-                    color: white;
-                    padding: 12px 20px;
-                    border-radius: 8px;
-                    text-decoration: none;
-                    text-align: center;
-                    font-weight: 600;
-                    transition: all 0.3s ease;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 8px;
-                  " onmouseover="this.style.background='#2563eb'" onmouseout="this.style.background='#3b82f6'">
-                    Lire l'article <i class="fas fa-external-link-alt"></i>
-                  </a>
-                ` : ''}
-                <a href="${article.notionUrl}" target="_blank" rel="noopener" style="
-                  background: #667eea;
-                  color: white;
-                  padding: 12px 20px;
-                  border-radius: 8px;
-                  text-decoration: none;
-                  display: flex;
-                  align-items: center;
-                  gap: 8px;
-                  font-weight: 600;
-                  transition: all 0.3s ease;
-                " onmouseover="this.style.background='#5568d3'" onmouseout="this.style.background='#667eea'">
-                  <i class="fas fa-sticky-note"></i> Notion
-                </a>
-              </div>
-              
+    // Afficher les skeletons
+    grid.innerHTML = Array(6).fill(0).map(() => `
+        <div class="skeleton-card">
+            <div class="skeleton-image"></div>
+            <div class="skeleton-body">
+                <div class="skeleton-line w80"></div>
+                <div class="skeleton-line w60"></div>
+                <div class="skeleton-line w40"></div>
+                <div class="skeleton-line w100"></div>
+                <div class="skeleton-line w100"></div>
+                <div class="skeleton-line w50"></div>
             </div>
-          </article>
+        </div>
+    `).join('');
+
+    try {
+        const res = await fetch('/.netlify/functions/get-notion-data');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message || 'Erreur API');
+
+        allArticles = data.articles;
+        genererFiltres(allArticles);
+        afficherArticles(allArticles);
+
+    } catch (err) {
+        console.error('❌ Erreur chargement:', err);
+        grid.innerHTML = '';
+        errorBox.style.display = 'block';
+        document.getElementById('veille-error-msg').textContent = err.message;
+    }
+}
+
+// ----- Génération dynamique des boutons de filtre -----
+function genererFiltres(articles) {
+    const container = document.getElementById('veille-filters');
+
+    // Collecter tous les tags uniques
+    const tagsSet = new Set();
+    articles.forEach(a => a.technologies.forEach(t => tagsSet.add(t)));
+    const tags = [...tagsSet].sort();
+
+    // Reconstruire la barre
+    container.innerHTML = `
+        <button class="veille-filter-btn ${activeFilter === 'all' ? 'active' : ''}" data-filter="all">
+            <i class="fas fa-th"></i> Tous
+        </button>
+        ${tags.map(tag => `
+            <button class="veille-filter-btn ${activeFilter === tag ? 'active' : ''}" data-filter="${tag}">
+                ${tag}
+            </button>
+        `).join('')}
+    `;
+
+    // Événements de clic
+    container.querySelectorAll('.veille-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            activeFilter = btn.dataset.filter;
+            container.querySelectorAll('.veille-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            filtrerArticles();
+        });
+    });
+}
+
+// ----- Filtrage -----
+function filtrerArticles() {
+    const filtered = activeFilter === 'all'
+        ? allArticles
+        : allArticles.filter(a => a.technologies.includes(activeFilter));
+    afficherArticles(filtered);
+}
+
+// ----- Affichage des cartes -----
+function afficherArticles(articles) {
+    const grid = document.getElementById('veille-grid');
+    const counter = document.getElementById('veille-counter');
+
+    counter.textContent = `${articles.length} article${articles.length > 1 ? 's' : ''} trouvé${articles.length > 1 ? 's' : ''}`;
+
+    if (articles.length === 0) {
+        grid.innerHTML = `
+            <div class="veille-empty">
+                <i class="fas fa-search" style="font-size:48px;color:#00A9E0;margin-bottom:16px;"></i>
+                <p>Aucun article trouvé pour ce filtre.</p>
+            </div>
         `;
-      }).join('')}
-    </div>
-  `;
-  
-  container.innerHTML = notionSection;
+        return;
+    }
+
+    grid.innerHTML = articles.map(article => {
+        const dateStr = formaterDate(article.date);
+        const stars = genererEtoiles(article.score);
+        const imageUrl = article.image || FALLBACK_IMAGE;
+        const tagsBadges = article.technologies.map(tag => {
+            const color = TAG_COLORS[tag] || DEFAULT_TAG_COLOR;
+            return `<span class="veille-tag" style="background:${color};">${tag}</span>`;
+        }).join('');
+
+        return `
+        <article class="veille-card" data-tags="${article.technologies.join(',')}" id="article-${article.id}">
+            <div class="veille-card__image-wrap">
+                <img class="veille-card__image" src="${imageUrl}" alt="${article.titre}" loading="lazy"
+                     onerror="this.src='${FALLBACK_IMAGE}'">
+            </div>
+            <div class="veille-card__body">
+                <div class="veille-card__header">
+                    <span class="veille-card__source">
+                        <i class="fas fa-rss"></i> ${article.source}
+                    </span>
+                    <span class="veille-card__date">
+                        <i class="fas fa-calendar-alt"></i> ${dateStr}
+                    </span>
+                </div>
+                <h3 class="veille-card__title">${article.titre}</h3>
+                <div class="veille-card__score">${stars}</div>
+                ${tagsBadges ? `<div class="veille-card__tags">${tagsBadges}</div>` : ''}
+                ${article.analyse ? `
+                    <div class="veille-card__analysis">
+                        <h4><i class="fas fa-robot"></i> Analyse IA</h4>
+                        <p>${article.analyse}</p>
+                    </div>
+                ` : ''}
+                ${article.url ? `
+                    <a href="${article.url}" target="_blank" rel="noopener noreferrer" class="veille-card__cta">
+                        Lire l'article <i class="fas fa-external-link-alt"></i>
+                    </a>
+                ` : ''}
+            </div>
+        </article>`;
+    }).join('');
 }
 
-function getImageForTechnologies(technologies) {
-  const techImages = {
-    'AD CS': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=250&fit=crop',
-    'PKI': 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=250&fit=crop',
-    'Certificats numériques': 'https://images.unsplash.com/photo-1555421689-491a97ff2040?w=400&h=250&fit=crop',
-    'Sauvegarde': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop',
-    'Restauration': 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=250&fit=crop',
-    'Serveur': 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop',
-    'IA': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop',
-    'Cloud': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=250&fit=crop',
-    'Azure': 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop',
-    'Sécurité': 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=250&fit=crop',
-    'Windows': 'https://images.unsplash.com/photo-1633265486064-086b219458ec?w=400&h=250&fit=crop'
-  };
-  
-  for (const tech of technologies) {
-    if (techImages[tech]) return techImages[tech];
-  }
-  
-  return 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=250&fit=crop';
+// ----- Helpers -----
+
+/** Formate une date ISO en français lisible */
+function formaterDate(iso) {
+    try {
+        return new Date(iso).toLocaleDateString('fr-FR', {
+            day: 'numeric', month: 'long', year: 'numeric'
+        });
+    } catch {
+        return iso;
+    }
 }
 
-function rafraichirArticlesNotion() {
-  chargerArticlesNotion();
+/** Génère un score en étoiles (⭐) */
+function genererEtoiles(score) {
+    const max = 5;
+    const full = Math.min(Math.max(Math.round(score), 0), max);
+    return '<span class="veille-stars">'
+        + '★'.repeat(full)
+        + '<span class="veille-stars--empty">' + '★'.repeat(max - full) + '</span>'
+        + ` <span class="veille-stars__label">${score}/5</span>`
+        + '</span>';
 }
-
-// Charger au démarrage
-document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    chargerArticlesNotion();
-  }, 1000);
-});
-
-// Auto-refresh toutes les 15 minutes
-setInterval(() => {
-  console.log('🔄 Actualisation automatique Notion');
-  rafraichirArticlesNotion();
-}, 15 * 60 * 1000);
 </script>
-
-<!-- Ton script existant pour IT-Connect et technologies émergentes -->
-<script src="veille-scripts.js"></script>
 
 </body>
 </html>

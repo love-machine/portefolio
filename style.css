@@ -1352,3 +1352,352 @@ p {
     box-shadow: 0 8px 16px rgba(0, 169, 224, 0.3);
     border: 1px solid #00A9E0;
 }
+
+/* =====================================================
+   PAGE VEILLE TECHNOLOGIQUE — Nouvelle version
+   ===================================================== */
+
+/* --- Barre de filtres --- */
+.veille-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 30px 0 10px;
+    padding: 16px;
+    background: #232323;
+    border-radius: 12px;
+}
+
+.veille-filter-btn {
+    background: #333;
+    color: #ccc;
+    border: 2px solid transparent;
+    padding: 8px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.veille-filter-btn:hover {
+    background: #444;
+    color: #fff;
+    border-color: #00A9E0;
+}
+
+.veille-filter-btn.active {
+    background: #00A9E0;
+    color: #fff;
+    border-color: #00A9E0;
+    box-shadow: 0 4px 14px rgba(0, 169, 224, 0.35);
+}
+
+/* --- Compteur --- */
+.veille-counter {
+    text-align: center;
+    color: #888;
+    font-size: 0.95rem;
+    margin: 8px 0 24px;
+}
+
+/* --- Grille d'articles --- */
+.veille-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 28px;
+    margin-top: 10px;
+}
+
+/* --- Carte article --- */
+.veille-card {
+    background: #232323;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #333;
+}
+
+.veille-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 169, 224, 0.2);
+    border-color: #00A9E0;
+}
+
+/* Image */
+.veille-card__image-wrap {
+    overflow: hidden;
+    height: 220px;
+    background: #1a1a1a;
+}
+
+.veille-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.veille-card:hover .veille-card__image {
+    transform: scale(1.06);
+}
+
+/* Body    */
+.veille-card__body {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Header row (source + date) */
+.veille-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.veille-card__source {
+    background: #00A9E0;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.veille-card__date {
+    color: #999;
+    font-size: 0.82rem;
+}
+
+/* Title */
+.veille-card__title {
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 10px;
+}
+
+/* Score / étoiles */
+.veille-card__score {
+    margin-bottom: 12px;
+}
+
+.veille-stars {
+    color: #f1c40f;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+}
+
+.veille-stars--empty {
+    color: #555;
+}
+
+.veille-stars__label {
+    color: #aaa;
+    font-size: 0.8rem;
+    margin-left: 6px;
+    letter-spacing: 0;
+}
+
+/* Tags */
+.veille-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.veille-tag {
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* Analyse IA */
+.veille-card__analysis {
+    background: rgba(0, 169, 224, 0.08);
+    border-left: 3px solid #00A9E0;
+    padding: 14px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    flex: 1;
+}
+
+.veille-card__analysis h4 {
+    color: #00A9E0;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: 0.5px;
+}
+
+.veille-card__analysis p {
+    color: #ddd;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* CTA Button */
+.veille-card__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #00A9E0;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.25s ease, transform 0.2s ease;
+    margin-top: auto;
+}
+
+.veille-card__cta:hover {
+    background: #008abb;
+    transform: translateY(-2px);
+}
+
+/* --- Empty state --- */
+.veille-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #888;
+}
+
+/* --- Error state --- */
+.veille-error {
+    text-align: center;
+    padding: 40px;
+    background: #2a1a1a;
+    border: 1px solid #e74c3c;
+    border-radius: 12px;
+    color: #e74c3c;
+    margin: 20px 0;
+}
+
+.veille-error h3 {
+    color: #e74c3c;
+    margin: 12px 0 8px;
+}
+
+.veille-error p {
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+/* --- Skeleton loaders --- */
+.skeleton-card {
+    background: #232323;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+.skeleton-image {
+    height: 220px;
+    background: linear-gradient(110deg, #2a2a2a 30%, #333 50%, #2a2a2a 70%);
+    background-size: 200% 100%;
+    animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+.skeleton-body {
+    padding: 22px;
+}
+
+.skeleton-line {
+    height: 14px;
+    border-radius: 7px;
+    margin-bottom: 12px;
+    background: linear-gradient(110deg, #2a2a2a 30%, #3a3a3a 50%, #2a2a2a 70%);
+    background-size: 200% 100%;
+    animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+.skeleton-line.w100 { width: 100%; }
+.skeleton-line.w80  { width: 80%; }
+.skeleton-line.w60  { width: 60%; }
+.skeleton-line.w50  { width: 50%; }
+.skeleton-line.w40  { width: 40%; }
+
+@keyframes skeleton-pulse {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .veille-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .veille-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .veille-filters {
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .veille-filter-btn {
+        padding: 6px 14px;
+        font-size: 0.82rem;
+    }
+
+    .veille-card__image-wrap {
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .veille-card__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .veille-card__body {
+        padding: 16px;
+    }
+
+    .veille-card__title {
+        font-size: 1.05rem;
+    }
+}
