@@ -133,7 +133,6 @@
         transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
         display: flex; flex-direction: column;
         width: 100%;
-        min-height: 540px;
     }
     .swiper-slide-active .vc {
         border-color: rgba(0,169,224,.3);
@@ -147,7 +146,7 @@
 
     /* -- Image area -- */
     .vc__img {
-        height: 160px; overflow: hidden; background: #1a1a1a;
+        height: 140px; overflow: hidden; background: #1a1a1a;
         display: flex; align-items: center; justify-content: center;
         flex-shrink: 0;
         position: relative;
@@ -170,8 +169,8 @@
 
     /* -- Body -- */
     .vc__body {
-        padding: 16px 18px 18px; display: flex; flex-direction: column;
-        flex: 1; overflow: hidden; gap: 8px;
+        padding: 14px 18px 14px; display: flex; flex-direction: column;
+        flex: 0 1 auto; gap: 6px;
     }
 
     /* -- Row: source badge + score -- */
@@ -213,7 +212,7 @@
     .vc__analysis {
         background: rgba(0,169,224,.06); border-left: 3px solid #00A9E0;
         padding: 10px 12px; border-radius: 6px;
-        flex: 1; min-height: 0;
+        max-height: 100px; min-height: 0;
         overflow-y: auto;
     }
     .vc__analysis h4 {
@@ -234,7 +233,7 @@
         background: linear-gradient(135deg, #00A9E0, #0077b6);
         color: #fff; text-decoration: none;
         padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: .85rem;
-        transition: all .3s ease; flex-shrink: 0; margin-top: auto;
+        transition: all .3s ease; flex-shrink: 0;
         box-shadow: 0 4px 16px rgba(0,169,224,.25);
     }
     .vc__cta:hover {
@@ -248,15 +247,15 @@
        =========================================================== */
     .sk {
         background: #252525; border-radius: 16px; overflow: hidden;
-        border: 1px solid #333; width: 100%; min-height: 540px;
+        border: 1px solid #333; width: 100%;
         display: flex; flex-direction: column;
     }
     .sk__img {
-        height: 160px; flex-shrink: 0;
+        height: 140px; flex-shrink: 0;
         background: linear-gradient(110deg, #2a2a2a 30%, #363636 50%, #2a2a2a 70%);
         background-size: 200% 100%; animation: sk-p 1.4s ease-in-out infinite;
     }
-    .sk__body { padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .sk__body { padding: 14px 18px; display: flex; flex-direction: column; gap: 10px; }
     .sk__line {
         height: 12px; border-radius: 6px;
         background: linear-gradient(110deg, #2a2a2a 30%, #3a3a3a 50%, #2a2a2a 70%);
@@ -301,8 +300,7 @@
         .veille-hero img { height: 260px; }
         .veille-swiper-wrap { padding: 10px 20px 44px; }
         .veille-swiper .swiper-slide { width: 290px; }
-        .vc { min-height: 500px; }
-        .vc__img { height: 130px; }
+        .vc__img { height: 120px; }
         .veille-swiper-wrap .swiper-button-prev,
         .veille-swiper-wrap .swiper-button-next { width: 38px; height: 38px; }
         .veille-swiper-wrap .swiper-button-prev::after,
@@ -311,7 +309,6 @@
     @media (max-width: 480px) {
         .veille-hero__title { font-size: 1.4rem; }
         .veille-swiper .swiper-slide { width: 260px; }
-        .vc { min-height: 470px; }
         .vc__title { font-size: .92rem; }
     }
     </style>
