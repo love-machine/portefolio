@@ -12,7 +12,7 @@
 
     <style>
     /* ===========================================================
-       VEILLE — Compact Carousel Cards
+       VEILLE — 3D Coverflow Carousel
        =========================================================== */
 
     /* --- Hero Banner --- */
@@ -56,71 +56,115 @@
     .veille-counter { text-align: center; color: #666; font-size: .85rem; margin: 6px 0 18px; }
 
     /* ===========================================================
-       SWIPER CONTAINER
+       SWIPER COVERFLOW CONTAINER
        =========================================================== */
     .veille-swiper-wrap {
-        max-width: 1260px; margin: 0 auto; padding: 0 50px 50px;
+        max-width: 1400px; margin: 0 auto; padding: 20px 60px 60px;
         position: relative;
     }
-    .veille-swiper .swiper-slide { height: auto; display: flex; }
+    .veille-swiper {
+        padding-top: 30px;
+        padding-bottom: 50px;
+        overflow: visible;
+    }
+    .veille-swiper .swiper-slide {
+        width: 380px;
+        height: auto;
+        display: flex;
+        transition: transform 0.4s ease, opacity 0.4s ease;
+    }
 
-    /* Arrows */
+    /* Non-active slides get subtle fade */
+    .veille-swiper .swiper-slide:not(.swiper-slide-active) {
+        opacity: 0.55;
+    }
+    .veille-swiper .swiper-slide-active {
+        opacity: 1;
+    }
+
+    /* Styled Arrows */
     .veille-swiper-wrap .swiper-button-prev,
     .veille-swiper-wrap .swiper-button-next {
-        color: #00A9E0; background: rgba(30,30,30,.9);
-        width: 42px; height: 42px; border-radius: 50%;
-        backdrop-filter: blur(4px);
+        color: #00A9E0;
+        background: rgba(30,30,30,.92);
+        width: 48px; height: 48px; border-radius: 50%;
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(0,169,224,.25);
+        transition: all .3s ease;
+        box-shadow: 0 4px 16px rgba(0,0,0,.4);
     }
     .veille-swiper-wrap .swiper-button-prev::after,
-    .veille-swiper-wrap .swiper-button-next::after { font-size: 16px; font-weight: 700; }
+    .veille-swiper-wrap .swiper-button-next::after {
+        font-size: 18px; font-weight: 700;
+    }
     .veille-swiper-wrap .swiper-button-prev:hover,
-    .veille-swiper-wrap .swiper-button-next:hover { background: rgba(0,169,224,.25); }
+    .veille-swiper-wrap .swiper-button-next:hover {
+        background: rgba(0,169,224,.2);
+        border-color: #00A9E0;
+        box-shadow: 0 4px 24px rgba(0,169,224,.3);
+        transform: scale(1.1);
+    }
 
-    /* Pagination */
+    /* Pagination dots */
+    .veille-swiper-wrap .swiper-pagination { bottom: 5px !important; }
     .veille-swiper-wrap .swiper-pagination-bullet {
         background: #444; opacity: 1; width: 8px; height: 8px;
+        transition: all .3s ease;
     }
     .veille-swiper-wrap .swiper-pagination-bullet-active {
-        background: #00A9E0; width: 24px; border-radius: 4px;
+        background: #00A9E0; width: 28px; border-radius: 4px;
+        box-shadow: 0 0 8px rgba(0,169,224,.5);
     }
 
     /* ===========================================================
-       CARD — Compact, fixed height
+       CARD — Compact, professional, dark
        =========================================================== */
     .vc {
-        background: #252525; border-radius: 12px; overflow: hidden;
-        box-shadow: 0 4px 16px rgba(0,0,0,.3);
+        background: #252525; border-radius: 16px; overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0,0,0,.45);
         border: 1px solid #333;
-        transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+        transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
         display: flex; flex-direction: column;
         width: 100%;
-        height: 520px;          /* ← FIXED HEIGHT */
+        min-height: 540px;
     }
-    .vc:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 28px rgba(0,169,224,.2);
+    .swiper-slide-active .vc {
+        border-color: rgba(0,169,224,.3);
+        box-shadow: 0 12px 48px rgba(0,169,224,.15), 0 8px 32px rgba(0,0,0,.5);
+    }
+    .swiper-slide-active .vc:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 56px rgba(0,169,224,.25), 0 8px 32px rgba(0,0,0,.5);
         border-color: #00A9E0;
     }
 
     /* -- Image area -- */
     .vc__img {
-        height: 140px; overflow: hidden; background: #1a1a1a;
+        height: 160px; overflow: hidden; background: #1a1a1a;
         display: flex; align-items: center; justify-content: center;
         flex-shrink: 0;
+        position: relative;
+    }
+    .vc__img::after {
+        content: '';
+        position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
+        background: linear-gradient(transparent, #252525);
+        pointer-events: none;
     }
     .vc__img img {
         width: 100%; height: 100%; object-fit: cover;
-        transition: transform .35s ease;
+        transition: transform .4s ease;
     }
-    .vc:hover .vc__img img { transform: scale(1.05); }
+    .swiper-slide-active .vc:hover .vc__img img { transform: scale(1.06); }
     .vc__img img.fav {
-        width: 64px; height: 64px; object-fit: contain; border-radius: 8px;
+        width: 72px; height: 72px; object-fit: contain; border-radius: 12px;
+        filter: drop-shadow(0 4px 12px rgba(0,169,224,.2));
     }
 
     /* -- Body -- */
     .vc__body {
-        padding: 14px 16px 16px; display: flex; flex-direction: column;
-        flex: 1; overflow: hidden; gap: 6px;
+        padding: 16px 18px 18px; display: flex; flex-direction: column;
+        flex: 1; overflow: hidden; gap: 8px;
     }
 
     /* -- Row: source badge + score -- */
@@ -129,21 +173,23 @@
         gap: 6px; flex-shrink: 0;
     }
     .vc__source {
-        background: #00A9E0; color: #fff; padding: 3px 10px;
-        border-radius: 12px; font-size: .72rem; font-weight: 600;
+        background: linear-gradient(135deg, #00A9E0, #0077b6);
+        color: #fff; padding: 4px 12px;
+        border-radius: 14px; font-size: .72rem; font-weight: 600;
         white-space: nowrap; max-width: 55%; overflow: hidden;
         text-overflow: ellipsis;
+        box-shadow: 0 2px 8px rgba(0,169,224,.25);
     }
     .vc__stars { color: #f1c40f; font-size: .85rem; letter-spacing: 1px; white-space: nowrap; }
     .vc__stars-empty { color: #3a3a3a; }
     .vc__stars-label { color: #777; font-size: .7rem; margin-left: 4px; letter-spacing: 0; }
 
     /* -- Date -- */
-    .vc__date { color: #777; font-size: .75rem; flex-shrink: 0; }
+    .vc__date { color: #888; font-size: .75rem; flex-shrink: 0; }
 
     /* -- Title (2-line clamp) -- */
     .vc__title {
-        color: #fff; font-size: 1rem; font-weight: 700;
+        color: #fff; font-size: 1.05rem; font-weight: 700;
         line-height: 1.35; margin: 2px 0;
         display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
         overflow: hidden; flex-shrink: 0;
@@ -160,7 +206,7 @@
     .vc__analysis {
         background: rgba(0,169,224,.06); border-left: 3px solid #00A9E0;
         padding: 10px 12px; border-radius: 6px;
-        flex: 1; min-height: 0;          /* key for flex shrink */
+        flex: 1; min-height: 0;
         overflow-y: auto;
     }
     .vc__analysis h4 {
@@ -171,7 +217,6 @@
     .vc__analysis p {
         color: #bbb; font-size: .8rem; line-height: 1.45; margin: 0;
     }
-    /* Custom scrollbar for analysis */
     .vc__analysis::-webkit-scrollbar { width: 4px; }
     .vc__analysis::-webkit-scrollbar-track { background: transparent; }
     .vc__analysis::-webkit-scrollbar-thumb { background: #00A9E0; border-radius: 2px; }
@@ -179,25 +224,32 @@
     /* -- CTA -- */
     .vc__cta {
         display: flex; align-items: center; justify-content: center; gap: 6px;
-        background: #00A9E0; color: #fff; text-decoration: none;
-        padding: 9px 14px; border-radius: 6px; font-weight: 600; font-size: .85rem;
-        transition: background .25s ease; flex-shrink: 0; margin-top: auto;
+        background: linear-gradient(135deg, #00A9E0, #0077b6);
+        color: #fff; text-decoration: none;
+        padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: .85rem;
+        transition: all .3s ease; flex-shrink: 0; margin-top: auto;
+        box-shadow: 0 4px 16px rgba(0,169,224,.25);
     }
-    .vc__cta:hover { background: #008abb; }
+    .vc__cta:hover {
+        background: linear-gradient(135deg, #0077b6, #005a8c);
+        box-shadow: 0 6px 24px rgba(0,169,224,.35);
+        transform: translateY(-2px);
+    }
 
     /* ===========================================================
-       SKELETON LOADER (compact)
+       SKELETON LOADER — 3D matching
        =========================================================== */
     .sk {
-        background: #252525; border-radius: 12px; overflow: hidden;
-        border: 1px solid #333; width: 100%; height: 520px;
+        background: #252525; border-radius: 16px; overflow: hidden;
+        border: 1px solid #333; width: 100%; min-height: 540px;
+        display: flex; flex-direction: column;
     }
     .sk__img {
-        height: 140px;
+        height: 160px; flex-shrink: 0;
         background: linear-gradient(110deg, #2a2a2a 30%, #363636 50%, #2a2a2a 70%);
         background-size: 200% 100%; animation: sk-p 1.4s ease-in-out infinite;
     }
-    .sk__body { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+    .sk__body { padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
     .sk__line {
         height: 12px; border-radius: 6px;
         background: linear-gradient(110deg, #2a2a2a 30%, #3a3a3a 50%, #2a2a2a 70%);
@@ -207,8 +259,13 @@
     .sk__line.w50 { width: 50%; } .sk__line.w40 { width: 40%; }
     .sk__line.w100 { width: 100%; }
     .sk__block {
-        height: 100px; border-radius: 6px;
+        height: 110px; border-radius: 6px; flex: 1;
         background: linear-gradient(110deg, #2a2a2a 30%, #3a3a3a 50%, #2a2a2a 70%);
+        background-size: 200% 100%; animation: sk-p 1.4s ease-in-out infinite;
+    }
+    .sk__btn {
+        height: 40px; border-radius: 8px;
+        background: linear-gradient(110deg, #1a3a4a 30%, #254555 50%, #1a3a4a 70%);
         background-size: 200% 100%; animation: sk-p 1.4s ease-in-out infinite;
     }
     @keyframes sk-p { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
@@ -228,16 +285,26 @@
     /* ===========================================================
        RESPONSIVE
        =========================================================== */
+    @media (max-width: 900px) {
+        .veille-swiper .swiper-slide { width: 320px; }
+        .veille-swiper-wrap { padding: 10px 40px 50px; }
+    }
     @media (max-width: 768px) {
         .veille-hero__title { font-size: 2rem; }
         .veille-hero img { height: 260px; }
-        .veille-swiper-wrap { padding: 0 16px 44px; }
-        .vc { height: 500px; }
-        .vc__img { height: 120px; }
+        .veille-swiper-wrap { padding: 10px 20px 44px; }
+        .veille-swiper .swiper-slide { width: 290px; }
+        .vc { min-height: 500px; }
+        .vc__img { height: 130px; }
+        .veille-swiper-wrap .swiper-button-prev,
+        .veille-swiper-wrap .swiper-button-next { width: 38px; height: 38px; }
+        .veille-swiper-wrap .swiper-button-prev::after,
+        .veille-swiper-wrap .swiper-button-next::after { font-size: 14px; }
     }
     @media (max-width: 480px) {
         .veille-hero__title { font-size: 1.4rem; }
-        .vc { height: 480px; }
+        .veille-swiper .swiper-slide { width: 260px; }
+        .vc { min-height: 470px; }
         .vc__title { font-size: .92rem; }
     }
     </style>
@@ -290,14 +357,16 @@
         <p class="veille-counter" id="veille-counter"></p>
     </section>
 
-    <!-- Carousel Swiper -->
+    <!-- Carousel Swiper 3D Coverflow -->
     <div class="veille-swiper-wrap" id="swiper-wrap">
         <div class="swiper veille-swiper" id="veille-swiper">
             <div class="swiper-wrapper" id="swiper-slides">
                 <!-- Skeleton loaders -->
-                <div class="swiper-slide"><div class="sk"><div class="sk__img"></div><div class="sk__body"><div class="sk__line w60"></div><div class="sk__line w80"></div><div class="sk__line w40"></div><div class="sk__block"></div><div class="sk__line w50"></div></div></div></div>
-                <div class="swiper-slide"><div class="sk"><div class="sk__img"></div><div class="sk__body"><div class="sk__line w60"></div><div class="sk__line w80"></div><div class="sk__line w40"></div><div class="sk__block"></div><div class="sk__line w50"></div></div></div></div>
-                <div class="swiper-slide"><div class="sk"><div class="sk__img"></div><div class="sk__body"><div class="sk__line w60"></div><div class="sk__line w80"></div><div class="sk__line w40"></div><div class="sk__block"></div><div class="sk__line w50"></div></div></div></div>
+                <div class="swiper-slide"><div class="sk"><div class="sk__img"></div><div class="sk__body"><div class="sk__line w60"></div><div class="sk__line w80"></div><div class="sk__line w40"></div><div class="sk__block"></div><div class="sk__btn"></div></div></div></div>
+                <div class="swiper-slide"><div class="sk"><div class="sk__img"></div><div class="sk__body"><div class="sk__line w60"></div><div class="sk__line w80"></div><div class="sk__line w40"></div><div class="sk__block"></div><div class="sk__btn"></div></div></div></div>
+                <div class="swiper-slide"><div class="sk"><div class="sk__img"></div><div class="sk__body"><div class="sk__line w60"></div><div class="sk__line w80"></div><div class="sk__line w40"></div><div class="sk__block"></div><div class="sk__btn"></div></div></div></div>
+                <div class="swiper-slide"><div class="sk"><div class="sk__img"></div><div class="sk__body"><div class="sk__line w60"></div><div class="sk__line w80"></div><div class="sk__line w40"></div><div class="sk__block"></div><div class="sk__btn"></div></div></div></div>
+                <div class="swiper-slide"><div class="sk"><div class="sk__img"></div><div class="sk__body"><div class="sk__line w60"></div><div class="sk__line w80"></div><div class="sk__line w40"></div><div class="sk__block"></div><div class="sk__btn"></div></div></div></div>
             </div>
             <div class="swiper-pagination"></div>
             <div class="swiper-button-prev"></div>
@@ -352,7 +421,7 @@
 
 <script>
 // ===========================================================
-//  VEILLE TECHNOLOGIQUE — Compact Carousel
+//  VEILLE TECHNOLOGIQUE — 3D Coverflow Carousel
 // ===========================================================
 
 const TAG_COLORS = {
@@ -400,12 +469,12 @@ async function chargerArticles() {
     const errBox = document.getElementById('veille-error');
     errBox.style.display = 'none';
 
-    // Show skeletons
-    slides.innerHTML = Array(3).fill(`
+    // Show skeleton loaders
+    slides.innerHTML = Array(5).fill(`
         <div class="swiper-slide"><div class="sk"><div class="sk__img"></div>
         <div class="sk__body"><div class="sk__line w60"></div><div class="sk__line w80"></div>
         <div class="sk__line w40"></div><div class="sk__block"></div>
-        <div class="sk__line w50"></div></div></div></div>
+        <div class="sk__btn"></div></div></div></div>
     `).join('');
     initSwiper();
 
@@ -427,17 +496,33 @@ async function chargerArticles() {
     }
 }
 
-// --- Swiper init ---
+// --- Swiper init (3D Coverflow) ---
 function initSwiper() {
     if (swiper) swiper.destroy(true, true);
     swiper = new Swiper('#veille-swiper', {
-        slidesPerView: 1, spaceBetween: 20, grabCursor: true,
-        pagination: { el: '.swiper-pagination', clickable: true },
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        breakpoints: {
-            640:  { slidesPerView: 1, spaceBetween: 16 },
-            768:  { slidesPerView: 2, spaceBetween: 20 },
-            1024: { slidesPerView: 3, spaceBetween: 22 },
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        loop: false,
+        coverflowEffect: {
+            rotate: 25,
+            stretch: 0,
+            depth: 220,
+            modifier: 1,
+            slideShadows: true,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        keyboard: {
+            enabled: true,
         },
     });
 }
