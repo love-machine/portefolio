@@ -15,28 +15,32 @@ function extractScore(prop) {
 
   let raw;
 
-  // Type "number"
-  if (prop.type === 'number' && prop.number != null) {
-    raw = prop.number;
+  // Type "multi_select" — confirmé comme type réel dans Notion
+  if (prop.type === 'multi_select' && prop.multi_select?.length) {
+    raw = prop.multi_select[0].name;
   }
-  // Type "select" → le nom contient le chiffre (ex: "4" ou "4/5")
+  // Type "select"
   else if (prop.type === 'select' && prop.select?.name) {
     raw = prop.select.name;
+  }
+  // Type "number"
+  else if (prop.type === 'number' && prop.number != null) {
+    raw = prop.number;
   }
   // Type "rich_text"
   else if (prop.type === 'rich_text' && prop.rich_text?.[0]?.plain_text) {
     raw = prop.rich_text[0].plain_text;
   }
-  // Type "formula" → peut retourner number ou string
+  // Type "formula"
   else if (prop.type === 'formula') {
     raw = prop.formula?.number ?? prop.formula?.string ?? 0;
   }
-  // Fallback : essaie les champs courants directement
+  // Fallback générique
   else {
-    raw = prop.number ?? prop.select?.name ?? prop.rich_text?.[0]?.plain_text ?? 0;
+    raw = prop.multi_select?.[0]?.name ?? prop.select?.name ?? prop.number ?? 0;
   }
 
-  // Convertir en entier, extraire le premier nombre trouvé (gère "4/5", "4", 4)
+  // Extraire le premier nombre (gère "4/5", "4", "★★★★", 4)
   const parsed = parseInt(String(raw).match(/\d+/)?.[0], 10);
   return Number.isNaN(parsed) ? 0 : Math.min(Math.max(parsed, 0), 5);
 }
