@@ -5,6 +5,41 @@ const { Client } = require('@notionhq/client');
  * Endpoint : /.netlify/functions/get-notion-data
  * Variables d'env requises : NOTION_API_KEY, NOTION_VEILLE_DATABASE_ID
  */
+
+/**
+ * Extrait le score depuis une propriété Notion quel que soit son type
+ * (number, select, rich_text, formula, etc.) et retourne un entier 0-5.
+ */
+function extractScore(prop) {
+  if (!prop) return 0;
+
+  let raw;
+
+  // Type "number"
+  if (prop.type === 'number' && prop.number != null) {
+    raw = prop.number;
+  }
+  // Type "select" → le nom contient le chiffre (ex: "4" ou "4/5")
+  else if (prop.type === 'select' && prop.select?.name) {
+    raw = prop.select.name;
+  }
+  // Type "rich_text"
+  else if (prop.type === 'rich_text' && prop.rich_text?.[0]?.plain_text) {
+    raw = prop.rich_text[0].plain_text;
+  }
+  // Type "formula" → peut retourner number ou string
+  else if (prop.type === 'formula') {
+    raw = prop.formula?.number ?? prop.formula?.string ?? 0;
+  }
+  // Fallback : essaie les champs courants directement
+  else {
+    raw = prop.number ?? prop.select?.name ?? prop.rich_text?.[0]?.plain_text ?? 0;
+  }
+
+  // Convertir en entier, extraire le premier nombre trouvé (gère "4/5", "4", 4)
+  const parsed = parseInt(String(raw).match(/\d+/)?.[0], 10);
+  return Number.isNaN(parsed) ? 0 : Math.min(Math.max(parsed, 0), 5);
+}
 exports.handler = async function (event, context) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -27,8 +62,21 @@ exports.handler = async function (event, context) {
       page_size: 100,
     });
 
-    const articles = response.results.map((page) => {
+    const articles = response.results.map((page, idx) => {
       const props = page.properties;
+
+      // --- Recherche case-insensitive de la propriété "score" ---
+      const scoreKey = Object.keys(props).find(
+        (k) => k.toLowerCase() === 'score'
+      );
+
+      // Log de debug pour le premier article (visible dans les logs Netlify)
+      if (idx === 0) {
+        console.log('🔍 Score key found:', scoreKey || 'NOT FOUND');
+        if (scoreKey) {
+          console.log('🔍 Score property raw:', JSON.stringify(props[scoreKey]));
+        }
+      }
 
       // --- Image : priorité cover > propriété "Image" > fallback ---
       let imageUrl = '';
@@ -52,7 +100,7 @@ exports.handler = async function (event, context) {
         technologies:
           props.technologie?.multi_select?.map((tag) => tag.name) || [],
         analyse: props.Analyse?.rich_text?.[0]?.plain_text || '',
-        score: props.Score?.number || 0,
+        score: extractScore(scoreKey ? props[scoreKey] : null),
         image: imageUrl,
         notionUrl: page.url,
       };

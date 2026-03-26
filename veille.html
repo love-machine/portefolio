@@ -840,8 +840,9 @@ function fmtDate(iso) {
     catch { return iso; }
 }
 function mkStars(score) {
-    const n = Math.min(Math.max(Math.round(score || 0), 0), 5);
-    return `<span class="vc__stars">${'★'.repeat(n)}<span class="vc__stars-empty">${'★'.repeat(5-n)}</span> <span class="vc__stars-label">${score||0}/5</span></span>`;
+    const parsed = parseInt(String(score).match(/\d+/)?.[0], 10);
+    const n = Number.isNaN(parsed) ? 0 : Math.min(Math.max(parsed, 0), 5);
+    return `<span class="vc__stars">${'★'.repeat(n)}<span class="vc__stars-empty">${'★'.repeat(5-n)}</span> <span class="vc__stars-label">${n}/5</span></span>`;
 }
 function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 </script>
