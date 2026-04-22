@@ -1314,11 +1314,13 @@ p {
 
 /* 1. STRATÉGIE DE VEILLE - Lignes ~870-880 dans votre fichier HTML (à déplacer dans style.css) */
 .veille-strategy {
-    background: linear-gradient(135deg, #232323, #00A9E0); /* Remplace les couleurs originales */
+    background: var(--bg-card);
     padding: 30px;
     margin: 20px 0;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    transition: var(--theme-transition);
 }
 
 /* 2. GRILLE DES SOURCES - Lignes ~885-895 */
@@ -1331,11 +1333,13 @@ p {
 
 /* 3. CARTES DES SOURCES - Lignes ~900-915 */
 .source-card {
-    background: #232323; /* Remplace #2c3e50 */
+    background: var(--bg-card);
     border-radius: 12px;
     padding: 20px;
     transition: transform 0.3s ease;
-    border-left: 4px solid #00A9E0; /* Remplace #3498db */
+    border-left: 4px solid var(--accent);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent);
 }
 
 .source-card:hover {
@@ -1345,11 +1349,12 @@ p {
 
 /* 4. SECTION WAKELET - Lignes ~920-930 */
 .wakelet-section {
-    background: #232323; /* Remplace #34495e */
+    background: var(--bg-card);
     border-radius: 15px;
     padding: 30px;
     margin: 30px 0;
     text-align: center;
+    border: 1px solid var(--border-color);
 }
 
 /* 5. TECHNOLOGIES ÉMERGENTES - Lignes ~935-945 */
@@ -1376,24 +1381,26 @@ p {
 
 /* 7. MÉTHODOLOGIE - Lignes ~970-980 */
 .methodology {
-    background: #00A9E0; /* Remplace #27ae60 */
-    color: white;
+    background: var(--accent-light);
+    color: var(--text-primary);
     padding: 25px;
     border-radius: 12px;
     margin: 20px 0;
+    border-left: 4px solid var(--accent);
+    transition: var(--theme-transition);
 }
 
 /* 8. ALERT INFO - Lignes ~985-995 */
 .alert-info {
-    background: #232323; /* Remplace #f39c12 */
-    color: white;
+    background: var(--bg-card);
+    color: var(--text-primary);
     padding: 15px;
     border-radius: 8px;
     margin: 15px 0;
     display: flex;
     align-items: center;
     gap: 10px;
-    border-left: 4px solid #00A9E0;
+    border-left: 4px solid var(--accent);
 }
 
 /* 9. BOUTONS REFRESH - Lignes ~1000-1010 */
@@ -1409,7 +1416,7 @@ p {
 }
 
 .refresh-btn:hover, .refresh-tech-btn:hover {
-    background: #232323; /* Remplace #2980b9 */
+    background: var(--accent-hover);
 }
 
 /* 10. LOADING ET ERROR - Lignes ~1015-1025 */
@@ -1421,21 +1428,21 @@ p {
 
 #articles-error, .error-message {
     display: none;
-    background: #232323; /* Plus cohérent que le rouge */
-    color: white;
+    background: var(--bg-card);
+    color: var(--text-primary);
     padding: 15px;
     border-radius: 8px;
     margin: 20px 0;
-    border-left: 4px solid #00A9E0;
+    border-left: 4px solid var(--accent);
 }
 
 /* 11. INFORMATIONS SOURCES - Nouvelles classes pour rester cohérent */
 .source-info {
-    background: #232323; /* Remplace #34495e */
+    background: var(--bg-card);
     border-radius: 10px;
     padding: 20px;
     margin: 20px 0;
-    border-left: 4px solid #00A9E0; /* Remplace #3498db */
+    border-left: 4px solid var(--accent);
 }
 
 /* 12. BOUTON SPÉCIAL REFRESH TECH - Style amélioré */
@@ -1452,20 +1459,20 @@ p {
 }
 
 .refresh-tech-btn:hover {
-    background: linear-gradient(135deg, #232323, #00A9E0); /* Remplace linear-gradient(135deg, #219a52, #27ae60) */
+    background: linear-gradient(135deg, var(--accent-hover), var(--accent));
     transform: translateY(-2px);
 }
 
 /* 13. TECH SOURCE ET DATE - Classes utilitaires */
 .tech-source {
     font-size: 0.8em;
-    color: #bdc3c7;
+    color: var(--text-muted);
     margin-top: 10px;
 }
 
 .tech-date {
     font-size: 0.8em;
-    color: #95a5a6;
+    color: var(--text-muted);
     font-style: italic;
 }
 
