@@ -26,7 +26,7 @@
     .veille-hero img { width: 100%; height: 340px; object-fit: cover; display: block; }
     .veille-hero__overlay {
         position: absolute; inset: 0;
-        background: linear-gradient(180deg, rgba(28,28,28,0) 30%, rgba(28,28,28,.95) 100%);
+        background: linear-gradient(180deg, transparent 30%, var(--bg-primary) 100%);
         display: flex; align-items: center; justify-content: center;
     }
     .veille-hero__title {
@@ -46,7 +46,7 @@
     }
     .veille-search {
         display: flex; align-items: center;
-        background: #232323; border: 2px solid #333;
+        background: var(--bg-card); border: 2px solid var(--border-color);
         border-radius: 12px; padding: 0 14px;
         transition: border-color .3s ease, box-shadow .3s ease;
     }
@@ -55,7 +55,7 @@
         box-shadow: 0 0 16px rgba(0,169,224,.2);
     }
     .veille-search__icon {
-        color: #555; font-size: 1rem; flex-shrink: 0;
+        color: var(--text-muted); font-size: 1rem; flex-shrink: 0;
         transition: color .3s ease;
     }
     .veille-search:focus-within .veille-search__icon {
@@ -63,12 +63,12 @@
     }
     .veille-search__input {
         flex: 1; background: none; border: none; outline: none;
-        color: #eee; font-size: .95rem; font-family: inherit;
+        color: var(--text-primary); font-size: .95rem; font-family: inherit;
         padding: 12px 10px;
     }
-    .veille-search__input::placeholder { color: #555; }
+    .veille-search__input::placeholder { color: var(--text-muted); }
     .veille-search__clear {
-        background: none; border: none; color: #555; cursor: pointer;
+        background: none; border: none; color: var(--text-muted); cursor: pointer;
         font-size: 1.1rem; padding: 4px; border-radius: 50%;
         transition: all .2s ease; display: none;
     }
@@ -78,20 +78,20 @@
     /* --- Suggestions Dropdown --- */
     .veille-suggestions {
         position: absolute; top: calc(100% + 6px); left: 0; right: 0;
-        background: #1e1e1e; border: 1px solid #333;
+        background: var(--bg-secondary); border: 1px solid var(--border-color);
         border-radius: 10px; max-height: 220px; overflow-y: auto;
         z-index: 100; display: none;
-        box-shadow: 0 8px 32px rgba(0,0,0,.5);
+        box-shadow: var(--shadow-lg);
     }
     .veille-suggestions.open { display: block; }
     .veille-suggestions__item {
-        padding: 10px 16px; color: #ccc; font-size: .88rem;
+        padding: 10px 16px; color: var(--text-secondary); font-size: .88rem;
         cursor: pointer; transition: all .15s ease;
         display: flex; align-items: center; gap: 8px;
     }
     .veille-suggestions__item:hover,
     .veille-suggestions__item.highlighted {
-        background: rgba(0,169,224,.12); color: #fff;
+        background: var(--accent-light); color: var(--text-primary);
     }
     .veille-suggestions__item i {
         color: #00A9E0; font-size: .75rem; flex-shrink: 0;
@@ -110,10 +110,10 @@
     }
     .veille-chip {
         display: inline-flex; align-items: center; gap: 5px;
-        background: #333; color: #fff;
+        background: var(--bg-secondary); color: var(--text-primary);
         padding: 5px 10px 5px 12px; border-radius: 20px;
         font-size: .78rem; font-weight: 600;
-        border: 1px solid #444;
+        border: 1px solid var(--border-color);
         transition: all .2s ease;
         animation: chipIn .25s ease;
     }
@@ -126,7 +126,7 @@
         width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
     }
     .veille-chip__x {
-        background: none; border: none; color: #777; cursor: pointer;
+        background: none; border: none; color: var(--text-muted); cursor: pointer;
         font-size: .75rem; padding: 2px; border-radius: 50%;
         transition: all .2s ease; line-height: 1;
     }
@@ -137,10 +137,10 @@
         text-decoration: underline; padding: 4px 6px;
         transition: color .2s ease;
     }
-    .veille-chips__clear:hover { color: #fff; }
+    .veille-chips__clear:hover { color: var(--text-primary); }
 
     /* --- Counter --- */
-    .veille-counter { text-align: center; color: #666; font-size: .85rem; margin: 6px 0 18px; }
+    .veille-counter { text-align: center; color: var(--text-muted); font-size: .85rem; margin: 6px 0 18px; }
 
     /* ===========================================================
        SWIPER COVERFLOW CONTAINER
@@ -208,9 +208,9 @@
        CARD — Compact, professional, dark
        =========================================================== */
     .vc {
-        background: #252525; border-radius: 16px; overflow: hidden;
-        box-shadow: 0 8px 32px rgba(0,0,0,.45);
-        border: 1px solid #333;
+        background: var(--bg-card); border-radius: 16px; overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border-color);
         transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
         display: flex; flex-direction: column;
         width: 100%;
@@ -227,7 +227,7 @@
 
     /* -- Image area -- */
     .vc__img {
-        height: 140px; overflow: hidden; background: #1a1a1a;
+        height: 140px; overflow: hidden; background: var(--bg-tertiary);
         display: flex; align-items: center; justify-content: center;
         flex-shrink: 0;
         position: relative;
@@ -235,7 +235,7 @@
     .vc__img::after {
         content: '';
         position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
-        background: linear-gradient(transparent, #252525);
+        background: linear-gradient(transparent, var(--bg-card));
         pointer-events: none;
     }
     .vc__img img {
@@ -268,15 +268,15 @@
         box-shadow: 0 2px 8px rgba(0,169,224,.25);
     }
     .vc__stars { color: #f1c40f; font-size: .85rem; letter-spacing: 1px; white-space: nowrap; }
-    .vc__stars-empty { color: #3a3a3a; }
-    .vc__stars-label { color: #777; font-size: .7rem; margin-left: 4px; letter-spacing: 0; }
+    .vc__stars-empty { color: var(--border-color); }
+    .vc__stars-label { color: var(--text-muted); font-size: .7rem; margin-left: 4px; letter-spacing: 0; }
 
     /* -- Date -- */
-    .vc__date { color: #888; font-size: .75rem; flex-shrink: 0; }
+    .vc__date { color: var(--text-muted); font-size: .75rem; flex-shrink: 0; }
 
     /* -- Title (2-line clamp) -- */
     .vc__title {
-        color: #fff; font-size: 1.05rem; font-weight: 700;
+        color: var(--text-primary); font-size: 1.05rem; font-weight: 700;
         line-height: 1.35; margin: 2px 0;
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -305,7 +305,7 @@
         display: flex; align-items: center; gap: 5px;
     }
     .vc__analysis p {
-        color: #bbb; font-size: .8rem; line-height: 1.45; margin: 0;
+        color: var(--text-secondary); font-size: .8rem; line-height: 1.45; margin: 0;
     }
     .vc__analysis::-webkit-scrollbar { width: 4px; }
     .vc__analysis::-webkit-scrollbar-track { background: transparent; }
@@ -330,8 +330,8 @@
        SKELETON LOADER — 3D matching
        =========================================================== */
     .sk {
-        background: #252525; border-radius: 16px; overflow: hidden;
-        border: 1px solid #333; width: 100%;
+        background: var(--bg-card); border-radius: 16px; overflow: hidden;
+        border: 1px solid var(--border-color); width: 100%;
         display: flex; flex-direction: column;
     }
     .sk__img {
@@ -369,8 +369,8 @@
         max-width: 550px; margin: 20px auto;
     }
     .veille-error h3 { color: #e74c3c; margin: 10px 0 6px; }
-    .veille-error p { color: #bbb; margin-bottom: 16px; }
-    .veille-empty { text-align: center; padding: 50px; color: #666; }
+    .veille-error p { color: var(--text-secondary); margin-bottom: 16px; }
+    .veille-empty { text-align: center; padding: 50px; color: var(--text-muted); }
 
     /* ===========================================================
        RESPONSIVE
@@ -397,7 +397,7 @@
     }
     </style>
 </head>
-<body style="margin:0;background-color:#1c1c1c;color:white;">
+<body>
 
 <!-- Barre de navigation -->
 <ul class="navbar">
@@ -512,6 +512,7 @@
 </footer>
 
 <!-- Scripts -->
+<script src="theme-toggle.js"></script>
 <script src="horloge.js"></script>
 <script src="lien-survolé.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

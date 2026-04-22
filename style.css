@@ -1,16 +1,157 @@
+/* =====================================================
+   THEME SYSTEM — Variables CSS (Light Mode par défaut)
+   ===================================================== */
+:root {
+    /* Couleurs de fond */
+    --bg-primary: #f5f6fa;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #eef1f5;
+    --bg-card: #ffffff;
+    --bg-navbar: #ffffff;
+    --bg-input: #f0f2f5;
+
+    /* Couleurs de texte */
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a4a6a;
+    --text-muted: #8888aa;
+    --text-on-accent: #ffffff;
+
+    /* Couleur d'accent (bleu signature) */
+    --accent: #00A9E0;
+    --accent-hover: #0088b3;
+    --accent-light: rgba(0, 169, 224, 0.1);
+    --accent-glow: rgba(0, 169, 224, 0.15);
+
+    /* Bordures & ombres */
+    --border-color: #e0e4ea;
+    --border-light: #eee;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+    /* Timeline */
+    --timeline-dot-bg: #ffffff;
+
+    /* Scrollbar */
+    --scrollbar-thumb: #ccc;
+    --scrollbar-track: #f0f0f0;
+
+    /* Transition globale pour le changement de thème */
+    --theme-transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Mode sombre */
+[data-theme="dark"] {
+    --bg-primary: #1c1c1c;
+    --bg-secondary: #232323;
+    --bg-tertiary: #1a1a1a;
+    --bg-card: #232323;
+    --bg-navbar: #232323;
+    --bg-input: #1c1c1c;
+
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-muted: #888888;
+    --text-on-accent: #ffffff;
+
+    --accent: #00A9E0;
+    --accent-hover: #0088b3;
+    --accent-light: rgba(0, 169, 224, 0.08);
+    --accent-glow: rgba(0, 169, 224, 0.2);
+
+    --border-color: #333333;
+    --border-light: #2a2a2a;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+
+    --timeline-dot-bg: #232323;
+
+    --scrollbar-thumb: #444;
+    --scrollbar-track: #1c1c1c;
+}
+
+/* =====================================================
+   BOUTON TOGGLE SOLEIL/LUNE  
+   ===================================================== */
+.theme-toggle {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9999;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: var(--shadow-md);
+    transition: var(--theme-transition), transform 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.12) rotate(15deg);
+    border-color: var(--accent);
+    box-shadow: 0 4px 24px var(--accent-glow);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Icône par défaut : lune (pour passer en mode sombre) */
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+    position: absolute;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.theme-toggle .icon-sun {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+}
+
+.theme-toggle .icon-moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+/* En mode sombre : afficher le soleil, cacher la lune */
+[data-theme="dark"] .theme-toggle .icon-sun {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+[data-theme="dark"] .theme-toggle .icon-moon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+}
+
+/* =====================================================
+   APPLICATION DES VARIABLES AU DESIGN EXISTANT
+   ===================================================== */
+
 /* Reset de la marge et du padding */
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #1c1c1c;
-    color: white;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: var(--theme-transition);
 }
 
 
 #body_veille{
   margin: 0;
-  background-color: #1c1c1c;
-  color: white;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 /* Barre de navigation */
@@ -19,13 +160,15 @@ body {
   margin: 0;
   padding: 0;
   width: 15%;  /* Réduit la largeur de la barre */
-  background-color: #232323;
+  background-color: var(--bg-navbar);
   position: fixed;
   height: 100%;
   overflow: auto;
   top: 0;
   left: 0;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid var(--border-color);
+  transition: var(--theme-transition);
 }
 
 
@@ -36,7 +179,7 @@ body {
 }
 
 .navbar a {
-  color: white;
+  color: var(--text-primary);
   text-decoration: none;
   display: block;
 }
@@ -47,7 +190,7 @@ body {
 
 li a {
     display: block;
-    color: #fff;
+    color: var(--text-primary);
     padding: 12px 16px;
     text-decoration: none;
     font-size: 16px;
@@ -71,11 +214,11 @@ li a:hover i {
 
 #clock {
     font-size: 18px;  /* Taille de police réduite si nécessaire */
-    color: #00A9E0;
+    color: var(--accent);
     font-weight: bold;
     text-align: center;  /* Centrer l'horloge */
     margin-top: 20px;
-    background-color: #232323;
+    background-color: var(--bg-navbar);
     padding: 10px;
     width: 100%;  /* Utiliser toute la largeur du conteneur */
     box-sizing: border-box;
@@ -92,9 +235,9 @@ li a:hover i {
 
 .content-wrapper {
   padding: 30px;
-  background: color #232323;
+  background: var(--bg-secondary);
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
   margin: 20px auto;
   max-width: 1000px;
 }
@@ -109,13 +252,13 @@ h1, h2 {
 }
 
 p {
-    color: #ffffff;
+    color: var(--text-secondary);
     line-height: 1.6;
     font-size: 1.1em;
 }
 .bugatti-bio {
-  background-color: #1c1c1c; /* Fond sombre du thème Bugatti */
-  color: #ffffff; /* Texte clair */
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   padding: 40px 20px;
   border-radius: 8px;
   margin: 20px auto;
@@ -149,7 +292,7 @@ p {
 .bugatti-bio-text h2 {
   font-size: 1.5rem;
   margin-top: 10px;
-  color: #ddd;
+  color: var(--text-secondary);
 }
 
 .bugatti-bio-text p {
@@ -307,9 +450,10 @@ p {
   }
   
   .diplome {
-    background-color: #333; /* Fond foncé pour les diplômes */
+    background-color: var(--bg-card);
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
     width: 220px;
     padding: 20px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
@@ -328,7 +472,7 @@ p {
   
   .diplome-description {
     font-size: 1.1rem;
-    color: #f5f5f5;
+    color: var(--text-secondary);
     margin-top: 10px;
     font-family: 'Helvetica Neue', sans-serif;
   }
@@ -362,16 +506,17 @@ p {
 }
 
 p {
-  color: #ffffff;
+  color: var(--text-secondary);
   line-height: 1.6;
   font-size: 1.1em;
 }
 /* Card Styling */
 .card {
-  background-color: #333;
+  background-color: var(--bg-card);
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   width: calc(33.333% - 20px); /* Adjust size within the slide */
 }
 
@@ -432,7 +577,7 @@ p {
   position: relative;
   margin-left: 40px; /* Décalage pour la ligne */
   padding-left: 0;
-  border-left: 4px solid #00A9E0; /* Ligne bleue Bugatti */
+  border-left: 4px solid var(--accent); /* Ligne bleue Bugatti */
 }
 
 /* Chaque élément de la timeline */
@@ -449,18 +594,19 @@ p {
   top: 0; /* Aligne le point avec le haut de chaque item */
   width: 20px;
   height: 20px;
-  background-color: #232323; /* Fond sombre du point */
-  border: 4px solid #00A9E0; /* Bordure bleue Bugatti */
+  background-color: var(--timeline-dot-bg);
+  border: 4px solid var(--accent); /* Bordure bleue Bugatti */
   border-radius: 50%; /* Cercle parfait */
   transform: translateX(-50%) translateY(100%); /* Centrage exact */
 }
 
 /* Contenu de chaque élément */
 .timeline-content {
-  background-color: #333;
+  background-color: var(--bg-card);
   padding: 20px;
   border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   margin-left: 50px; /* Décale le contenu à droite de la ligne */
 }
 
@@ -474,7 +620,7 @@ p {
 /* Texte dans les éléments */
 .timeline-content p {
   font-size: 1.1rem;
-  color: #ffffff;
+  color: var(--text-secondary);
 }
 
 /* Lien dans le contenu */
@@ -489,7 +635,7 @@ p {
 
 /* Effet au survol */
 .timeline-item:hover .timeline-content {
-  background-color: #1c1c1c;
+  background-color: var(--bg-tertiary);
   transition: 0.3s ease;
 }
 
@@ -504,10 +650,11 @@ p {
 }
 
 .project-card {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   padding: 15px;
   width: calc(33.333% - 20px); /* 3 cards par ligne */
   text-align: center;
@@ -528,7 +675,7 @@ p {
 .project-container {
   display: flex;
   align-items: center;
-  background-color: #333;
+  background-color: var(--bg-card);
   border-radius: 10px;
   padding: 20px;
   margin: 20px 0;
@@ -690,10 +837,11 @@ p {
 
 /* Card Styling */
 .card {
-  background-color: #333;
+  background-color: var(--bg-card);
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   width: calc(33.333% - 20px); /* Adjust size within the slide */
 }
 
@@ -771,10 +919,11 @@ p {
 }
 
 .exp-card {
-  background: #232323;
+  background: var(--bg-card);
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   height: 100%;
 }
 
@@ -783,8 +932,8 @@ p {
   height: 150px;
   object-fit: contain;
   padding: 10px;
-  background: #232323;
-  border-bottom: 2px solid #00A9E0;
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--accent);
 }
 
 .exp-content {
@@ -799,7 +948,7 @@ p {
 .exp-content p {
   margin: 0;
   font-size: 0.9em;
-  color: #fff;
+  color: var(--text-secondary);
 }
 
 .exp-prev, .exp-next {
@@ -861,12 +1010,12 @@ p {
 
 .project-card {
   flex: 0 1 350px;
-  background: #232323;
+  background: var(--bg-card);
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: var(--shadow-sm);
   transition: transform 0.3s ease;
-  border: 1px solid #333;
+  border: 1px solid var(--border-color);
 }
 
 .project-card:hover {
@@ -898,7 +1047,7 @@ p {
 }
 
 .project-info p {
-  color: #fff;
+  color: var(--text-secondary);
   margin: 0;
   font-size: 0.9em;
   line-height: 1.5;
@@ -918,9 +1067,10 @@ p {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #232323;
+  background-color: var(--bg-card);
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 .contact-info {
   margin-bottom: 30px;
@@ -945,10 +1095,11 @@ p {
 .form-group input,
 .form-group textarea {
   padding: 10px;
-  border: 1px solid #00A9E0;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
-  background-color: #1c1c1c;
-  color: white;
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+  transition: var(--theme-transition);
 }
 .form-group textarea {
   min-height: 150px;
@@ -986,7 +1137,7 @@ p {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background: #1a1a1a;
+    background: var(--bg-tertiary);
 }
 
 .articles-grid {
@@ -997,13 +1148,13 @@ p {
 }
 
 .article-card {
-    background: #333;
+    background: var(--bg-card);
     border-radius: 15px;
     height: 100%;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border: none;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
 }
 
 .article-card:hover {
@@ -1013,11 +1164,11 @@ p {
 
 .article-content {
     padding: 25px;
-    background: #333;
+    background: var(--bg-card);
 }
 
 .article-card h3 {
-    color: white;
+    color: var(--text-primary);
     font-size: 1.3rem;
     margin-bottom: 15px;
     font-weight: 600;
@@ -1086,11 +1237,11 @@ p {
     }
 }
 .titre-article{
-  color: white;
+  color: var(--text-primary);
 }
 .acceuil_evenement{
   font-family: 'Arial', sans-serif;
-  color: white;
+  color: var(--text-primary);
   margin: 5% auto;
   text-align: center;
   font-size: 1.5rem;
@@ -1105,9 +1256,10 @@ p {
   font-family: 'Arial', sans-serif;
   max-width: 600px;
   margin: 5% auto;
-  background-color: #232323;
+  background-color: var(--bg-card);
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
 }
 
 /* Style pour chaque élément de l'accordéon */
@@ -1117,14 +1269,14 @@ p {
 
 /* Style pour l'en-tête de l'accordéon */
 .accordion-header {
-  background-color: #333;
+  background-color: var(--bg-secondary);
   padding: 15px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0;
-  color: white;
+  color: var(--text-primary);
   transition: background-color 0.3s ease;
 }
 
@@ -1138,8 +1290,8 @@ p {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease-out;
-  background-color: #1c1c1c;
-  color: white;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 /* Style pour le corps de l'accordéon lorsqu'il est ouvert */
@@ -1150,7 +1302,7 @@ p {
 
 /* Style pour le chevron */
 .chevron {
-  color: white;
+  color: var(--text-primary);
   transition: transform 0.3s ease;
 }
 
@@ -1365,13 +1517,14 @@ p {
     justify-content: center;
     margin: 30px 0 10px;
     padding: 16px;
-    background: #232323;
+    background: var(--bg-card);
     border-radius: 12px;
+    border: 1px solid var(--border-color);
 }
 
 .veille-filter-btn {
-    background: #333;
-    color: #ccc;
+    background: var(--bg-secondary);
+    color: var(--text-muted);
     border: 2px solid transparent;
     padding: 8px 18px;
     border-radius: 25px;
@@ -1385,9 +1538,9 @@ p {
 }
 
 .veille-filter-btn:hover {
-    background: #444;
-    color: #fff;
-    border-color: #00A9E0;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--accent);
 }
 
 .veille-filter-btn.active {
@@ -1415,14 +1568,14 @@ p {
 
 /* --- Carte article --- */
 .veille-card {
-    background: #232323;
+    background: var(--bg-card);
     border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    box-shadow: var(--shadow-md);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    border: 1px solid #333;
+    border: 1px solid var(--border-color);
 }
 
 .veille-card:hover {
@@ -1435,7 +1588,7 @@ p {
 .veille-card__image-wrap {
     overflow: hidden;
     height: 220px;
-    background: #1a1a1a;
+    background: var(--bg-tertiary);
 }
 
 .veille-card__image {
@@ -1483,7 +1636,7 @@ p {
 
 /* Title */
 .veille-card__title {
-    color: #fff;
+    color: var(--text-primary);
     font-size: 1.15rem;
     font-weight: 700;
     line-height: 1.4;
@@ -1549,7 +1702,7 @@ p {
 }
 
 .veille-card__analysis p {
-    color: #ddd;
+    color: var(--text-secondary);
     font-size: 0.9rem;
     line-height: 1.55;
     margin: 0;
@@ -1608,10 +1761,10 @@ p {
 
 /* --- Skeleton loaders --- */
 .skeleton-card {
-    background: #232323;
+    background: var(--bg-card);
     border-radius: 14px;
     overflow: hidden;
-    border: 1px solid #333;
+    border: 1px solid var(--border-color);
 }
 
 .skeleton-image {
